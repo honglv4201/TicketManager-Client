@@ -1,18 +1,23 @@
-import { useEffect, useRef, useState } from "react";
+const { useState, useRef, useEffect } = require("react");
 
-export default function useClickOutSide() {
+export default function useClickOutSide(dom = "button") {
   const [show, setShow] = useState(false);
   const nodeRef = useRef();
 
   useEffect(() => {
-    const handleClick = (e) => {
-      if (nodeRef.current && nodeRef.current.contains(e.target)) {
+    const handleClickOutSide = (e) => {
+      if (
+        nodeRef.current &&
+        !nodeRef.current.contains(e.target) &&
+        document.querySelector(dom) &&
+        !document.querySelector(dom).contains(e.target)
+      ) {
         setShow(false);
       }
     };
-    document.addEventListener("click", handleClick);
+    document.addEventListener("click", handleClickOutSide);
     return () => {
-      document.removeEventListener("click", handleClick);
+      document.removeEventListener("click", handleClickOutSide);
     };
   }, []);
   return {
