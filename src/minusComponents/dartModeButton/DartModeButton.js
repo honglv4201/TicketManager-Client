@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./dartMode.scss";
-const DartMode = ({ onClick }) => {
+const DartModeButton = ({ onClick }) => {
   const toggleRef = useRef();
   const [themeState, setThemeState] = useState(); //dark or light
   const handleToggle = () => {
@@ -29,4 +29,4 @@ const DartMode = ({ onClick }) => {
   );
 };
 
-export default DartMode;
+export default DartModeButton;

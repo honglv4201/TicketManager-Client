@@ -1,5 +1,5 @@
 import React from "react";
-import DartMode from "../../minusComponents/dartMode/DartMode";
+import DartModeButton from "../../minusComponents/dartModeButton/DartModeButton";
 
 const UserGuest = (props) => {
   const handleDardMode = () => {
@@ -29,7 +29,7 @@ const UserGuest = (props) => {
   }
   return (
     <div className="flex items-center gap-4">
-      <DartMode onClick={handleDardMode} />
+      <DartModeButton onClick={handleDardMode} />
       {localStorage.getItem("id") == null ? (
         <div className="flex items-center">
           <div

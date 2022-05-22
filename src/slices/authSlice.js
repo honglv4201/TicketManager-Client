@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { apiUrl } from "../utils";
+import { apiUrl } from "../utils/utils";
 
 const user = JSON.parse(localStorage.getItem("ticket-user"));
 
