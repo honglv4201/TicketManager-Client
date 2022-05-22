@@ -1,11 +1,12 @@
 import React, { Fragment, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
-import CustomInput from "./CustomInput";
+import CustomInput, { ErrorNotify } from "./CustomInput";
 import { Checkbox } from "antd";
 import CustomButton from "./CustomButton";
 import { register } from "../../slices/authSlice";
+import { userSelector } from "../../redux/authSelector";
 
 const SignUp = () => {
   const [signUpForm, setSignUpForm] = useState({
@@ -32,6 +33,8 @@ const SignUp = () => {
       })
     );
   };
+
+  const { msg } = useSelector(userSelector);
   return (
     <Fragment>
       {/* for sign up */}
@@ -71,6 +74,7 @@ const SignUp = () => {
           title="Password"
         />
       </div>
+      <div className="mt-4">{msg && <ErrorNotify>{msg}</ErrorNotify>}</div>
 
       <div className="flex my-5  justify-start gap-3">
         <Checkbox></Checkbox>

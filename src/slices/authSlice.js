@@ -12,36 +12,45 @@ const initState = {
   msg: "",
 };
 
-export const register = createAsyncThunk("auth/register", async (userData) => {
-  try {
-    const url = `${apiUrl}/signup`;
-    const response = await axios.post(url, userData);
-    console.log("hongdata", userData);
-    console.log("hongdata1", response);
-    if (response.data) {
-      localStorage.setItem("ticket-user", JSON.stringify(response.data));
-    }
+export const register = createAsyncThunk(
+  "auth/register",
+  async (userData, thunkAPI) => {
+    try {
+      const url = `${apiUrl}/signup`;
+      const response = await axios.post(url, userData);
+      console.log("hongdata", userData);
+      console.log("hongdata1", response);
+      if (response.data) {
+        localStorage.setItem("ticket-user", JSON.stringify(response.data));
+      }
 
-    return response.data || response.response;
-  } catch (error) {
-    console.log("error when register: ", error);
-    return error.message;
-  }
-});
-export const login = createAsyncThunk("auth/login", async (userData) => {
-  try {
-    console.log(userData);
-    const url = `${apiUrl}/signin`;
-    const response = await axios.post(url, userData);
-    if (response.data) {
-      localStorage.setItem("ticket-user", JSON.stringify(response.data));
+      return response.data || response.response;
+    } catch (error) {
+      console.log("error when register: ", error);
+      const msg = error.response.data.error || error.response.data.message;
+      return thunkAPI.rejectWithValue(msg);
     }
-
-    return response.data;
-  } catch (error) {
-    console.log(error);
   }
-});
+);
+export const login = createAsyncThunk(
+  "auth/login",
+  async (userData, thunkAPI) => {
+    try {
+      console.log(userData);
+      const url = `${apiUrl}/signin`;
+      const response = await axios.post(url, userData);
+      if (response.data) {
+        localStorage.setItem("ticket-user", JSON.stringify(response.data));
+      }
+
+      return response.data;
+    } catch (error) {
+      console.log("fail", error);
+      const msg = error.response.data.error || error.response.data.message;
+      return thunkAPI.rejectWithValue(msg);
+    }
+  }
+);
 
 const authSlice = createSlice({
   name: "auth",
@@ -74,9 +83,8 @@ const authSlice = createSlice({
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
-        state.isErr = false;
+        state.isErr = true;
         state.msg = action.payload;
-        state.user = "dd";
       })
       .addCase(login.pending, (state) => {
         state.isLoading = true;
@@ -85,8 +93,13 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isErr = false;
         state.user = action.payload;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isErr = true;
+        state.msg = action.payload;
       });
   },
 });
-export const { logOut } = authSlice.actions;
+export const { logOut, reset } = authSlice.actions;
 export default authSlice.reducer;

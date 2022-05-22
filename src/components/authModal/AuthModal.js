@@ -1,14 +1,20 @@
 import React, { Fragment, useState } from "react";
 import ReactDom from "react-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoadingInModal from "../../minusComponents/loading/LoadingInModal";
 import { userSelector } from "../../redux/authSelector";
+import { reset } from "../../slices/authSlice";
 
 import Login from "./Login";
 import SignUp from "./SignUp";
 
 const AuthModal = ({ handleClose, authType }) => {
   const { isLoading } = useSelector(userSelector);
+
+  const dispatch = useDispatch();
+  const resetForm = () => {
+    dispatch(reset());
+  };
   return ReactDom.createPortal(
     <div className="fixed inset-0 modal-login ">
       <div className="overlay absolute inset-0 bg-[#0000009a]"></div>
@@ -40,7 +46,10 @@ const AuthModal = ({ handleClose, authType }) => {
 
           {/* exit  */}
           <div
-            onClick={handleClose}
+            onClick={() => {
+              resetForm();
+              handleClose();
+            }}
             className="absolute z-30 right-0 top-0 w-[50px] h-[50px] rounded-full shadow-xl mt-2 mr-2 translate-x-2/4 -translate-y-2/4 text-4xl cursor-pointer  bg-white hover:!bg-blue-100   grid place-items-center"
           >
             <i class="bx bx-x opacity-70 text-2xl"></i>

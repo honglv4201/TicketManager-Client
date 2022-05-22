@@ -1,9 +1,10 @@
-import React, { Fragment, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import useHandleOnChange from "../../hooks/useHandleOnChange";
+import { userSelector } from "../../redux/authSelector";
 import { login } from "../../slices/authSlice";
 import CustomButton from "./CustomButton";
-import CustomInput from "./CustomInput";
+import CustomInput, { ErrorNotify } from "./CustomInput";
 
 const Login = () => {
   const initState = {
@@ -18,6 +19,9 @@ const Login = () => {
   const handleLogin = () => {
     dispatch(login(formValue));
   };
+
+  const { msg } = useSelector(userSelector);
+
   return (
     <Fragment>
       <div className="input-field flex flex-col gap-3 ">
@@ -38,6 +42,8 @@ const Login = () => {
           title="Password"
         />
       </div>
+
+      <div className="mt-4">{msg && <ErrorNotify>{msg}</ErrorNotify>}</div>
 
       <div className="text-right opacity-70 text-sm my-3 mr-1 ">
         Forgot your password?
