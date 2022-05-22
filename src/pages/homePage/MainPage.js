@@ -53,12 +53,14 @@ const MainPage = () => {
     setShowQuantity(true);
     setCoords(nodeRefQuantity.current.getBoundingClientRect());
   };
+
+  // tempt link: https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_720/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/f5b01j54xainwtaosf8r/TourNg%C3%A0yThamQuanGrandCanyonWestRimT%E1%BB%ABLasVegas.webp
   return (
-    <div className="relative mb-[150px] !transition-colors !duration-1000">
+    <div className="relative mb-[150px] !transition-colors !duration-1000 select-none">
       <div className="min-h-[200px]">
         <img
           className="w-full h-[500px] object-cover"
-          src="https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_720/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/f5b01j54xainwtaosf8r/TourNg%C3%A0yThamQuanGrandCanyonWestRimT%E1%BB%ABLasVegas.webp"
+          src="https://images.unsplash.com/photo-1653047256226-ab0d16c758d5?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170"
           alt=""
         />
       </div>

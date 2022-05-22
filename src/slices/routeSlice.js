@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { apiUrl } from "../utils";
 
 const routeSlice = createSlice({
   name: "route",
@@ -17,7 +18,7 @@ const routeSlice = createSlice({
   },
 });
 export const fetchRoute = createAsyncThunk("route/fetchRoute", async () => {
-  const url = "http://localhost:2000/api/route";
+  const url = `${apiUrl}/route`;
   const { data } = await axios.get(url);
 
   return data;

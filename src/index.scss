@@ -88,5 +88,14 @@
   }
 }
 .test {
-  background: rgba(244, 244, 244, 0.663);
+  background-color: rgba(244, 244, 244, 0.663);
+}
+@layer components {
+  //antd
+  .ant-checkbox {
+    color: red;
+    .ant-checkbox-inner {
+      background-color: rgba(244, 244, 244, 0.663);
+    }
+  }
 }
