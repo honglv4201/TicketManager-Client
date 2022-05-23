@@ -7,11 +7,12 @@ module.exports = {
         body: ["DM Sans", "sans-serif"],
       },
       colors: {
-        primary: "#ccc",
+        primary: "#0d6efd",
         zprimary: "#FF0000",
         border_opacity: "#fff",
         secondary: "#FF0000",
         primaryBg: "#F5F5F5",
+        primaryBxg: "#F5F5F5",
         hong: "#000",
 
         // color for dark mode

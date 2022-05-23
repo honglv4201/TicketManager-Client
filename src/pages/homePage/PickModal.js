@@ -3,7 +3,7 @@ import ReactDom from "react-dom";
 import { useSelector } from "react-redux";
 import { routeSelector } from "../../redux/routeSelector";
 
-const PickModal = ({ coords, type }) => {
+const PickModal = ({ coords, type, setLocation, handleClose }) => {
   const { route, status } = useSelector(routeSelector);
   const location = Array.from(
     new Set(
@@ -12,6 +12,11 @@ const PickModal = ({ coords, type }) => {
       )
     )
   );
+
+  const handleChoosingItem = (item) => {
+    setLocation(item);
+    handleClose();
+  };
 
   return ReactDom.createPortal(
     <div
@@ -26,6 +31,7 @@ const PickModal = ({ coords, type }) => {
         location.map((item) => (
           <div
             key={item}
+            onClick={() => handleChoosingItem(item)}
             className="item border-b-2 border-b-gray-50 flex gap-4 items-center hover:bg-gray-100 cursor-pointer px-4 py-3 pr-10 pt-4"
           >
             <i class="fa-solid fa-location-dot"></i>

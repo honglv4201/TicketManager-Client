@@ -46,9 +46,9 @@ export const UserLogin = (props) => {
           <div className="profile__name">
             <span className="font-bold">
               Hi,{" "}
-              {!user._user
-                ? user?.firstName + " " + user?.lastName
-                : user._user.firstName + user._user.lastName}
+              {!user.user
+                ? user?._user.firstName + " " + user?._user.lastName
+                : user.user.firstName + user.user.lastName}
             </span>
           </div>
           <div className="profile__btn-down relative">

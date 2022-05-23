@@ -4,6 +4,7 @@ import Header from "./layouts/header/Header";
 import MainPage from "./pages/homePage/MainPage";
 import PopularRoute from "./pages/homePage/PopularRoute";
 import "./asset/css/components.css";
+import TicketPage from "./pages/ticketPage/TicketPage";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
               </>
             }
           ></Route>
-          <Route path="/ticket" element={<MainPage />}></Route>
+          <Route path="/ticket" element={<TicketPage />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

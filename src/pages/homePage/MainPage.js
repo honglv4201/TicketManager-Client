@@ -54,6 +54,9 @@ const MainPage = () => {
     setCoords(nodeRefQuantity.current.getBoundingClientRect());
   };
 
+  const [startLocation, setStartLocation] = useState();
+  const [endLocation, setEndLocation] = useState();
+
   // tempt link: https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_720/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/f5b01j54xainwtaosf8r/TourNg%C3%A0yThamQuanGrandCanyonWestRimT%E1%BB%ABLasVegas.webp
   return (
     <div className="relative mb-[150px] !transition-colors !duration-1000 select-none">
@@ -91,7 +94,24 @@ const MainPage = () => {
               {showQuantity && <PickQuantityTicket coords={coords} />}
             </div>
           </div>
-
+          {show1 && (
+            <PickModal
+              type="start"
+              setLocation={setStartLocation}
+              handleClose={() => {
+                setShow1(false);
+              }}
+              coords={coords}
+            />
+          )}
+          {show2 && (
+            <PickModal
+              type="end"
+              setLocation={setEndLocation}
+              handleClose={() => setShow2(false)}
+              coords={coords}
+            />
+          )}
           <div className="search-component content-between ">
             <div className="form-input  flex text-base 2xl:gap-2 lg:gap-4 2xl:flex-row lg:flex-col lg:-mt-10">
               <div
@@ -100,8 +120,9 @@ const MainPage = () => {
                 className="pl-10 pr-16 py-2 dark:bg-[#575757] dark:text-white rounded-lg bg-blue-50 flex flex-col relative cursor-pointer"
               >
                 <span>Location</span>
-                <span className="opacity-40">Your location?</span>
-                {show1 && <PickModal type="start" coords={coords} />}
+                <span className="opacity-40">
+                  {startLocation || "Your location?"}
+                </span>
               </div>
               <div
                 ref={nodeRef2}
@@ -109,8 +130,9 @@ const MainPage = () => {
                 className="pl-10 pr-16 py-2 dark:bg-[#575757] dark:text-white rounded-lg bg-gray-50 flex flex-col relative cursor-pointer"
               >
                 <span>Location</span>
-                <span className="opacity-40">Where do you go?</span>
-                {show2 && <PickModal type="end" coords={coords} />}
+                <span className="opacity-40">
+                  {endLocation || "Where do you go?"}
+                </span>
               </div>
               <div className="pl-10 pr-16 py-2 dark:bg-[#575757] dark:text-white rounded-lg bg-gray-50 flex flex-col relative cursor-pointer">
                 <span>Time</span>

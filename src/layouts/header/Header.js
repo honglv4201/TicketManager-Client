@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import AuthModal from "../../components/authModal/AuthModal";
 import { userSelector } from "../../redux/authSelector";
 import UserGuest from "./UserGuest";
@@ -32,12 +32,20 @@ const Header = () => {
     }
   }, []);
 
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate("/");
+  };
+
   return (
     <Fragment>
       <div className="min-h-[80px] bg-white shadow-md dark:!bg-black !transition-colors !duration-500 2xl:px-16 md:px-1 w-200 flex items-center">
         <div className=" flex items-center w-screen justify-between">
           <div className="header__logo ssm:hidden  ">
-            <div className="img-logo w-fit h-12">
+            <div
+              className="img-logo w-fit h-12 cursor-pointer"
+              onClick={handleNavigate}
+            >
               <img className="w-full h-full object-cover" src={logo} alt="" />
             </div>
           </div>
