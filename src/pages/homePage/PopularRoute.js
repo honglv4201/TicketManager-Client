@@ -31,293 +31,9 @@ const PopularRoute = () => {
         This is the most populate route that visitor has choosen this month
       </div>
       <div className="flex flex-wrap gap-10 items-center justify-center px-4">
-        {/* item 1 */}
-        <div className="item w-[340px] h-[500px] px-4 py-3 rounded-2xl shadow-xl flex flex-col overflow-hidden dark:bg-[#252525] hover:shadow-2xl transition-all duration-200 cursor-pointer hover:scale-105 dark:hover:border-white border-1 border-transparent dark:hover:border-1">
-          <div className="image-wrapper w-full h-[200px]">
-            <img
-              className="w-full h-full object-cover rounded-xl"
-              src="https://dulichconvoi.com/wp-content/uploads/2020/02/ha.jpg"
-              alt=""
-            />
-          </div>
-
-          <div className="star flex items-center mt-3 gap-1">
-            <i class="fa-solid fa-star text-yellow-500 "></i>
-            <span className="star-count ml-2 dark:text-white">4.78</span>
-            <span className="opacity-60 font-extralight dark:text-white">
-              (234 rates)
-            </span>
-          </div>
-          <div className="route text-[18px] font-bold mt-3 dark:text-white">
-            Ho Chi Minh{" "}
-            <span mx-4>
-              <i class="fa-solid fa-caret-right"></i>
-            </span>{" "}
-            Da Nang
-          </div>
-
-          <div className="session flex items-center gap-3 mt-3 ">
-            <div className="icon text-blue-400">
-              <i class="fa-solid fa-map"></i>
-            </div>
-            <div className="detail dark:text-white">810 kilometers</div>
-          </div>
-
-          <div className="session flex items-center gap-3 mt-3">
-            <div className="icon text-blue-400">
-              <i class="fa-solid fa-hourglass-empty"></i>
-            </div>
-            <div className="detail dark:text-white">21 hours</div>
-          </div>
-
-          <div className="session flex items-center gap-3 mt-3">
-            <div className="icon text-blue-400">
-              <i class="fa-solid fa-clipboard-list"></i>
-            </div>
-            <div className="detail dark:text-white">3.342 routes/month</div>
-          </div>
-
-          <div className="flex justify-between">
-            {" "}
-            <div className="price dark:text-white px-3 py-2 mt-3 rounded-xl dark:bg-gray-700 bg-[#CFF4D9] bg-opacity-40 font-bold text-[#157535] inline-block h-fit">
-              970.000 vnd
-            </div>
-            <div className="inline-block dark:text-white w-fit  mt-6  btn-detail pb-12 pt-3 p-5 bg-blue-500 hover:bg-blue-400 cursor-pointer text-white uppercase text-xl -mb-0 -mr-6 rounded-l-2xl pr-10">
-              Detail
-            </div>
-          </div>
-        </div>
-
-        {/* item 2 */}
-        <div className="item w-[340px] h-[500px] px-4 py-3 rounded-2xl shadow-xl flex flex-col overflow-hidden dark:bg-[#252525] hover:shadow-2xl transition-all duration-200 cursor-pointer hover:scale-105 dark:hover:border-white border-1 border-transparent dark:hover:border-1">
-          <div className="image-wrapper w-full h-[200px]">
-            <img
-              className="w-full h-full object-cover rounded-xl"
-              src="https://media.tacdn.com/media/attractions-splice-spp-674x446/07/b3/ab/c3.jpg"
-              alt=""
-            />
-          </div>
-
-          <div className="star flex items-center mt-3 gap-1">
-            <i class="fa-solid fa-star text-yellow-500 "></i>
-            <span className="star-count ml-2 dark:text-white">4.78</span>
-            <span className="opacity-60 font-extralight dark:text-white">
-              (234 rates)
-            </span>
-          </div>
-          <div className="route text-[18px] font-bold mt-3 dark:text-white">
-            Ho Chi Minh{" "}
-            <span mx-4>
-              <i class="fa-solid fa-caret-right"></i>
-            </span>{" "}
-            Da Nang
-          </div>
-
-          <div className="session flex items-center gap-3 mt-3 ">
-            <div className="icon text-blue-400">
-              <i class="fa-solid fa-map"></i>
-            </div>
-            <div className="detail dark:text-white">810 kilometers</div>
-          </div>
-
-          <div className="session flex items-center gap-3 mt-3">
-            <div className="icon text-blue-400">
-              <i class="fa-solid fa-hourglass-empty"></i>
-            </div>
-            <div className="detail dark:text-white">21 hours</div>
-          </div>
-
-          <div className="session flex items-center gap-3 mt-3">
-            <div className="icon text-blue-400">
-              <i class="fa-solid fa-clipboard-list"></i>
-            </div>
-            <div className="detail dark:text-white">3.342 routes/month</div>
-          </div>
-
-          <div className="flex justify-between">
-            {" "}
-            <div className="price dark:text-white px-3 py-2 mt-3 rounded-xl dark:bg-gray-700 bg-[#CFF4D9] bg-opacity-40 font-bold text-[#157535] inline-block h-fit">
-              970.000 vnd
-            </div>
-            <div className="inline-block dark:text-white w-fit  mt-6  btn-detail pb-12 pt-3 p-5 bg-blue-500 hover:bg-blue-400 cursor-pointer text-white uppercase text-xl -mb-0 -mr-6 rounded-l-2xl pr-10">
-              Detail
-            </div>
-          </div>
-        </div>
-
-        {/* item 3 */}
-
-        <div className="item w-[340px] h-[500px] px-4 py-3 rounded-2xl shadow-xl flex flex-col overflow-hidden dark:bg-[#252525] hover:shadow-2xl transition-all duration-200 cursor-pointer hover:scale-105 dark:hover:border-white border-1 border-transparent dark:hover:border-1">
-          <div className="image-wrapper w-full h-[200px]">
-            <img
-              className="w-full h-full object-cover rounded-xl"
-              src="https://www.itourvn.com/images/easyblog_images/2021/january/update_12_beautiful_places_in_vietnam/beautiful-places-in-vietnam-sapa-fansipan-temple-outlook.jpg"
-              alt=""
-            />
-          </div>
-
-          <div className="star flex items-center mt-3 gap-1">
-            <i class="fa-solid fa-star text-yellow-500 "></i>
-            <span className="star-count ml-2 dark:text-white">4.78</span>
-            <span className="opacity-60 font-extralight dark:text-white">
-              (234 rates)
-            </span>
-          </div>
-          <div className="route text-[18px] font-bold mt-3 dark:text-white">
-            Ho Chi Minh{" "}
-            <span mx-4>
-              <i class="fa-solid fa-caret-right"></i>
-            </span>{" "}
-            Da Nang
-          </div>
-
-          <div className="session flex items-center gap-3 mt-3 ">
-            <div className="icon text-blue-400">
-              <i class="fa-solid fa-map"></i>
-            </div>
-            <div className="detail dark:text-white">810 kilometers</div>
-          </div>
-
-          <div className="session flex items-center gap-3 mt-3">
-            <div className="icon text-blue-400">
-              <i class="fa-solid fa-hourglass-empty"></i>
-            </div>
-            <div className="detail dark:text-white">21 hours</div>
-          </div>
-
-          <div className="session flex items-center gap-3 mt-3">
-            <div className="icon text-blue-400">
-              <i class="fa-solid fa-clipboard-list"></i>
-            </div>
-            <div className="detail dark:text-white">3.342 routes/month</div>
-          </div>
-
-          <div className="flex justify-between">
-            {" "}
-            <div className="price dark:text-white px-3 py-2 mt-3 rounded-xl dark:bg-gray-700 bg-[#CFF4D9] bg-opacity-40 font-bold text-[#157535] inline-block h-fit">
-              970.000 vnd
-            </div>
-            <div className="inline-block dark:text-white w-fit  mt-6  btn-detail pb-12 pt-3 p-5 bg-blue-500 hover:bg-blue-400 cursor-pointer text-white uppercase text-xl -mb-0 -mr-6 rounded-l-2xl pr-10">
-              Detail
-            </div>
-          </div>
-        </div>
-
-        {/* item 5 */}
-        <div className="item w-[340px] h-[500px] px-4 py-3 rounded-2xl shadow-xl flex flex-col overflow-hidden dark:bg-[#252525] hover:shadow-2xl transition-all duration-200 cursor-pointer hover:scale-105 dark:hover:border-white border-1 border-transparent dark:hover:border-1">
-          <div className="image-wrapper w-full h-[200px]">
-            <img
-              className="w-full h-full object-cover rounded-xl"
-              src="https://media.tacdn.com/media/attractions-splice-spp-674x446/07/b3/ab/c3.jpg"
-              alt=""
-            />
-          </div>
-
-          <div className="star flex items-center mt-3 gap-1">
-            <i class="fa-solid fa-star text-yellow-500 "></i>
-            <span className="star-count ml-2 dark:text-white">4.78</span>
-            <span className="opacity-60 font-extralight dark:text-white">
-              (234 rates)
-            </span>
-          </div>
-          <div className="route text-[18px] font-bold mt-3 dark:text-white">
-            Ho Chi Minh{" "}
-            <span mx-4>
-              <i class="fa-solid fa-caret-right"></i>
-            </span>{" "}
-            Da Nang
-          </div>
-
-          <div className="session flex items-center gap-3 mt-3 ">
-            <div className="icon text-blue-400">
-              <i class="fa-solid fa-map"></i>
-            </div>
-            <div className="detail dark:text-white">810 kilometers</div>
-          </div>
-
-          <div className="session flex items-center gap-3 mt-3">
-            <div className="icon text-blue-400">
-              <i class="fa-solid fa-hourglass-empty"></i>
-            </div>
-            <div className="detail dark:text-white">21 hours</div>
-          </div>
-
-          <div className="session flex items-center gap-3 mt-3">
-            <div className="icon text-blue-400">
-              <i class="fa-solid fa-clipboard-list"></i>
-            </div>
-            <div className="detail dark:text-white">3.342 routes/month</div>
-          </div>
-
-          <div className="flex justify-between">
-            {" "}
-            <div className="price dark:text-white px-3 py-2 mt-3 rounded-xl dark:bg-gray-700 bg-[#CFF4D9] bg-opacity-40 font-bold text-[#157535] inline-block h-fit">
-              970.000 vnd
-            </div>
-            <div className="inline-block dark:text-white w-fit  mt-6  btn-detail pb-12 pt-3 p-5 bg-blue-500 hover:bg-blue-400 cursor-pointer text-white uppercase text-xl -mb-0 -mr-6 rounded-l-2xl pr-10">
-              Detail
-            </div>
-          </div>
-        </div>
-
-        {/* item 1 */}
-        <div className="item w-[340px] h-[500px] px-4 py-3 rounded-2xl shadow-xl flex flex-col overflow-hidden dark:bg-[#252525] hover:shadow-2xl transition-all duration-200 cursor-pointer hover:scale-105 dark:hover:border-white border-1 border-transparent dark:hover:border-1">
-          <div className="image-wrapper w-full h-[200px]">
-            <img
-              className="w-full h-full object-cover rounded-xl"
-              src="https://dulichconvoi.com/wp-content/uploads/2020/02/ha.jpg"
-              alt=""
-            />
-          </div>
-
-          <div className="star flex items-center mt-3 gap-1">
-            <i class="fa-solid fa-star text-yellow-500 "></i>
-            <span className="star-count ml-2 dark:text-white">4.78</span>
-            <span className="opacity-60 font-extralight dark:text-white">
-              (234 rates)
-            </span>
-          </div>
-          <div className="route text-[18px] font-bold mt-3 dark:text-white">
-            Ho Chi Minh{" "}
-            <span mx-4>
-              <i class="fa-solid fa-caret-right"></i>
-            </span>{" "}
-            Da Nang
-          </div>
-
-          <div className="session flex items-center gap-3 mt-3 ">
-            <div className="icon text-blue-400">
-              <i class="fa-solid fa-map"></i>
-            </div>
-            <div className="detail dark:text-white">810 kilometers</div>
-          </div>
-
-          <div className="session flex items-center gap-3 mt-3">
-            <div className="icon text-blue-400">
-              <i class="fa-solid fa-hourglass-empty"></i>
-            </div>
-            <div className="detail dark:text-white">21 hours</div>
-          </div>
-
-          <div className="session flex items-center gap-3 mt-3">
-            <div className="icon text-blue-400">
-              <i class="fa-solid fa-clipboard-list"></i>
-            </div>
-            <div className="detail dark:text-white">3.342 routes/month</div>
-          </div>
-
-          <div className="flex justify-between">
-            {" "}
-            <div className="price dark:text-white px-3 py-2 mt-3 rounded-xl dark:bg-gray-700 bg-[#CFF4D9] bg-opacity-40 font-bold text-[#157535] inline-block h-fit">
-              970.000 vnd
-            </div>
-            <div className="inline-block dark:text-white w-fit  mt-6  btn-detail pb-12 pt-3 p-5 bg-blue-500 hover:bg-blue-400 cursor-pointer text-white uppercase text-xl -mb-0 -mr-6 rounded-l-2xl pr-10">
-              Detail
-            </div>
-          </div>
-        </div>
-
-        {/* item3 */}
+        {images.map((item) => (
+          <ItemRoute urlImage={item.url} key={item} />
+        ))}
       </div>
 
       {/* populated destination suggestion */}
@@ -343,3 +59,63 @@ const PopularRoute = () => {
 };
 
 export default PopularRoute;
+
+const ItemRoute = ({ urlImage }) => {
+  return (
+    <div className="item w-[340px] h-[460px] px-4 py-3 rounded-2xl shadow-xl flex flex-col overflow-hidden dark:bg-[#252525] hover:shadow-2xl transition-all duration-200 cursor-pointer hover:scale-105 dark:hover:border-white border-1 border-transparent dark:hover:border-1">
+      <div className="image-wrapper w-full min-h-[200px] h-[200px]">
+        <img
+          className="w-full h-full object-cover rounded-xl"
+          src={urlImage}
+          alt=""
+        />
+      </div>
+
+      <div className="star flex items-center mt-3 gap-1">
+        <i class="fa-solid fa-star text-yellow-500 "></i>
+        <span className="star-count ml-2 dark:text-white">4.78</span>
+        <span className="opacity-60 font-extralight dark:text-white">
+          (234 rates)
+        </span>
+      </div>
+      <div className="route text-[18px] font-bold mt-3 dark:text-white">
+        Ho Chi Minh{" "}
+        <span mx-4>
+          <i class="fa-solid fa-caret-right"></i>
+        </span>{" "}
+        Da Nang
+      </div>
+
+      <div className="session flex items-center gap-3 mt-3 ">
+        <div className="icon text-blue-400">
+          <i class="fa-solid fa-map"></i>
+        </div>
+        <div className="detail dark:text-white">810 kilometers</div>
+      </div>
+
+      <div className="session flex items-center gap-3 mt-3">
+        <div className="icon text-blue-400">
+          <i class="fa-solid fa-hourglass-empty"></i>
+        </div>
+        <div className="detail dark:text-white">21 hours</div>
+      </div>
+
+      <div className="session flex items-center gap-3 mt-3">
+        <div className="icon text-blue-400">
+          <i class="fa-solid fa-clipboard-list"></i>
+        </div>
+        <div className="detail dark:text-white">3.342 routes/month</div>
+      </div>
+
+      <div className="flex justify-between items-center">
+        {" "}
+        <div className="price dark:text-white px-3 pt-6 pb-10 rounded-xl dark:bg-gray-700  bg-opacity-40 font-bold   text-base inline-block h-fit">
+          970.000 vnd
+        </div>
+        <div className="inline-block dark:text-white w-fit  mt-6  btn-detail pb-12 pt-3 p-5 bg-gray-200 hover:bg-blue-500 hover:text-white cursor-pointer font-bold text-blue-500 uppercase text-lg -mb-0 -mr-6 rounded-l-2xl pr-10">
+          Detail
+        </div>
+      </div>
+    </div>
+  );
+};

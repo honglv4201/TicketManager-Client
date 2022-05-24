@@ -13,6 +13,8 @@ import useClickOutSide from "../../hooks/useClickOutSide";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRoute } from "../../slices/routeSlice";
 import { routeSelector } from "../../redux/routeSelector";
+import { updateFiter } from "../../slices/filterTicketSlice";
+import useHandleTicketRequest from "../../hooks/useHandleTicketRequest";
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -37,7 +39,7 @@ const MainPage = () => {
     setShow: setShowQuantity,
     nodeRef: nodeRefQuantity,
   } = useClickOutSide(".quantity-box");
-  // const { show, setshow1, nodeRef } = useClickOutSide();
+
   const [coords, setCoords] = useState({});
   const handleOpenModal1 = () => {
     setShow1(true);
@@ -54,8 +56,15 @@ const MainPage = () => {
     setCoords(nodeRefQuantity.current.getBoundingClientRect());
   };
 
-  const [startLocation, setStartLocation] = useState();
-  const [endLocation, setEndLocation] = useState();
+  const {
+    startLocation,
+    endLocation,
+    dateStart,
+    setStartLocation,
+    setEndLocation,
+    setDateStart,
+    handleChangeDate,
+  } = useHandleTicketRequest();
 
   // tempt link: https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_720/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/f5b01j54xainwtaosf8r/TourNg%C3%A0yThamQuanGrandCanyonWestRimT%E1%BB%ABLasVegas.webp
   return (
@@ -71,7 +80,7 @@ const MainPage = () => {
         <div className="flex flex-col 2xl:px-14 lg:px-16 sm:px-8 pt-12 gap-10 ">
           <div className="flex justify-between  dark:text-white 2xl:flex-row lg:flex-col 2xl:border-b-gray-[#ccc] 2xl:border-b-2 lg:border-none ">
             <div className="flex content-center 2xl:gap-10 sm:gap-2 lg:border-b-gray-[#ccc] lg:border-b-2 ">
-              <div className="flex  2xl:gap-3 lg:gap-2 text-lg leading-7 pr-1 mr-2 border-b-blue-400 pb-3 border-b-2 cursor-pointer">
+              <div className="flex  2xl:gap-3 lg:gap-2 text-lg leading-7 pr-1 mr-2  pb-3 cursor-pointer custom-border-b">
                 <i class="fa-solid fa-bus text-base"></i>
                 <span className="">Bus</span>
               </div>
@@ -117,7 +126,7 @@ const MainPage = () => {
               <div
                 ref={nodeRef1}
                 onClick={handleOpenModal1}
-                className="pl-10 pr-16 py-2 dark:bg-[#575757] dark:text-white rounded-lg bg-blue-50 flex flex-col relative cursor-pointer"
+                className="pl-10 min-w-[240px] pr-16 py-2 dark:bg-[#575757] dark:text-white rounded-lg bg-blue-50 flex flex-col relative cursor-pointer"
               >
                 <span>Location</span>
                 <span className="opacity-40">
@@ -127,7 +136,7 @@ const MainPage = () => {
               <div
                 ref={nodeRef2}
                 onClick={handleOpenModal2}
-                className="pl-10 pr-16 py-2 dark:bg-[#575757] dark:text-white rounded-lg bg-gray-50 flex flex-col relative cursor-pointer"
+                className="pl-10 min-w-[240px] pr-16 py-2 dark:bg-[#575757] dark:text-white rounded-lg bg-gray-50 flex flex-col relative cursor-pointer"
               >
                 <span>Location</span>
                 <span className="opacity-40">
@@ -137,6 +146,7 @@ const MainPage = () => {
               <div className="pl-10 pr-16 py-2 dark:bg-[#575757] dark:text-white rounded-lg bg-gray-50 flex flex-col relative cursor-pointer">
                 <span>Time</span>
                 <DatePicker
+                  onChange={handleChangeDate}
                   placeholder="Where you go"
                   className=""
                 ></DatePicker>

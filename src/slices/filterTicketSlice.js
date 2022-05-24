@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initState = {
   start: "everywhere",
@@ -12,7 +12,12 @@ const filterTicketSlice = createSlice({
   initialState: initState,
   reducers: {
     updateFiter: (state, action) => {
-      //   state.start = data.start;
+      state.start = action.payload.start || "everywhere";
+      state.end = action.payload.end;
+      state.date = action.payload.date;
     },
   },
 });
+export const { updateFiter } = filterTicketSlice.actions;
+
+export default filterTicketSlice.reducer;
