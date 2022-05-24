@@ -9,7 +9,7 @@ const PickQuantityTicket = ({ coords }) => {
         top: coords.top + window.scrollY,
         left: coords.left,
         marginLeft: "-200px",
-        marginTop: "-340px",
+        marginTop: "-300px",
       }}
       className="absolute quantity-box open-pop-up min-w-[200px] min-h-[100px] bg-white rounded-lg shadow-lg p-4"
     >

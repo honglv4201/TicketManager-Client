@@ -33,7 +33,7 @@ const UserGuest = (props) => {
       {localStorage.getItem("id") == null ? (
         <div className="flex items-center">
           <div
-            className="min-w-[160px] w-fit grid place-items-center  lg:hidden  mr-4 text-base  py-2  rounded-lg text-blue-500 border-2 dark:text-white  dark:border-blue-300 border-blue-500 hover:bg-blue-500 hover:text-white hover:border-none cursor-pointer"
+            className="min-w-[160px] w-fit grid place-items-center  lg:hidden  mr-4 text-base  py-2  rounded-lg  dark:text-white bg-gray-200  hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500 cursor-pointer"
             onClick={props.onClickRegister}
             ref={props.nodeRefSecond}
           >
@@ -41,7 +41,7 @@ const UserGuest = (props) => {
           </div>
 
           <div
-            className="min-w-[160px] w-fit px- mr-6 text-base grid place-items-center py-2 rounded-lg border-transparent border-2 bg-blue-500 text-white hover:bg-blue-400 cursor-pointer"
+            className="min-w-[160px] w-fit px- mr-6 text-base grid place-items-center py-2 rounded-lg border-transparent border-2 bg-blue-500 text-white hover:bg-blue-400 dark:bg-gray-600 dark:hover:bg-gray-500 cursor-pointer"
             onClick={props.onClickLogin}
             ref={props.nodeRef}
           >

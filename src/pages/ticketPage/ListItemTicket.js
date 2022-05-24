@@ -1,10 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { tripSelector } from "../../redux/tripSelector";
+import { tripFilterSelector, tripSelector } from "../../redux/tripSelector";
+import NoItem from "./NoItem";
 import TicketItem from "./TicketItem";
 
 const ListItemTicket = () => {
-  const { trip } = useSelector(tripSelector);
+  const trip = useSelector(tripFilterSelector);
   console.log(trip);
   return (
     <div className="bg-transparent dark:!text-white dark:!bg-dark_primary_bg w-full h-full min-h-[800px] flex flex-col gap-4">
@@ -30,6 +31,7 @@ const ListItemTicket = () => {
       </div>
 
       {trip && trip.map((item, ind) => <TicketItem data={item} key={ind} />)}
+      {trip && trip.length === 0 && <NoItem />}
     </div>
   );
 };
