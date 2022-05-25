@@ -3,7 +3,7 @@ const notfound = require("../../asset/img/notfound.png");
 
 const NoItem = () => {
   return (
-    <div className="w-full min-h-[370px] mt-6 round-lg py-10 px-4 gap-4 flex items-center flex-col bg-white">
+    <div className="w-full min-h-[370px] mt-0 round-lg py-10 px-4 gap-4 flex items-center flex-col bg-white">
       <div className="w-[200px] h-fit">
         <img src={notfound} className="w-full h-full object-cover" alt="" />
       </div>

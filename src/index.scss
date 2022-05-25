@@ -124,3 +124,27 @@
     border-radius: 5px;
   }
 }
+
+//custom animation
+@layer components {
+  @keyframes drop {
+    from {
+      transform: translateY(-100px);
+    }
+    to {
+      transform: translateY(0px);
+    }
+  }
+  @keyframes openPopUp {
+    from {
+      transform: scale(0.8) translateY(30px);
+    }
+    to {
+      transform: scale(1) translate(0);
+    }
+  }
+
+  .custom-animate-dropdown {
+    animation: drop 0.1s ease;
+  }
+}
