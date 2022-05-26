@@ -23,7 +23,7 @@ const ItemSeat = ({ value, status = "" }) => {
   const { wagon, currentWagon } = useSelector(seatSelector);
 
   useEffect(() => {
-    setClassName("bg-white  border-2 ");
+    setClassName("bg-white border-2 ");
     setClassNamesub("bg-white");
     // if (handleCheckChoosing(value)) {
     //   setClassName("bg-gray-200 border-2");
