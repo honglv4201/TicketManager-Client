@@ -3,6 +3,7 @@ import authSlice from "../slices/authSlice";
 import filterTicketSlice from "../slices/filterTicketSlice";
 
 import routeSlice from "../slices/routeSlice";
+import seatBookingSlice from "../slices/seatBookingSlice";
 import tripSlice from "../slices/tripSlice";
 
 const store = configureStore({
@@ -11,6 +12,7 @@ const store = configureStore({
     routeAuth: authSlice,
     trip: tripSlice,
     filter: filterTicketSlice,
+    seatChoosing: seatBookingSlice,
   },
 });
 
