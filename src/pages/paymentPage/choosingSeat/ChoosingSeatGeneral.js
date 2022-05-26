@@ -1,7 +1,19 @@
+import { useSelector } from "react-redux";
+import { seatSelector } from "../../../redux/seatBookingSelector";
 import TickeChoosing from "./TicketChoosing";
 import TotalMoney from "./TotalMoney";
 
 const ChoosingSeatGeneral = ({ isOpenTab, handleToggleOpenTab }) => {
+  const { wagon, currentWagon } = useSelector(seatSelector);
+
+  const checkTotalTicket = () => {
+    let totalTicket = 0;
+
+    for (let i = 0; i < wagon.length; i++) {
+      totalTicket += wagon[i].seat.length;
+    }
+    return totalTicket;
+  };
   return (
     <div
       className={`${
@@ -9,7 +21,7 @@ const ChoosingSeatGeneral = ({ isOpenTab, handleToggleOpenTab }) => {
       } min-h-[130px] bg-white rounded-lg overflow-hidden transition-all duration-75`}
     >
       <div
-        className="w-full h-6 bg-gray-200 bg-opacity-80 text-center py-6 flex items-center gap-2 justify-center cursor-pointer"
+        className="w-full px-1 h-6 bg-gray-200 bg-opacity-80 text-center py-6 flex items-center gap-2 justify-center cursor-pointer"
         onClick={handleToggleOpenTab}
       >
         <i
@@ -20,9 +32,9 @@ const ChoosingSeatGeneral = ({ isOpenTab, handleToggleOpenTab }) => {
         {isOpenTab ? (
           " Chi tiết vé"
         ) : (
-          <div>
-            <span className="opacity-60 text-sm">Đã chọn :</span>{" "}
-            <span className="ml-1">1/2</span>
+          <div className="">
+            <span className="opacity-60 text-sm">Đã chọn:</span>{" "}
+            <span className="ml-1">{checkTotalTicket()} vé</span>
           </div>
         )}
       </div>

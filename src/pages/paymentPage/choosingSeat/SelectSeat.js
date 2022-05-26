@@ -45,7 +45,13 @@ const SelectSeat = () => {
         </div>
 
         {/* choose seat */}
-        {currentWagon % 2 === 0 ? <SeatPlace /> : <SeatPlaceType2 />}
+        {currentWagon % 3 === 0 ? (
+          <SeatPlace />
+        ) : currentWagon % 3 === 1 ? (
+          <SeatPlaceType2 />
+        ) : (
+          <SeatPlaceType3 />
+        )}
       </div>
     </div>
   );
@@ -90,28 +96,89 @@ const SeatPlace = () => {
 
 const SeatPlaceType2 = () => {
   return (
-    <div className="grid  grid-flow-col  w-full h-full mx-2 mt-10 pr-4 gap-0 ">
-      {new Array(7).fill(0).map((item, ind) => {
-        return <GroupItemSeatType2 ind={ind * 4} />;
-      })}
+    <div className="flex items-center gap-4">
+      <div className="flex flex-col items-start justify-between w-14  -mr-6 h-full  ml-4 mt-14 ">
+        <div className="text-center  h-20 grid place-content-center">
+          Tang 1
+        </div>
+        <div className="text-center  h-20 grid place-content-center">
+          Tang 2
+        </div>
+        <div className="text-center  h-20 grid place-content-center">
+          Tang 3
+        </div>
+      </div>
+      <div className="grid  grid-flow-col  w-full h-full mx-1 mt-10 pr-4 gap-0 ">
+        {new Array(7).fill(0).map((item, ind) => {
+          return <GroupItemSeatType2 ind={ind * 6} />;
+        })}
+      </div>
+    </div>
+  );
+};
+
+const SeatPlaceType3 = () => {
+  return (
+    <div className="flex items-center gap-4">
+      <div className="flex flex-col items-start justify-between w-14  -mr-6 h-full  ml-4 mt-14 ">
+        <div className="text-center  h-20 grid place-content-center">
+          Tang 1
+        </div>
+        <div className="text-center  h-20 grid place-content-center">
+          Tang 2
+        </div>
+      </div>
+      <div className="grid  grid-flow-col  w-full h-full mx-1 mt-10 pr-4 gap-0 ">
+        {new Array(7).fill(0).map((item, ind) => {
+          return <GroupItemSeatType3 ind={ind * 4} />;
+        })}
+      </div>
     </div>
   );
 };
 
 const GroupItemSeatType2 = ({ ind }) => {
   return (
-    <div className="flex items-stretch h-full gap-2 mx-2  justify-around">
-      <div className="w-2 bg-gray-200 rounded-md"></div>
-      <div className="grid grid-cols-2 grid-rows-2 grid-flow-row gap-4">
-        <ItemSeatType2 ind={ind + 3} />
-        <ItemSeatType2 ind={ind + 4} />
-        <ItemSeatType2 ind={ind + 1} />
-        <ItemSeatType2 ind={ind + 2} />
+    <div className="mt-6">
+      <div className="flex items-stretch h-full gap-2 mx-2  justify-around">
+        <div className="relative">
+          <div className="absolute w-full text-center -top-10 opacity-60">
+            Khoang {ind / 6 + 1}
+          </div>
+          <div className="grid grid-cols-2 grid-rows-2 grid-flow-row gap-4">
+            <ItemSeatType2 ind={ind + 5} />
+            <ItemSeatType2 ind={ind + 6} />
+            <ItemSeatType2 ind={ind + 3} />
+            <ItemSeatType2 ind={ind + 4} />
+            <ItemSeatType2 ind={ind + 1} />
+            <ItemSeatType2 ind={ind + 2} />
+          </div>
+        </div>
+        <div className="w-1 bg-gray-200 rounded-md"></div>
       </div>
     </div>
   );
 };
-
+const GroupItemSeatType3 = ({ ind }) => {
+  return (
+    <div className="mt-6">
+      <div className="flex items-stretch h-full gap-2 mx-2  justify-around">
+        <div className="relative">
+          <div className="absolute w-full text-center -top-10 opacity-60">
+            Khoang {ind / 4 + 1}
+          </div>
+          <div className="grid grid-cols-2 grid-rows-2 grid-flow-row gap-4">
+            <ItemSeatType2 ind={ind + 3} />
+            <ItemSeatType2 ind={ind + 4} />
+            <ItemSeatType2 ind={ind + 1} />
+            <ItemSeatType2 ind={ind + 2} />
+          </div>
+        </div>
+        <div className="w-1 bg-gray-200 rounded-md"></div>
+      </div>
+    </div>
+  );
+};
 const ItemSeatType2 = ({ ind }) => {
   const [className, setClassName] = useState();
   const [classNamesub, setClassNamesub] = useState();
@@ -120,20 +187,27 @@ const ItemSeatType2 = ({ ind }) => {
   const handleAddSeat = () => {
     dispatch(addSeat(ind));
   };
-  const { wagon } = useSelector(seatSelector);
+  const { wagon, currentWagon } = useSelector(seatSelector);
 
   useEffect(() => {
-    setClassName("bg-gray-200 ");
+    setClassNamesub("bg-gray-200");
     setClassName("bg-white border-2 hover:bg-gray-100");
-    setClassName(
-      "bg-white border-2 border-primary bg-blue-50 bg-opacity-60 hover:bg-gray-100"
-    );
-    setClassNamesub("bg-primary bg-opacity-20");
   }, []);
+  useEffect(() => {
+    if (wagon[currentWagon].seat.includes(ind)) {
+      setClassName(
+        "bg-white border-2 border-primary bg-blue-50 bg-opacity-60 hover:bg-gray-100"
+      );
+      setClassNamesub("bg-primary bg-opacity-20");
+    } else {
+      setClassNamesub("bg-gray-200 ");
+      setClassName("bg-white border-2 hover:bg-gray-100");
+    }
+  }, [wagon[currentWagon]]);
   return (
     <div
       onClick={handleAddSeat}
-      className={`w-12 h-16 cursor-pointer relative  rounded-md grid place-content-center ${className}`}
+      className={`w-10 h-16 cursor-pointer relative  rounded-md grid place-content-center ${className}`}
     >
       <div
         className={`top-1 w-6 h-3 absolute left-1/2 -translate-x-1/2 rounded-sm bg-gray-200 ${classNamesub}`}
