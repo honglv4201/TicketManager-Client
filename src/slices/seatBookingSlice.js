@@ -40,7 +40,7 @@ const seatBookingSlice = createSlice({
     },
     setInitWagon: (state, action) => {
       let sum = action.payload - 1;
-      while (sum > 0) {
+      while (sum > 0 && state.wagon.length < action.payload) {
         state.wagon.push({ seat: [] });
         sum -= 1;
       }
