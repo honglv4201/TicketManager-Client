@@ -12,10 +12,10 @@ const TicketPage = () => {
     dispatch(fetchTrip());
   }, []);
   return (
-    <div>
+    <div className="lg:px-6 xl:px-2">
       <SearchHeader />
       <div className="page-container mt-4">
-        <div className="flex gap-10">
+        <div className="flex lg:flex-col  gap-10">
           <FilterSearch />
           <ListItemTicket />
         </div>

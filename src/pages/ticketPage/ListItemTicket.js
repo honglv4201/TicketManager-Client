@@ -8,8 +8,8 @@ const ListItemTicket = () => {
   const trip = useSelector(tripFilterSelector);
   console.log(trip);
   return (
-    <div className="bg-transparent dark:!text-white dark:!bg-dark_primary_bg w-full h-full min-h-[800px] flex flex-col gap-4">
-      <div className=" min-h-[60px] rounded-lg bg-white dark:!bg-dark_primary_pnl -mb-5 flex justify-between items-center pl-6">
+    <div className="bg-transparent dark:!text-white dark:!bg-dark_primary_bg w-full h-full min-h-[800px] flex flex-col gap-4 ">
+      <div className=" min-h-[60px] rounded-lg bg-white dark:!bg-dark_primary_pnl  flex justify-between items-center pl-6 mb-1">
         <div className="flex gap-2 items-center ">
           <div className="name text-lg font-bold pr-2 border-r-2 border-r-gray-100">
             Train

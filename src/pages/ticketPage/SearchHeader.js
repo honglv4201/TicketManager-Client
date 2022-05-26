@@ -52,7 +52,7 @@ const SearchHeader = () => {
   }, []);
   console.log(start);
   return (
-    <div className="page-container w-full min-h-[90px] pt-2 bg-white rounded-lg pr-10 shadow-sm  pl-10 mt-4 dark:!bg-dark_primary_pnl dark:!text-white">
+    <div className="page-container w-full min-h-[90px] pt-2 bg-white rounded-lg pr-10 shadow-sm  pl-10 mt-4 dark:!bg-dark_primary_pnl dark:!text-white ">
       <div className="flex gap-4 justify-end">
         <div className="flex flex-col gap-1">
           <span className="font-sm opacity-80">From</span>
