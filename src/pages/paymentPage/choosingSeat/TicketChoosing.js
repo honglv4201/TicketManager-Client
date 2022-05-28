@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { seatSelector } from "../../../redux/seatBookingSelector";
 import ItemSeatDetail from "./ItemSeatDetail";
 
-const TickeChoosing = () => {
+const TickeChoosing = ({ type }) => {
   const { wagon, currentWagon } = useSelector(seatSelector);
 
   const checkTotalTicket = () => {
@@ -45,7 +45,11 @@ const TickeChoosing = () => {
             return (
               wagon[index].seat &&
               wagon[index].seat.map((item, ind) => (
-                <ItemSeatDetail data={{ seat: item, wagon: index }} key={ind} />
+                <ItemSeatDetail
+                  type={type}
+                  data={{ seat: item, wagon: index }}
+                  key={ind}
+                />
               ))
             );
           })}

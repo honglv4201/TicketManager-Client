@@ -7,6 +7,7 @@ import "./asset/css/components.css";
 import TicketPage from "./pages/ticketPage/TicketPage";
 import PaymentPage from "./pages/paymentPage/PaymentPage";
 import ScrollToTop from "./components/functionComponent/ScrollToTop";
+import PaymentCompletePage from "./pages/completedPage/PaymentCompletePage";
 
 function App() {
   return (
@@ -25,6 +26,10 @@ function App() {
           ></Route>
           <Route path="/ticket" element={<TicketPage />}></Route>
           <Route path="/payment" element={<PaymentPage />}></Route>
+          <Route
+            path="/payment/completed"
+            element={<PaymentCompletePage />}
+          ></Route>
         </Route>
       </Routes>
       <ScrollToTop />

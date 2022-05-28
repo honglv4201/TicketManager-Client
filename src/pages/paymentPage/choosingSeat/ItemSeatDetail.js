@@ -1,8 +1,10 @@
 import { useDispatch } from "react-redux";
 import { removeSeat } from "../../../slices/seatBookingSlice";
 
-const ItemSeatDetail = ({ data: { seat, wagon } }) => {
+const ItemSeatDetail = ({ data: { seat, wagon }, type }) => {
   const dispatch = useDispatch();
+
+  console.log("hogtest ", type);
   const handleRemoveItem = () => {
     dispatch(removeSeat({ seat, wagon }));
   };
@@ -16,10 +18,15 @@ const ItemSeatDetail = ({ data: { seat, wagon } }) => {
       </div>
 
       <div className="flex items-center gap-1 text-[12px] flex-col">
+        <div className={`opacity-60 ${type !== "edit" ? "" : "hidden "}`}>
+          Chưa nhập thông tin
+        </div>
         <span className="font-bold ">713.000 vnd</span>
         <div
           onClick={handleRemoveItem}
-          className="btn px-2 py-1 rounded-md border hover:bg-gray-200 cursor-pointer"
+          className={`${
+            type === "edit" ? "" : "hidden "
+          } btn px-2 py-1 rounded-md border hover:bg-gray-200 cursor-pointer`}
         >
           Bỏ chọn
         </div>

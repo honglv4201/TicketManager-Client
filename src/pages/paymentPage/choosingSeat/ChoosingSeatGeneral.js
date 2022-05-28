@@ -3,7 +3,11 @@ import { seatSelector } from "../../../redux/seatBookingSelector";
 import TickeChoosing from "./TicketChoosing";
 import TotalMoney from "./TotalMoney";
 
-const ChoosingSeatGeneral = ({ isOpenTab, handleToggleOpenTab }) => {
+const ChoosingSeatGeneral = ({
+  isOpenTab,
+  handleToggleOpenTab,
+  type = "edit",
+}) => {
   const { wagon, currentWagon } = useSelector(seatSelector);
 
   const checkTotalTicket = () => {
@@ -27,7 +31,7 @@ const ChoosingSeatGeneral = ({ isOpenTab, handleToggleOpenTab }) => {
         <i
           class={`fa-solid fa-angle-left transition-all duration-100 ${
             isOpenTab ? "rotate-180" : ""
-          }`}
+          } ${type === "nonedit" ? "hidden" : ""}`}
         ></i>
         {isOpenTab ? (
           " Chi tiết vé"
@@ -39,7 +43,7 @@ const ChoosingSeatGeneral = ({ isOpenTab, handleToggleOpenTab }) => {
         )}
       </div>
 
-      {isOpenTab && <TickeChoosing />}
+      {isOpenTab && <TickeChoosing type={type} />}
       {!isOpenTab && <TotalMoney />}
     </div>
   );
