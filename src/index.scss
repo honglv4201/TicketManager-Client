@@ -51,6 +51,28 @@
     color: white !important;
     opacity: 0.8 !important;
   }
+
+  .method-cash {
+    input:checked + span {
+      border: solid 1px #2cccff;
+    }
+    span {
+      border: solid 1px transparent;
+    }
+
+    svg {
+      display: block;
+      opacity: 0;
+      transform: translateX(30%) translateY(-30%) scale(1.5);
+      transition: all 0.5s ease;
+    }
+
+    input:checked + span svg {
+      transform: translateX(30%) translateY(-30%) scale(1);
+      opacity: 1;
+      display: block;
+    }
+  }
   .method-item {
     input {
       display: none;

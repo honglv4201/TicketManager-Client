@@ -5,6 +5,7 @@ const initState = {
   currentWagon: 0,
   wagon: [
     {
+      type: "",
       seat: [],
     },
   ],
@@ -39,9 +40,18 @@ const seatBookingSlice = createSlice({
       state.currentWagon = action.payload;
     },
     setInitWagon: (state, action) => {
+      state.wagon = [];
       let sum = action.payload - 1;
-      while (sum > 0) {
-        state.wagon.push({ seat: [] });
+      while (sum > 0 && state.wagon.length < action.payload) {
+        state.wagon.push({
+          type:
+            sum % 3 === 0
+              ? "ngoi-mem-dieu-hoa"
+              : sum % 3 === 1
+              ? "nam-khoang-6"
+              : "nam-khoang-4",
+          seat: [],
+        });
         sum -= 1;
       }
     },

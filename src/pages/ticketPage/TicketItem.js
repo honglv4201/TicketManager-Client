@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { setInitWagon } from "../../slices/seatBookingSlice";
 import { handleTimeTicket } from "../../utils/handleValue";
 import Details from "./detailsInTicket/Details";
 
@@ -7,6 +9,12 @@ const TicketItem = ({ data }) => {
   const [detailPannel, setDetailPannel] = useState(false);
   const handleDetailPannel = () => {
     setDetailPannel((prev) => !prev);
+  };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleToPayment = () => {
+    dispatch(setInitWagon(9));
+    navigate("/payment");
   };
   return (
     <div>
