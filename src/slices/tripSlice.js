@@ -12,7 +12,7 @@ export const fetchTrip = createAsyncThunk("trip/fetch", async (thunkAPI) => {
   try {
     const url = `${apiUrl}/trip/fetch`;
     const response = await axios.get(url);
-    console.log(response);
+    console.log("hongtest1", response);
     return response.data;
   } catch (error) {
     const msg = error.toString();

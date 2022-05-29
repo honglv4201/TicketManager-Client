@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { setInitWagon } from "../../slices/seatBookingSlice";
 import { handleTimeTicket } from "../../utils/handleValue";
 import Details from "./detailsInTicket/Details";
+import Policy from "./detailsInTicket/Policy";
 
 const TicketItem = ({ data }) => {
   const [detailPannel, setDetailPannel] = useState(false);
@@ -16,6 +17,8 @@ const TicketItem = ({ data }) => {
     dispatch(setInitWagon(9));
     navigate("/payment");
   };
+
+  const [tabDetail, setTabDetail] = useState(1);
   return (
     <div>
       <div className="flex gap-0 py-10 px-8 bg-white dark:!bg-dark_primary_pnl rounded-lg">
@@ -103,10 +106,10 @@ const TicketItem = ({ data }) => {
 
         <div className="flex flex-col gap-4 pt-2 pl-10">
           <div className="money px-2 font-bold">
-            {data.ticket?.price.toLocaleString("it-IT", {
+            {/* {data.ticket?.price.toLocaleString("it-IT", {
               style: "currency",
               currency: "VND",
-            })}{" "}
+            })}{" "} */}
           </div>
           <Link
             to="/payment"
@@ -126,15 +129,43 @@ const TicketItem = ({ data }) => {
       <div className={detailPannel ? "block" : "hidden"}>
         {" "}
         <div className="flex gap-4 ml-2 mt-2 cursor-pointer">
-          <span className="border-b-2 border-b-gray-200 px-2">Details</span>
-          <span>Policy</span>
+          <span
+            onClick={() => setTabDetail(1)}
+            className={`px-2 ${
+              tabDetail === 1 ? "border-b-2 border-b-gray-300" : ""
+            }`}
+          >
+            Details
+          </span>
+          <span
+            onClick={() => setTabDetail(2)}
+            className={`${
+              tabDetail === 2 ? "border-b-2 border-b-gray-300" : ""
+            }`}
+          >
+            Policy
+          </span>
         </div>
-        <div className="bg-white overflow-hidden rounded-tl-none rounded-tr-none rounded-br-lg rounded-bl-lg w-full min-h-[200px]">
-          <Details />
+        <div className="custom-animate-dropdown bg-white overflow-hidden  rounded-tl-none rounded-tr-none rounded-br-lg rounded-bl-lg w-full min-h-[200px]">
+          <ComponentInDetail tab={tabDetail} />
         </div>
       </div>
     </div>
   );
+};
+
+const ComponentInDetail = ({ tab }) => {
+  switch (tab) {
+    case 1: {
+      return <Details />;
+    }
+    case 2: {
+      return <Policy />;
+    }
+    default: {
+      break;
+    }
+  }
 };
 
 export default TicketItem;

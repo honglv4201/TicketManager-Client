@@ -7,6 +7,7 @@ const ChoosingSeatGeneral = ({
   isOpenTab,
   handleToggleOpenTab,
   type = "edit",
+  handleContinue,
 }) => {
   const { wagon, currentWagon } = useSelector(seatSelector);
 
@@ -43,7 +44,9 @@ const ChoosingSeatGeneral = ({
         )}
       </div>
 
-      {isOpenTab && <TickeChoosing type={type} />}
+      {isOpenTab && (
+        <TickeChoosing type={type} handleContinue={handleContinue} />
+      )}
       {!isOpenTab && <TotalMoney />}
     </div>
   );

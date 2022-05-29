@@ -8,8 +8,6 @@ export const tripFilterSelector = createSelector(
   tripSelector,
   filterSelector,
   (trip, filter) => {
-    console.log("hongtest", trip);
-
     return trip.filter((trip) => {
       return (
         (trip.route.startLocation === filter.start ||

@@ -2,27 +2,44 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateFiter } from "../slices/filterTicketSlice";
 
-const useHandleTicketRequest = () => {
+const useHandleTicketRequest = (type = 0) => {
   const [startLocation, setStartLocation] = useState();
   const [endLocation, setEndLocation] = useState();
   const [dateStart, setDateStart] = useState();
 
+  const [input, setInput] = useState();
+
+  const handleOnChange = (e) => {
+    setInput(e.target.value);
+  };
+  const [fixbug, setFixBug] = useState(0);
+
   const handleChangeDate = (e) => {
+    // if (type === 1) {
+    //   alert("hong");
+    //   if (fixbug === 0) {
+    //     setFixBug((prev) => prev + 1);
+    //     return;
+    //   }
+    // }
     setDateStart(e._d.toISOString().substring(0, 10));
   };
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  const handleSaveFilter = () => {
     dispatch(
       updateFiter({
         start: startLocation,
+        input: input,
         end: endLocation,
         date: dateStart,
         filter: {},
       })
     );
-  }, [startLocation, endLocation, dateStart, dispatch]);
+  };
+
+  useEffect(() => {}, [startLocation, input, endLocation, dateStart, dispatch]);
 
   return {
     startLocation,
@@ -32,6 +49,10 @@ const useHandleTicketRequest = () => {
     setEndLocation,
     setDateStart,
     handleChangeDate,
+    handleOnChange,
+    input,
+    setInput,
+    handleSaveFilter,
   };
 };
 export default useHandleTicketRequest;

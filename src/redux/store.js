@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "../slices/authSlice";
+import citySlice from "../slices/citySlice";
 import filterTicketSlice from "../slices/filterTicketSlice";
 
 import routeSlice from "../slices/routeSlice";
@@ -13,6 +14,7 @@ const store = configureStore({
     trip: tripSlice,
     filter: filterTicketSlice,
     seatChoosing: seatBookingSlice,
+    city: citySlice,
   },
 });
 

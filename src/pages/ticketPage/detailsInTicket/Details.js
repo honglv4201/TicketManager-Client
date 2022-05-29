@@ -2,7 +2,7 @@ import React from "react";
 
 const Details = () => {
   return (
-    <div className="px-8 py-6  custom-animate-dropdown">
+    <div className="px-8 py-6  custom-anim-left">
       <div className="flex gap gap-8">
         <div className="tab py-4 px-6 rounded-md bg-gray-50  flex flex-col gap-2">
           <p className="font-bold text-base mb-2 text-primary opacity-80">
