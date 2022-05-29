@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { seatSelector } from "../../../redux/seatBookingSelector";
 import ItemSeatDetail from "./ItemSeatDetail";
 
-const TickeChoosing = ({ type }) => {
+const TickeChoosing = ({ type, handleContinue }) => {
   const { wagon, currentWagon } = useSelector(seatSelector);
 
   const checkTotalTicket = () => {
@@ -13,6 +13,13 @@ const TickeChoosing = ({ type }) => {
       totalTicket += wagon[i].seat.length;
     }
     return totalTicket;
+  };
+  const handleContinueFix = () => {
+    if (type === "edit") {
+      handleContinue(1);
+    } else {
+      handleContinue(2);
+    }
   };
 
   useEffect(() => {}, []);
@@ -72,8 +79,9 @@ const TickeChoosing = ({ type }) => {
                 ? "!opacity-20 hover:bg-opacity-100 bg-gray-500"
                 : ""
             }`}
+            onClick={handleContinueFix}
           >
-            Thanh Toán
+            Tiếp tục
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PickModal from "./PickModal";
 import PickQuantityTicket from "./PickQuantityTicket";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "moment/locale/zh-cn";
 import locale from "antd/es/date-picker/locale/zh_CN";
@@ -15,24 +15,62 @@ import { fetchRoute } from "../../slices/routeSlice";
 import { routeSelector } from "../../redux/routeSelector";
 import { updateFiter } from "../../slices/filterTicketSlice";
 import useHandleTicketRequest from "../../hooks/useHandleTicketRequest";
+import { fetchCity } from "../../slices/citySlice";
+import { citySelector } from "../../redux/citySelector";
+import useClickOutSideWithEvent from "../../hooks/useClickOutSideWithEvent";
 
 const MainPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchRoute());
+    dispatch(fetchCity());
   }, []);
+
+  const city = useSelector(citySelector);
+  const checkRightCity = (data) => {
+    console.log(data);
+    for (let c of city.city) {
+      if (c.name === data) return true;
+    }
+    return false;
+  };
+
+  const [startTrue, setStartTrue] = useState(false);
+
+  const [err, seterr] = useState({
+    start: false,
+    end: false,
+    date: false,
+  });
+  const handleResetErr = () => {
+    seterr({
+      start: false,
+      end: false,
+      date: false,
+    });
+  };
+  const handleResetLocation = () => {
+    console.log("hongcheck", startLocation);
+    if (!checkRightCity(startLocation)) {
+      //setStartLocation("");
+    }
+    if (!checkRightCity(endLocation)) {
+      //setEndLocation("");
+    }
+  };
 
   const {
     show: show1,
     setShow: setShow1,
     nodeRef: nodeRef1,
-  } = useClickOutSide(".modal");
+  } = useClickOutSideWithEvent(".modal");
+
   const {
     show: show2,
     setShow: setShow2,
     nodeRef: nodeRef2,
-  } = useClickOutSide(".modal");
+  } = useClickOutSide(".modal", handleResetLocation);
 
   const {
     show: showQuantity,
@@ -41,12 +79,15 @@ const MainPage = () => {
   } = useClickOutSide(".quantity-box");
 
   const [coords, setCoords] = useState({});
+
   const handleOpenModal1 = () => {
+    handleResetErr();
     setShow1(true);
     console.log(nodeRef1.current.getBoundingClientRect());
     setCoords(nodeRef1.current.getBoundingClientRect());
   };
   const handleOpenModal2 = () => {
+    handleResetErr();
     setShow2(true);
     console.log(nodeRef1.current.getBoundingClientRect());
     setCoords(nodeRef2.current.getBoundingClientRect());
@@ -64,7 +105,47 @@ const MainPage = () => {
     setEndLocation,
     setDateStart,
     handleChangeDate,
+    handleSaveFilter,
   } = useHandleTicketRequest();
+
+  useEffect(() => {
+    setCoords(nodeRef1.current.getBoundingClientRect());
+    if (checkRightCity(startLocation)) {
+      setStartTrue(true);
+    } else {
+      setStartTrue(false);
+    }
+  }, [startLocation]);
+  useEffect(() => {
+    setCoords(nodeRef2.current.getBoundingClientRect());
+  }, [endLocation]);
+
+  const navigate = useNavigate();
+  const { city: cities } = useSelector(citySelector);
+  const checkLocation = (data) => {
+    for (let c in cities) {
+      if (c.name === data) return true;
+    }
+    return false;
+  };
+
+  const handleSearch = () => {
+    seterr({
+      start: checkLocation(startLocation),
+      end: checkLocation(endLocation),
+      date: checkLocation(dateStart),
+    });
+    if (
+      checkLocation(startLocation) ||
+      checkLocation(endLocation) ||
+      checkLocation(dateStart)
+    ) {
+      return;
+    }
+    handleSaveFilter();
+    // alert(startLocation + endLocation + dateStart + cities[0].name);
+    navigate("/ticket");
+  };
 
   // tempt link: https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_720/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/f5b01j54xainwtaosf8r/TourNg%C3%A0yThamQuanGrandCanyonWestRimT%E1%BB%ABLasVegas.webp
   return (
@@ -76,7 +157,7 @@ const MainPage = () => {
           alt=""
         />
       </div>
-      <div className="main-form rounded-lg bg-white  dark:!bg-[#2f2f2f] absolute pb-8 2xl:-bottom-16 lg:top-[150px] -translate-x-2/4 left-2/4 2xl:w-[1100px] lg:w-[85%] lg:mx-1 h-fit ">
+      <div className="main-form rounded-lg bg-white   dark:!bg-[#2f2f2f] absolute pb-14 2xl:-bottom-16 lg:top-[150px] -translate-x-2/4 left-2/4 2xl:w-[1100px] lg:w-[85%] lg:mx-1 h-fit ">
         <div className="flex flex-col 2xl:px-14 lg:px-16 sm:px-8 pt-12 gap-10 ">
           <div className="flex justify-between  dark:text-white 2xl:flex-row lg:flex-col 2xl:border-b-gray-[#ccc] 2xl:border-b-2 lg:border-none ">
             <div className="flex content-center 2xl:gap-10 sm:gap-2 lg:border-b-gray-[#ccc] lg:border-b-2 ">
@@ -126,42 +207,68 @@ const MainPage = () => {
               <div
                 ref={nodeRef1}
                 onClick={handleOpenModal1}
-                className="pl-10 min-w-[240px] pr-16 py-2 dark:bg-[#575757] dark:text-white rounded-lg bg-blue-50 flex flex-col relative cursor-pointer"
+                className="pl-8  min-w-[240px] pr-16 py-2   dark:bg-[#575757] dark:text-white rounded-lg bg-gray-100 flex flex-col relative cursor-pointer"
               >
-                <span>Location</span>
-                <span className="opacity-40">
-                  {startLocation || "Your location?"}
-                </span>
+                <span className="opacity-80">Điểm đi</span>
+                <input
+                  type="text"
+                  className="py-1 mt-0 px-0 rounded-md bg-transparent  w-full  outline-none"
+                  value={startLocation}
+                  placeholder="Chọn điểm đi"
+                  onChange={(e) => setStartLocation(e.target.value)}
+                />
+                <span className="opacity-40 hidden"></span>
+                {err.start && <ErrorNotify> Vui Lòng chọn điểm đi</ErrorNotify>}
               </div>
               <div
                 ref={nodeRef2}
                 onClick={handleOpenModal2}
-                className="pl-10 min-w-[240px] pr-16 py-2 dark:bg-[#575757] dark:text-white rounded-lg bg-gray-50 flex flex-col relative cursor-pointer"
+                className="pl-8  min-w-[240px] pr-16 py-2 dark:bg-[#575757] dark:text-white rounded-lg bg-gray-50 flex flex-col relative cursor-pointer"
               >
-                <span>Location</span>
-                <span className="opacity-40">
+                <span className="opacity-80">Điểm đến</span>
+                {/* <span className="opacity-40">
                   {endLocation || "Where do you go?"}
-                </span>
+                </span> */}
+                <input
+                  type="text"
+                  className="py-1 mt-0 px-0 rounded-md bg-transparent  w-full  outline-none"
+                  value={endLocation}
+                  placeholder="Chọn điểm đến"
+                  onChange={(e) => setEndLocation(e.target.value)}
+                />
+                {err.end && <ErrorNotify> Vui Lòng chọn điểm đến</ErrorNotify>}
               </div>
-              <div className="pl-10 pr-16 py-2 dark:bg-[#575757] dark:text-white rounded-lg bg-gray-50 flex flex-col relative cursor-pointer">
-                <span>Time</span>
+              <div className="pl-6  pr-16 py-2 dark:bg-[#575757] dark:text-white rounded-lg bg-gray-50 flex flex-col relative cursor-pointer">
+                <span className="opacity-80">Thời gian</span>
                 <DatePicker
                   onChange={handleChangeDate}
-                  placeholder="Where you go"
-                  className=""
+                  placeholder="Chọn"
+                  onClick={handleResetErr}
+                  className="w-full"
                 ></DatePicker>
+                {err.date && (
+                  <ErrorNotify> Vui lòng chọn thời gian</ErrorNotify>
+                )}
               </div>
 
-              <Link
-                to="/ticket"
-                className="min-w-[160px] hover:bg-blue-400 cursor-pointer text-white btn-search bg-blue-500 2xl:ml-6 lg:ml-0 rounded-lg text-center grid content-center 2xl:max-w-[100px] lg:max-w-full min-h-[40px] lg:w-full 2xl:mt-0 lg:mt-6 lg:py-3"
+              <div
+                onClick={handleSearch}
+                className="min-w-[160px] hover:text-white hover:bg-blue-400 cursor-pointer text-white btn-search bg-blue-500 2xl:ml-6 lg:ml-0 rounded-lg text-center grid content-center 2xl:max-w-[100px] lg:max-w-full min-h-[40px] lg:w-full 2xl:mt-0 lg:mt-6 lg:py-3"
               >
                 Search
-              </Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  );
+};
+export const ErrorNotify = ({ children }) => {
+  return (
+    <div className="absolute -bottom-10 left-0 right-0 text-red-400 flex items-center gap-2 text-sm ml-2">
+      <i class="fa-solid fa-triangle-exclamation "></i>
+      {children}
     </div>
   );
 };

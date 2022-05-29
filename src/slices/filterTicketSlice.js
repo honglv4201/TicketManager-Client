@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initState = {
-  start: "everywhere",
-  end: "everywhere",
+  start: "",
+  end: "",
+  input: "",
   date: "everytime",
   filter: {},
 };
@@ -12,9 +13,10 @@ const filterTicketSlice = createSlice({
   initialState: initState,
   reducers: {
     updateFiter: (state, action) => {
-      state.start = action.payload.start || "everywhere";
+      state.start = action.payload.start;
       state.end = action.payload.end;
       state.date = action.payload.date;
+      state.input = action.payload.input;
     },
   },
 });

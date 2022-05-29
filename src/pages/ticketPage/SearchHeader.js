@@ -1,11 +1,19 @@
-import { Select } from "antd";
+import { DatePicker, Select } from "antd";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useClickOutSide from "../../hooks/useClickOutSide";
 import useHandleTicketRequest from "../../hooks/useHandleTicketRequest";
+import { fetchCity } from "../../slices/citySlice";
+import moment from "moment";
+import "moment/locale/zh-cn";
 import PickModal from "../homePage/PickModal";
 
 const SearchHeader = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCity());
+  }, []);
   const { Option } = Select;
 
   const { show, setShow, nodeRef } = useClickOutSide(".modal");
@@ -35,7 +43,6 @@ const SearchHeader = () => {
   const handleOnChange1 = (e) => {
     setEndLocation(e.target.value);
   };
-
   const {
     startLocation,
     endLocation,
@@ -43,8 +50,9 @@ const SearchHeader = () => {
     setStartLocation,
     setEndLocation,
     setDateStart,
+
     handleChangeDate,
-  } = useHandleTicketRequest();
+  } = useHandleTicketRequest(1);
   const { start, end } = useSelector((state) => state.filter);
   useEffect(() => {
     setStartLocation(start);
@@ -101,13 +109,13 @@ const SearchHeader = () => {
 
         <div className="flex flex-col gap-1">
           <span className="font-sm opacity-80">Time</span>
-          <div className="px-4 py-2 bg-gray-50  dark:!bg-dark_input  rounded-lg">
-            <input
-              className="bg-transparent  outline-none "
-              type="text"
-              placeholder="10/5/2022"
-              value="10/5/2022"
-            />
+          <div className="px-4 py-[2px] bg-gray-50  dark:!bg-dark_input  rounded-lg">
+            <DatePicker
+              placeholder="Chọn"
+              className="w-full"
+              value={moment(dateStart)}
+              defaultValue={moment(dateStart)}
+            ></DatePicker>
           </div>
         </div>
 

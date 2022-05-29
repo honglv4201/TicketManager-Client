@@ -1,16 +1,23 @@
 import React from "react";
 import ReactDom from "react-dom";
 import { useSelector } from "react-redux";
+import {
+  cityFilterSelectorEnd,
+  cityFilterSelectorStart,
+  citySelector,
+} from "../../redux/citySelector";
 import { routeSelector } from "../../redux/routeSelector";
 import { everywhere } from "../../utils/constValue";
 
 const PickModal = ({ coords, type, setLocation, handleClose }) => {
-  const { route, status } = useSelector(routeSelector);
+  const cityStart = useSelector(cityFilterSelectorStart);
+  const cityEnd = useSelector(cityFilterSelectorEnd);
+
   const location = Array.from(
     new Set(
-      route.map((route) =>
-        type === "start" ? route.startLocation : route.endLocation
-      )
+      type === "start"
+        ? cityStart.map((city) => city.name)
+        : cityEnd.map((city) => city.name)
     )
   );
   location.unshift(everywhere);

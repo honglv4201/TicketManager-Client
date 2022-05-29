@@ -71,6 +71,7 @@ const ChoosingTicket = ({ isDark, process, SetProcess }) => {
           isOpenTab={isOpenTab}
           setIsOpenTab={setIsOpenTab}
           handleToggleOpenTab={handleToggleOpenTab}
+          handleContinue={ChangeProcess}
         />
       </div>
     </>
