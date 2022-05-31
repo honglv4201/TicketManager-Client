@@ -8,17 +8,21 @@ const initState = {
   trip: [],
 };
 
-export const fetchTrip = createAsyncThunk("trip/fetch", async (thunkAPI) => {
-  try {
-    const url = `${apiUrl}/trip/fetch`;
-    const response = await axios.get(url);
-    console.log("hongtest1", response);
-    return response.data;
-  } catch (error) {
-    const msg = error.toString();
-    return thunkAPI.rejectWithValue(msg);
+export const fetchTrip = createAsyncThunk(
+  "trip/fetch",
+  async (data, thunkAPI) => {
+    try {
+      const url = `${apiUrl}/trip/fetch`;
+      console.log(data);
+      const response = await axios.post(url, data);
+      console.log("hongtest1", response);
+      return response.data;
+    } catch (error) {
+      const msg = error.toString();
+      return thunkAPI.rejectWithValue(msg);
+    }
   }
-});
+);
 
 const tripSlice = createSlice({
   name: "trip",

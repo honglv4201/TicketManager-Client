@@ -7,6 +7,7 @@ import { fetchCity } from "../../slices/citySlice";
 import moment from "moment";
 import "moment/locale/zh-cn";
 import PickModal from "../homePage/PickModal";
+import { filterSelectorFixIndex } from "../../redux/tripSelector";
 
 const SearchHeader = () => {
   const dispatch = useDispatch();
@@ -50,15 +51,14 @@ const SearchHeader = () => {
     setStartLocation,
     setEndLocation,
     setDateStart,
-
-    handleChangeDate,
   } = useHandleTicketRequest(1);
-  const { start, end } = useSelector((state) => state.filter);
+  const { start, end, date } = useSelector((state) => state.filter);
   useEffect(() => {
     setStartLocation(start);
+    setDateStart(date);
     setEndLocation(end);
   }, []);
-  console.log(start);
+
   return (
     <div className="page-container w-full min-h-[90px] pt-2 bg-white rounded-lg pr-10 shadow-sm  pl-10 mt-4 dark:!bg-dark_primary_pnl dark:!text-white ">
       <div className="flex gap-4 justify-end">

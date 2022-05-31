@@ -2,7 +2,10 @@ import React, { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { setInitWagon } from "../../slices/seatBookingSlice";
-import { handleTimeTicket } from "../../utils/handleValue";
+import {
+  handleTimeTicket,
+  handleTimeTicketMinutes,
+} from "../../utils/handleValue";
 import Details from "./detailsInTicket/Details";
 import Policy from "./detailsInTicket/Policy";
 
@@ -19,6 +22,9 @@ const TicketItem = ({ data }) => {
   };
 
   const [tabDetail, setTabDetail] = useState(1);
+  if (!data) {
+    return <div>Khong co du lieu</div>;
+  }
   return (
     <div>
       <div className="flex gap-0 py-10 px-8 bg-white dark:!bg-dark_primary_pnl rounded-lg">
@@ -31,7 +37,7 @@ const TicketItem = ({ data }) => {
                 4.5
               </span>
               <span className="">Available: </span>
-              <span className="text-yellow-500 ">53 seat</span>
+              <span className="text-yellow-500 ">{data.totalSeat} seat</span>
             </div>
 
             <div className="flex items-center gap-2">
@@ -42,7 +48,7 @@ const TicketItem = ({ data }) => {
                   alt="tau_image"
                 />
                 <div className="absolute right-0 bottom-0 rounded-md px-2 py-[2px] leading-2 bg-blue-50 font-bold text-[11px] text-blue-400">
-                  Tàu SE3
+                  {data.idTrain}
                 </div>
               </div>
 
@@ -51,21 +57,19 @@ const TicketItem = ({ data }) => {
               </span> */}
               <div className="flex flex-col gap-1 text-sm ml-10">
                 <span className="time-start font-bold">
-                  {handleTimeTicket(data.route.startTime)}
+                  {handleTimeTicket(data.s)}
                 </span>
-                <span className=""> {data.route.startLocation}</span>
+                <span className=""> {"start ne"}</span>
               </div>
               <div className="flex flex-col gap-1 items-center text-sm">
                 <div className="w-[100px] border-dotted border-b-2"></div>
-                <span>{data.route.totalTime}h</span>
+                <span>{handleTimeTicketMinutes(data.e - data.s)}h</span>
               </div>
               <div className="flex flex-col gap-1 text-sm mr-10">
                 <span className="time-start font-bold">
-                  {handleTimeTicket(
-                    data.route.startTime + data.route.totalTime
-                  )}
+                  {handleTimeTicket(data.e)}
                 </span>
-                <span> {data.route.endLocation}</span>
+                <span> {"end nne"}</span>
               </div>
 
               {/* <span className="p-2 font-bold text-lg ">
@@ -150,6 +154,7 @@ const TicketItem = ({ data }) => {
           <ComponentInDetail tab={tabDetail} />
         </div>
       </div>
+      ``
     </div>
   );
 };

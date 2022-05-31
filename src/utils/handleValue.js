@@ -1,6 +1,24 @@
 export const handleTimeTicket = (value) => {
-  let result = value.toString();
-  if (result.length <= 2) result = result += ":00";
+  let result = value?.toString();
+  if (result?.length <= 2) result = result += ":00";
+  else {
+    result =
+      Math.floor(result) +
+      ":" +
+      (Math.floor(((result % 10) * 10 * 60) / 100) < 10
+        ? "0" + Math.floor(((result % 10) * 10 * 60) / 100)
+        : Math.floor(((result % 10) * 10 * 60) / 100));
+  }
+
+  return result;
+};
+
+export const handleTimeTicketMinutes = (value) => {
+  let result = value?.toString();
+  if (result?.length <= 2) result = result += ":00";
+  else {
+    result = Math.ceil(result);
+  }
 
   return result;
 };
