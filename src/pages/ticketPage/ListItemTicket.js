@@ -30,11 +30,10 @@ const ListItemTicket = () => {
         </div>
       </div>
       {trip.status === "loading" && <Loading />}
-
+      {(!trip || trip.length <= 0) && <NoItem />}
       {trip.trip &&
         trip.status === "idle" &&
         trip.trip.map((item, ind) => <TicketItem data={item} key={ind} />)}
-      {trip && trip.length === 0 && <NoItem />}
     </div>
   );
 };

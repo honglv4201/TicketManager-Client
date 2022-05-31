@@ -23,6 +23,13 @@ export const handleTimeTicketMinutes = (value) => {
   return result;
 };
 
+export const handleMoney = (value) => {
+  return value?.toLocaleString("it-IT", {
+    style: "currency",
+    currency: "vnd",
+  });
+};
+
 export const UnsignedString = (data) => {
   const sample = [
     "aAeEoOuUiIdDyY",

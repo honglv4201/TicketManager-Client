@@ -25,7 +25,7 @@ function App() {
             }
           ></Route>
           <Route path="/ticket" element={<TicketPage />}></Route>
-          <Route path="/payment" element={<PaymentPage />}></Route>
+          <Route path="/booking/:id" element={<PaymentPage />}></Route>
           <Route
             path="/payment/completed"
             element={<PaymentCompletePage />}

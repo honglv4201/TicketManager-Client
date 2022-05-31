@@ -1,13 +1,20 @@
 import { useRef, useState } from "react";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { updateMethodPayment } from "../../../slices/seatBookingSlice";
 
 const CreditCard = () => {
-  const [method, setMethod] = useState("");
+  const [method, setMethod] = useState();
 
+  const dispatch = useDispatch();
   const handleChangeMethod = (e) => {
     setMethod(e.target.value);
-    console.log(e.target.value);
-    console.log(method);
+    dispatch(
+      updateMethodPayment({
+        payment: e.target.value === "0" ? "cash" : "creditcard",
+        isPay: e.target.value === "0" ? "true" : "false",
+      })
+    );
   };
   return (
     <div className="creadit-card">
@@ -182,7 +189,11 @@ const CreditCard = () => {
         </div>
       </div>
 
-      <div className="mt-10 w-full bg-white dark:!bg-dark_primary_pnl rounded-lg">
+      <div
+        className={`${
+          method === "0" ? "opacity-40" : ""
+        } mt-10 w-full bg-white dark:!bg-dark_primary_pnl rounded-lg`}
+      >
         <div className="opacity-80 mb-2 dark:text-white">Name Card</div>
         <input
           type="text"

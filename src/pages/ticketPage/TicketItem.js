@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { filterSelectorFixIndex } from "../../redux/tripSelector";
 import { setInitWagon } from "../../slices/seatBookingSlice";
 import {
   handleTimeTicket,
@@ -16,9 +17,12 @@ const TicketItem = ({ data }) => {
   };
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleToPayment = () => {
-    dispatch(setInitWagon(9));
-    navigate("/payment");
+  const { data: dataFilter, success } = useSelector(filterSelectorFixIndex);
+  const handleToBooking = () => {
+    // dispatch(setInitWagon(9));
+    localStorage.setItem("s", dataFilter.startIndex);
+    localStorage.setItem("e", dataFilter.endIndex);
+    navigate(`/booking/${data.idTrip}`);
   };
 
   const [tabDetail, setTabDetail] = useState(1);
@@ -122,12 +126,12 @@ const TicketItem = ({ data }) => {
             Luu lai
           </Link>
 
-          <Link
-            to="/payment"
+          <div
+            onClick={handleToBooking}
             className="btn-pay px-4 py-2 rounded-lg bg-primary text-white hover:text-white hover:bg-opacity-80 "
           >
             Dat Ngay
-          </Link>
+          </div>
         </div>
       </div>
       <div className={detailPannel ? "block" : "hidden"}>

@@ -1,19 +1,24 @@
 import { useDispatch } from "react-redux";
 import { removeSeat } from "../../../slices/seatBookingSlice";
+import { convertNameWagon } from "../../../utils/constValue";
+import { handleMoney } from "../../../utils/handleValue";
 
-const ItemSeatDetail = ({ data: { seat, wagon }, type }) => {
+const ItemSeatDetail = ({
+  data: { numOfSeat, typeWagon, price },
+  wagon,
+  type,
+}) => {
   const dispatch = useDispatch();
 
-  console.log("hogtest ", type);
   const handleRemoveItem = () => {
-    dispatch(removeSeat({ seat, wagon }));
+    dispatch(removeSeat({ numOfSeat, wagon }));
   };
   return (
     <div className="w-full px-3 py-3 flex justify-between items-center rounded-md border my-4">
       <div className="flex flex-col gap-1 items-start">
-        <div className="text-[10px]">Ngồi mềm điều hòa</div>
+        <div className="text-[10px]">{convertNameWagon(typeWagon)}</div>
         <div className="font-bold">
-          Ghế {seat} - Toa {wagon + 1}
+          Ghế {numOfSeat} - Toa {wagon + 1}
         </div>
       </div>
 
@@ -21,7 +26,7 @@ const ItemSeatDetail = ({ data: { seat, wagon }, type }) => {
         <div className={`opacity-60 ${type !== "edit" ? "" : "hidden "}`}>
           Chưa nhập thông tin
         </div>
-        <span className="font-bold ">713.000 vnd</span>
+        <span className="font-bold lowercase ">{handleMoney(price)}</span>
         <div
           onClick={handleRemoveItem}
           className={`${
