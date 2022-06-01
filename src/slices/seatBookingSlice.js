@@ -37,9 +37,51 @@ export const createInvoice = createAsyncThunk(
 
       if (data) {
         const seatUrl = `${apiUrl}/seat/create`;
+        const cusTicketUrl = `${apiUrl}/cusTicket/create`;
+        const userBookingUrl = `${apiUrl}/userBooking/create`;
+        const userBookingData = {
+          idType:
+            reqdata.typeHumanBooking === "user"
+              ? reqdata.userID
+              : "5ting_guest",
+          type: reqdata.typeHumanBooking,
+          idInvoice: data._id,
+          fullname: reqdata.user.name,
+          phoneNumber: Math.floor(reqdata.user.sdt),
+          email: reqdata.user.email,
+          identifyNumber: reqdata.user.identify,
+        };
+        await axios.post(userBookingUrl, userBookingData);
+        for (let userTicket of reqdata.list) {
+          const userTicketData = {
+            idWagonTicket: userTicket.idWagon,
+            numOfSeat: userTicket.numOfSeat,
+            startIndex: reqdata.tripLocation.startIndex,
+            endIndex: reqdata.tripLocation.endIndex,
+          };
+          console.log(userTicketData);
+          const { data: seatDataReturn } = await axios.post(
+            seatUrl,
+            userTicketData
+          );
+          console.log(
+            "🚀 ~ file: seatBookingSlice.js ~ line 52 ~ seatDataReturn",
+            seatDataReturn
+          );
 
-        const { seatData } = await axios.post();
+          const userInfoTicket = {
+            idSeat: seatDataReturn._id,
+            idInvoice: data._id,
+            cusName: userTicket.name,
+            cusID: userTicket.identifyOrAge,
+            cusAge: "0",
+          };
+          console.log("xxx", userInfoTicket);
+          await axios.post(cusTicketUrl, userInfoTicket);
+        }
       }
+      console.log("successful");
+      alert("success");
       return data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);

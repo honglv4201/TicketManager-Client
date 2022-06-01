@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { seatSelector } from "../../../redux/seatBookingSelector";
+import { filterSelectorFixIndex } from "../../../redux/tripSelector";
 import { createInvoice } from "../../../slices/seatBookingSlice";
 
 const SumaryResultTicket = () => {
@@ -8,14 +9,34 @@ const SumaryResultTicket = () => {
   const dispatch = useDispatch();
 
   const { wagonData, wagonBooking, status } = useSelector(seatSelector);
+  const {
+    data: { startIndex, endIndex },
+  } = useSelector(filterSelectorFixIndex);
   const handlePay = () => {
-    const data = {
+    let typeHumanBooking = "guest";
+    let data = {
       idTicket: wagonData[0]?.idTicket,
-      idUser: wagonBooking.user.idUser || "",
       payment: wagonBooking.payment,
       isPay: wagonBooking.isPay,
     };
-    dispatch(createInvoice({ data, list: wagonBooking.listUserTicket }));
+    if (wagonBooking.user.idUser) typeHumanBooking = "user";
+    else typeHumanBooking = "guest";
+
+    const tripLocation = {
+      startIndex,
+      endIndex,
+    };
+    dispatch(
+      createInvoice({
+        data: data,
+        list: wagonBooking.listUserTicket,
+        user: wagonBooking.user,
+        userID: wagonBooking.user.idUser || "",
+        tripLocation,
+        typeHumanBooking,
+      })
+    );
+
     if (status === "idle") {
       navigate("/payment/completed");
     }

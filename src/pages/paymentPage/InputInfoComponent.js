@@ -31,7 +31,7 @@ const InputInfoComponent = () => {
         phone: userBookingForm.phone,
         identify: userBookingForm.identify,
         idUser:
-          JSON.parse(localStorage.getItem("ticket-user"))?.user?._id || "guest",
+          JSON.parse(localStorage.getItem("ticket-user"))?.user?._id || null,
       })
     );
   }, [
