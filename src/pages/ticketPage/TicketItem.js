@@ -1,7 +1,10 @@
 import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { filterSelectorFixIndex } from "../../redux/tripSelector";
+import {
+  filterSelector,
+  filterSelectorFixIndex,
+} from "../../redux/tripSelector";
 import { setInitWagon } from "../../slices/seatBookingSlice";
 import {
   handleTimeTicket,
@@ -18,6 +21,7 @@ const TicketItem = ({ data }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data: dataFilter, success } = useSelector(filterSelectorFixIndex);
+  const { start, end } = useSelector(filterSelector);
   const handleToBooking = () => {
     // dispatch(setInitWagon(9));
     localStorage.setItem("s", dataFilter.startIndex);
@@ -59,21 +63,21 @@ const TicketItem = ({ data }) => {
               {/* <span className="p-2 font-bold text-lg ">
                 {data.route.startLocation}
               </span> */}
-              <div className="flex flex-col gap-1 text-sm ml-10">
+              <div className="flex items-center flex-col gap-1 text-sm ml-10">
                 <span className="time-start font-bold">
                   {handleTimeTicket(data.s)}
                 </span>
-                <span className=""> {"start ne"}</span>
+                <span className=""> {start}</span>
               </div>
               <div className="flex flex-col gap-1 items-center text-sm">
                 <div className="w-[100px] border-dotted border-b-2"></div>
                 <span>{handleTimeTicketMinutes(data.e - data.s)}h</span>
               </div>
-              <div className="flex flex-col gap-1 text-sm mr-10">
+              <div className="flex  items-center flex-col gap-1 text-sm mr-10">
                 <span className="time-start font-bold">
                   {handleTimeTicket(data.e)}
                 </span>
-                <span> {"end nne"}</span>
+                <span> {end}</span>
               </div>
 
               {/* <span className="p-2 font-bold text-lg ">
@@ -128,7 +132,7 @@ const TicketItem = ({ data }) => {
 
           <div
             onClick={handleToBooking}
-            className="btn-pay px-4 py-2 rounded-lg bg-primary text-white hover:text-white hover:bg-opacity-80 "
+            className="btn-pay px-4 py-2 rounded-lg bg-primary text-white hover:text-white hover:bg-opacity-80 cursor-pointer "
           >
             Dat Ngay
           </div>

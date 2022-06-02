@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import useDetectFocusInput from "../../hooks/useDetectFocusInput";
 import CustomInput from "../../minusComponents/CustomInput";
 import { seatSelector } from "../../redux/seatBookingSelector";
 import {
@@ -96,8 +97,12 @@ const ItemCustomer = ({ ind }) => {
     name: "",
     info: "",
   });
+
+  const { nodeRef: nodeRef1, err, value, setValue } = useDetectFocusInput();
+  const { nodeRef: nodeRef2 } = useDetectFocusInput();
   const handleOnchange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setValue(e.target.value);
   };
   const handleOnChangeName = (e) => {
     setForm({ ...form, name: e.target.value });
@@ -123,12 +128,14 @@ const ItemCustomer = ({ ind }) => {
         <div className="flex items-center gap-2">
           <i class="fa-solid fa-chair"></i>Ghe 11 - Toa 1
         </div>
+        {err}
         <div className="px-4 -mr-2 py-2  rounded-md hover:bg-blue-100 cursor-pointer">
           <i class="fa-solid fa-arrows-rotate"></i>
         </div>
       </div>
       <div className="flex items-center gap-10 mt-2 justify-items-stretch">
         <CustomInput
+          nodeRef={nodeRef1}
           value={form.name}
           handleOnChange={handleOnchange}
           name="name"
@@ -136,6 +143,7 @@ const ItemCustomer = ({ ind }) => {
           placeholder="Ho va Ten"
         />
         <CustomInput
+          nodeRef={nodeRef2}
           value={form.info}
           handleOnChange={handleOnchange}
           name="info"

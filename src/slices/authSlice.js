@@ -5,7 +5,7 @@ import { apiUrl } from "../utils/utils";
 const user = JSON.parse(localStorage.getItem("ticket-user"));
 
 const initState = {
-  user: user ? user._user : null,
+  user: user ? user : null,
   isLoading: false,
   isErr: false,
   isSuccess: false,
@@ -36,7 +36,6 @@ export const login = createAsyncThunk(
   "auth/login",
   async (userData, thunkAPI) => {
     try {
-      console.log(userData);
       const url = `${apiUrl}/signin`;
       const response = await axios.post(url, userData);
       if (response.data) {
@@ -52,6 +51,32 @@ export const login = createAsyncThunk(
   }
 );
 
+export const updatePassword = createAsyncThunk(
+  "user/updatePassword",
+  async (passwordData, thunkAPI) => {
+    try {
+      const url = `${apiUrl}/user/changepassword/${passwordData.id}`;
+      const response = await axios.put(url, passwordData);
+      return response.data || response.response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+export const updateUserInfo = createAsyncThunk(
+  "user/update",
+  async (userData, thunkAPI) => {
+    try {
+      const url = `${apiUrl}/user/${userData.id}`;
+      const response = await axios.put(url, userData);
+      if (response.data) {
+        return response.data;
+      }
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 const authSlice = createSlice({
   name: "auth",
   initialState: initState,
@@ -98,6 +123,36 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isErr = true;
         state.msg = action.payload;
+      })
+      .addCase(updateUserInfo.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateUserInfo.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const userItem = JSON.parse(localStorage.getItem("ticket-user"));
+        localStorage.removeItem("ticket-user");
+        localStorage.setItem(
+          "ticket-user",
+          JSON.stringify({
+            ...userItem,
+            user: action.payload.user,
+          })
+        );
+        state.user.user = action.payload.user;
+      })
+      .addCase(updatePassword.pending, (state) => {
+        state.isLoading = true;
+        state.msg = "";
+        state.isErr = false;
+      })
+      .addCase(updatePassword.fulfilled, (state, action) => {
+        state.isLoading = false;
+        console.log("hong1", action.payload);
+        state.isErr = false;
+      })
+      .addCase(updatePassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.msg = action.payload.message;
       });
   },
 });

@@ -30,9 +30,11 @@ const CustomInput = ({
 };
 export default CustomInput;
 
-export const ErrorNotify = ({ children }) => {
+export const ErrorNotify = ({ children, className = "" }) => {
   return (
-    <div className="opacity-70 text-red-500 font-normal text-[12px] ml-2 mt-2 flex items-center gap-2 ">
+    <div
+      className={`opacity-70 text-red-500 font-normal text-[12px] ml-2 mt-2 flex items-center gap-2 ${className}`}
+    >
       <i class="fa-solid fa-triangle-exclamation"></i>
       <span className="mt-[1px]">{children}</span>
     </div>

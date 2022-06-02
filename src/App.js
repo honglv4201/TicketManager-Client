@@ -8,6 +8,10 @@ import TicketPage from "./pages/ticketPage/TicketPage";
 import PaymentPage from "./pages/paymentPage/PaymentPage";
 import ScrollToTop from "./components/functionComponent/ScrollToTop";
 import PaymentCompletePage from "./pages/completedPage/PaymentCompletePage";
+import ProfilePage from "./pages/profilePage/ProfilePage";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -30,9 +34,38 @@ function App() {
             path="/payment/completed"
             element={<PaymentCompletePage />}
           ></Route>
+          <Route
+            path="/profile/user"
+            element={<ProfilePage index={0} />}
+          ></Route>
+          <Route
+            path="/profile/myticket"
+            element={<ProfilePage index={1} />}
+          ></Route>
+          <Route
+            path="/profile/saveticket"
+            element={<ProfilePage index={2} />}
+          ></Route>
+          <Route
+            path="/profile/voucher"
+            element={<ProfilePage index={3} />}
+          ></Route>
+          <Route
+            path="/profile/mycomment"
+            element={<ProfilePage index={4} />}
+          ></Route>{" "}
+          <Route
+            path="/profile/password"
+            element={<ProfilePage index={5} />}
+          ></Route>
+          <Route
+            path="/profile/logout"
+            element={<ProfilePage index={6} />}
+          ></Route>
         </Route>
       </Routes>
       <ScrollToTop />
+      <ToastContainer />
     </BrowserRouter>
   );
 }

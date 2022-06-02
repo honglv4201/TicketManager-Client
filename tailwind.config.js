@@ -10,7 +10,7 @@ module.exports = {
         primary: "#0d6efd",
         zprimary: "#FF0000",
         border_opacity: "#fff",
-        secondary: "#FF0000",
+        secondary: "#2e5979",
         primaryBg: "#F5F5F5",
         primaryBxg: "#F5F5F5",
         hong: "#000",

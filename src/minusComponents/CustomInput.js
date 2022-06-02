@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import useClickOutSide from "../hooks/useClickOutSide";
 
 const CustomInput = ({
   placeholder,
@@ -6,11 +7,13 @@ const CustomInput = ({
   className,
   name,
   handleOnChange,
+  nodeRef,
 }) => {
   return (
     <div className="flex flex-col items-start gap-1 w-full">
       <p className="ml-1">{placeholder}</p>
       <input
+        ref={nodeRef}
         onChange={handleOnChange}
         name={name}
         type={type}

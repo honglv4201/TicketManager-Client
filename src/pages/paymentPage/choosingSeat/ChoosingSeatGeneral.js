@@ -22,7 +22,7 @@ const ChoosingSeatGeneral = ({
   return (
     <div
       className={`${
-        isOpenTab ? "w-[500px] " : "w-[130px] absolute right-0 top-0"
+        isOpenTab ? "w-[600px] " : "w-[130px] absolute right-0 top-0"
       } min-h-[130px] bg-white rounded-lg overflow-hidden transition-all duration-75`}
     >
       <div

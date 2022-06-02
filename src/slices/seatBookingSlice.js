@@ -3,7 +3,7 @@ import axios from "axios";
 import { apiUrl } from "../utils/utils";
 
 const initState = {
-  status: "idie",
+  status: "idle",
   currentWagon: 0,
   wagon: [
     {
@@ -64,10 +64,6 @@ export const createInvoice = createAsyncThunk(
             seatUrl,
             userTicketData
           );
-          console.log(
-            "🚀 ~ file: seatBookingSlice.js ~ line 52 ~ seatDataReturn",
-            seatDataReturn
-          );
 
           const userInfoTicket = {
             idSeat: seatDataReturn._id,
@@ -76,12 +72,10 @@ export const createInvoice = createAsyncThunk(
             cusID: userTicket.identifyOrAge,
             cusAge: "0",
           };
-          console.log("xxx", userInfoTicket);
+
           await axios.post(cusTicketUrl, userInfoTicket);
         }
       }
-      console.log("successful");
-      alert("success");
       return data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -96,7 +90,6 @@ export const fetchDataDetailTrip = createAsyncThunk(
       const url = `${apiUrl}/wagonTicket/getAllByidTrip`;
 
       const { data } = await axios.post(url, { idTrip });
-      return data;
       return data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -235,7 +228,6 @@ const seatBookingSlice = createSlice({
       .addCase(createInvoice.rejected, (state, action) => {
         state.status = "idle";
         alert("gap loi", action.payload);
-        console.log("dfdfdasfasdfsa", action.payload);
       });
   },
 });
