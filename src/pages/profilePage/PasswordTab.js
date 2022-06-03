@@ -50,11 +50,13 @@ const PasswordTab = () => {
       newPassword: passwordForm.newPassword,
     };
     dispatch(updatePassword(data));
-    // if (!isErr && !isLoading) notify();
   };
   useEffect(() => {
     setErr(msg);
-  }, [msg]);
+    // if (!msg) {
+    //   if (!isErr && !isLoading) notify();
+    // }
+  }, [isErr]);
 
   const notify = () => {
     toast("Đổi mật khẩu thành công");

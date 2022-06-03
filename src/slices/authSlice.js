@@ -153,6 +153,7 @@ const authSlice = createSlice({
       .addCase(updatePassword.rejected, (state, action) => {
         state.isLoading = false;
         state.msg = action.payload.message;
+        state.isErr = true;
       });
   },
 });

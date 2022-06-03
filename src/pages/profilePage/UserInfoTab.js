@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CustomInputUser from "./CustomInputUser";
 import { userSelector } from "../../redux/authSelector";
 import { updateUserInfo } from "../../slices/authSlice";
+import { toast } from "react-toastify";
 
 const UserInfoTab = () => {
   const {
@@ -36,6 +37,7 @@ const UserInfoTab = () => {
         id: user._id,
       })
     );
+    toast("Thay đổi thông tin thành công");
   };
   return (
     <div className="mt-8">
