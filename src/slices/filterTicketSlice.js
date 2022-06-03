@@ -15,7 +15,7 @@ const filterTicketSlice = createSlice({
     updateFiter: (state, action) => {
       state.start = action.payload.start;
       state.end = action.payload.end;
-      state.date = action.payload.date;
+      if (action.payload.date) state.date = action.payload.date;
       state.input = action.payload.input;
     },
   },

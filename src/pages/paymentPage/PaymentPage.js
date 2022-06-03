@@ -3,10 +3,14 @@ import React, { useEffect, useState } from "react";
 import { checkDark } from "../../utils/darkMode";
 import { useDispatch } from "react-redux";
 
-import { setInitWagon } from "../../slices/seatBookingSlice";
+import {
+  fetchDataDetailTrip,
+  setInitWagon,
+} from "../../slices/seatBookingSlice";
 import ChoosingTicket from "./childPage/ChoosingTicket";
 import Payment from "./childPage/Payment";
 import InputInfo from "./childPage/InputInfo";
+import { useParams } from "react-router-dom";
 
 const PaymentPage = () => {
   const isDark = checkDark();
@@ -15,8 +19,12 @@ const PaymentPage = () => {
   const [process, SetProcess] = useState(0);
 
   const dispatch = useDispatch();
+
+  const { id } = useParams();
   useEffect(() => {
     dispatch(setInitWagon(9));
+
+    dispatch(fetchDataDetailTrip(id));
   }, []);
   return (
     <div className="dark:!bg-dark_primary_bg select-none">

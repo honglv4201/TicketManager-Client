@@ -1,6 +1,47 @@
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { seatSelector } from "../../../redux/seatBookingSelector";
+import { filterSelectorFixIndex } from "../../../redux/tripSelector";
+import { createInvoice } from "../../../slices/seatBookingSlice";
 
 const SumaryResultTicket = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { wagonData, wagonBooking, status } = useSelector(seatSelector);
+  const {
+    data: { startIndex, endIndex },
+  } = useSelector(filterSelectorFixIndex);
+  const handlePay = () => {
+    let typeHumanBooking = "guest";
+    let data = {
+      idTicket: wagonData[0]?.idTicket,
+      payment: wagonBooking.payment,
+      isPay: wagonBooking.isPay,
+    };
+    if (wagonBooking.user.idUser) typeHumanBooking = "user";
+    else typeHumanBooking = "guest";
+
+    const tripLocation = {
+      startIndex,
+      endIndex,
+    };
+    dispatch(
+      createInvoice({
+        data: data,
+        list: wagonBooking.listUserTicket,
+        user: wagonBooking.user,
+        userID: wagonBooking.user.idUser || "",
+        tripLocation,
+        typeHumanBooking,
+      })
+    );
+
+    if (status === "idle") {
+      navigate("/payment/completed");
+    }
+  };
+
   return (
     <div className="flex-1 px-4 min-w-[300px] min-h-[400px] rounded-lg dark:!opacity-90 dark:!text-white  bg-white dark:!bg-dark_primary_pnl flex-col ">
       <div className="w-full px-1 h-6 bg-gray-200 bg-opacity-80 text-center py-6 flex items-center gap-2 justify-center cursor-pointer rounded-b-lg">
@@ -69,13 +110,20 @@ const SumaryResultTicket = () => {
           </div>
           <span>Trả tiền mặt</span>
         </div>
-        <Link
-          to="completed"
+        <div
+          onClick={handlePay}
           className="px-4 py-[12px] rounded-lg bg-primary text-white text-center mt-3 mb-2"
         >
           Pay
-        </Link>
+        </div>
       </div>
+
+      {/* loading */}
+      {status === "loading" && (
+        <div className="absolute rounded-md inset-0 bg-gray-400 bg-opacity-60 flex items-center justify-center">
+          <div className="w-14 h-14 border-4 duration-75  rounded-full border-primary border-r-transparent animate-spin"></div>
+        </div>
+      )}
     </div>
   );
 };

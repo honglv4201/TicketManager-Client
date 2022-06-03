@@ -11,7 +11,7 @@ const ItemSeatType2 = ({ ind }) => {
   const handleAddSeat = () => {
     dispatch(addSeat(ind));
   };
-  const { wagon, currentWagon } = useSelector(seatSelector);
+  const { wagon, currentWagon, wagonBooked } = useSelector(seatSelector);
 
   useEffect(() => {
     setClassNamesub("bg-gray-200");
@@ -26,6 +26,10 @@ const ItemSeatType2 = ({ ind }) => {
     } else {
       setClassNamesub("bg-gray-200 ");
       setClassName("bg-white border-2 hover:bg-gray-100");
+    }
+    if (wagonBooked[currentWagon].includes(ind)) {
+      setClassName("bg-gray-200 border-2 hover:bg-gray-200 cursor-default");
+      setClassNamesub("bg-gray-200");
     }
   }, [wagon[currentWagon]]);
   return (

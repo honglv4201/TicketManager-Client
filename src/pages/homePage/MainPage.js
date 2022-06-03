@@ -29,7 +29,6 @@ const MainPage = () => {
 
   const city = useSelector(citySelector);
   const checkRightCity = (data) => {
-    console.log(data);
     for (let c of city.city) {
       if (c.name === data) return true;
     }

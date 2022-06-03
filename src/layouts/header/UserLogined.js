@@ -19,7 +19,10 @@ export const UserLogin = (props) => {
   };
 
   const { user } = useSelector(userSelector);
-
+  const closeModal = () => {
+    //alert("hong");
+    setShow(false);
+  };
   return (
     <div className="flex items-center gap-10">
       <div className="flex items-center gap-10 list-none">
@@ -39,22 +42,26 @@ export const UserLogin = (props) => {
           <i class="fas fa-cog"></i>
         </div> */}
 
-        <div className="profile" ref={nodeRef} onClick={handleOpenModal}>
+        <div className="profile">
           <div className="profile__avatar">
             <img src={avatar} alt="" />
           </div>
-          <div className="profile__name">
+          <div
+            className="profile__name"
+            ref={nodeRef}
+            onClick={handleOpenModal}
+          >
             <span className="font-bold">
               Hi,{" "}
               {!user.user
-                ? user?._user?.firstName + " " + user?._user?.lastName
-                : user.user?.firstName + user.user?.lastName}
+                ? user?.user?.firstName + " " + user?.user?.lastName
+                : user.user?.firstName + " " + user.user?.lastName}
             </span>
           </div>
           <div className="profile__btn-down relative">
             <i class="fas fa-chevron-down"></i>
           </div>
-          {show && <UserOptionModal coords={coords} />}
+          {show && <UserOptionModal onClose={closeModal} coords={coords} />}
         </div>
       </div>
     </div>

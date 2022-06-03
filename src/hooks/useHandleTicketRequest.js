@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { filterSelector } from "../redux/tripSelector";
 import { updateFiter } from "../slices/filterTicketSlice";
 
 const useHandleTicketRequest = (type = 0) => {
-  const [startLocation, setStartLocation] = useState();
-  const [endLocation, setEndLocation] = useState();
-  const [dateStart, setDateStart] = useState();
+  const { start, end, date } = useSelector(filterSelector);
+  const [startLocation, setStartLocation] = useState(start);
+  const [endLocation, setEndLocation] = useState(end);
+  const [dateStart, setDateStart] = useState(date);
 
   const [input, setInput] = useState();
 
@@ -27,7 +29,9 @@ const useHandleTicketRequest = (type = 0) => {
 
   const dispatch = useDispatch();
 
-  const handleSaveFilter = () => {
+  const handleSaveFilter = () => {};
+
+  useEffect(() => {
     dispatch(
       updateFiter({
         start: startLocation,
@@ -37,9 +41,7 @@ const useHandleTicketRequest = (type = 0) => {
         filter: {},
       })
     );
-  };
-
-  useEffect(() => {}, [startLocation, input, endLocation, dateStart, dispatch]);
+  }, [startLocation, input, endLocation, dateStart, dispatch]);
 
   return {
     startLocation,

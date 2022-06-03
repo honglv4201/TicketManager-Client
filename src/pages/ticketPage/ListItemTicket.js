@@ -5,7 +5,7 @@ import NoItem from "./NoItem";
 import TicketItem from "./TicketItem";
 
 const ListItemTicket = () => {
-  const trip = useSelector(tripFilterSelector);
+  const trip = useSelector(tripSelector);
   console.log(trip);
   return (
     <div className="bg-transparent dark:!text-white dark:!bg-dark_primary_bg w-full h-full min-h-[800px] flex flex-col gap-4 ">
@@ -29,9 +29,19 @@ const ListItemTicket = () => {
           </div>
         </div>
       </div>
+      {trip.status === "loading" && <Loading />}
+      {(!trip || trip.length <= 0) && <NoItem />}
+      {trip.trip &&
+        trip.status === "idle" &&
+        trip.trip.map((item, ind) => <TicketItem data={item} key={ind} />)}
+    </div>
+  );
+};
 
-      {trip && trip.map((item, ind) => <TicketItem data={item} key={ind} />)}
-      {trip && trip.length === 0 && <NoItem />}
+const Loading = () => {
+  return (
+    <div className="flex  items-center min-h-[300px] justify-center ">
+      <div className="w-16 rounded-full h-16 border-4 border-primary border-r-transparent animate-spin"></div>
     </div>
   );
 };

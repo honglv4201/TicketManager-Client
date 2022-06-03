@@ -1,8 +1,15 @@
 import React, { Fragment, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  filterSelector,
+  filterSelectorFixIndex,
+} from "../../redux/tripSelector";
 import { setInitWagon } from "../../slices/seatBookingSlice";
-import { handleTimeTicket } from "../../utils/handleValue";
+import {
+  handleTimeTicket,
+  handleTimeTicketMinutes,
+} from "../../utils/handleValue";
 import Details from "./detailsInTicket/Details";
 import Policy from "./detailsInTicket/Policy";
 
@@ -13,12 +20,19 @@ const TicketItem = ({ data }) => {
   };
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleToPayment = () => {
-    dispatch(setInitWagon(9));
-    navigate("/payment");
+  const { data: dataFilter, success } = useSelector(filterSelectorFixIndex);
+  const { start, end } = useSelector(filterSelector);
+  const handleToBooking = () => {
+    // dispatch(setInitWagon(9));
+    localStorage.setItem("s", dataFilter.startIndex);
+    localStorage.setItem("e", dataFilter.endIndex);
+    navigate(`/booking/${data.idTrip}`);
   };
 
   const [tabDetail, setTabDetail] = useState(1);
+  if (!data) {
+    return <div>Khong co du lieu</div>;
+  }
   return (
     <div>
       <div className="flex gap-0 py-10 px-8 bg-white dark:!bg-dark_primary_pnl rounded-lg">
@@ -31,7 +45,7 @@ const TicketItem = ({ data }) => {
                 4.5
               </span>
               <span className="">Available: </span>
-              <span className="text-yellow-500 ">53 seat</span>
+              <span className="text-yellow-500 ">{data.totalSeat} seat</span>
             </div>
 
             <div className="flex items-center gap-2">
@@ -42,30 +56,28 @@ const TicketItem = ({ data }) => {
                   alt="tau_image"
                 />
                 <div className="absolute right-0 bottom-0 rounded-md px-2 py-[2px] leading-2 bg-blue-50 font-bold text-[11px] text-blue-400">
-                  Tàu SE3
+                  {data.idTrain}
                 </div>
               </div>
 
               {/* <span className="p-2 font-bold text-lg ">
                 {data.route.startLocation}
               </span> */}
-              <div className="flex flex-col gap-1 text-sm ml-10">
+              <div className="flex items-center flex-col gap-1 text-sm ml-10">
                 <span className="time-start font-bold">
-                  {handleTimeTicket(data.route.startTime)}
+                  {handleTimeTicket(data.s)}
                 </span>
-                <span className=""> {data.route.startLocation}</span>
+                <span className=""> {start}</span>
               </div>
               <div className="flex flex-col gap-1 items-center text-sm">
                 <div className="w-[100px] border-dotted border-b-2"></div>
-                <span>{data.route.totalTime}h</span>
+                <span>{handleTimeTicketMinutes(data.e - data.s)}h</span>
               </div>
-              <div className="flex flex-col gap-1 text-sm mr-10">
+              <div className="flex  items-center flex-col gap-1 text-sm mr-10">
                 <span className="time-start font-bold">
-                  {handleTimeTicket(
-                    data.route.startTime + data.route.totalTime
-                  )}
+                  {handleTimeTicket(data.e)}
                 </span>
-                <span> {data.route.endLocation}</span>
+                <span> {end}</span>
               </div>
 
               {/* <span className="p-2 font-bold text-lg ">
@@ -118,12 +130,12 @@ const TicketItem = ({ data }) => {
             Luu lai
           </Link>
 
-          <Link
-            to="/payment"
-            className="btn-pay px-4 py-2 rounded-lg bg-primary text-white hover:text-white hover:bg-opacity-80 "
+          <div
+            onClick={handleToBooking}
+            className="btn-pay px-4 py-2 rounded-lg bg-primary text-white hover:text-white hover:bg-opacity-80 cursor-pointer "
           >
             Dat Ngay
-          </Link>
+          </div>
         </div>
       </div>
       <div className={detailPannel ? "block" : "hidden"}>
@@ -150,6 +162,7 @@ const TicketItem = ({ data }) => {
           <ComponentInDetail tab={tabDetail} />
         </div>
       </div>
+      ``
     </div>
   );
 };

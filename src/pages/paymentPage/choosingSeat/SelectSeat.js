@@ -17,9 +17,20 @@ const SelectSeat = () => {
           <div className="!w-14 mr-2 h-14 rounded-tl-full border-8 border-gray-300 border-r-transparent border-b-transparent bg-gray-100">
             <div className="w-14"></div>
           </div>
-          {new Array(9).fill(0).map((item, ind) => {
+          {/* {new Array(9).fill(0).map((item, ind) => {
             return <ItemWagon ind={ind} active={ind === currentWagon} />;
-          })}
+          })} */}
+
+          {wagon &&
+            wagon.map((item, ind) => {
+              return (
+                <ItemWagon
+                  data={item}
+                  ind={ind}
+                  active={ind === currentWagon}
+                />
+              );
+            })}
         </ScrollContainer>
       </div>
 
@@ -44,17 +55,25 @@ const SelectSeat = () => {
           </div>
         </div>
 
-        {/* choose seat */}
-        {wagon[currentWagon]?.type === "ngoi-mem-dieu-hoa" ? (
-          <SeatPlace />
-        ) : wagon[currentWagon]?.type === "nam-khoang-6" ? (
-          <SeatPlaceType2 />
-        ) : (
-          <SeatPlaceType3 />
-        )}
+        <ChoosingWagonRender type={wagon[currentWagon]?.type} />
       </div>
     </div>
   );
+};
+
+const ChoosingWagonRender = ({ type }) => {
+  switch (type) {
+    case "nmdh":
+      return <SeatPlace />;
+    case "nk4dh":
+      return <SeatPlaceType3 />;
+    case "nk6dh":
+      return <SeatPlaceType2 />;
+    case "ncdh":
+      return <SeatPlace />;
+    default:
+      break;
+  }
 };
 
 export default SelectSeat;

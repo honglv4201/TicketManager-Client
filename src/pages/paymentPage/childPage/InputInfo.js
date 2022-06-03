@@ -63,7 +63,11 @@ const InputInfo = ({ isDark, process, SetProcess }) => {
         </div>
 
         {/* right pannel general info */}
-        <ChoosingSeatGeneral isOpenTab={true} type="nonedit" />
+        <ChoosingSeatGeneral
+          handleContinue={ChangeProcess}
+          isOpenTab={true}
+          type="nonedit"
+        />
         {/* <div className="w-[500px]"></div> */}
       </div>
     </>
