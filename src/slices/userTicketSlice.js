@@ -14,12 +14,11 @@ const initState = {
 
 export const fetchAllUserTicket = createAsyncThunk(
   "userTicket/fetchAll",
-  async (userID, thunkAPI) => {
+  async (payload, thunkAPI) => {
     try {
       const url = `${apiUrl}/user/fetchUserTicket`;
-      const { data } = await axios.post(url, userID);
+      const { data } = await axios.post(url, payload);
 
-      console.log(data);
       return data;
     } catch (error) {
       console.log(error);
@@ -44,9 +43,9 @@ const userTicketSlice = createSlice({
         state.isErr = false;
         if (payload.success) {
           if (payload.hadTrip) {
-            state.ticketAvailables = payload.ticketAvailables;
-            state.ticketCancels = payload.resultTicketCancel;
-            state.ticketUseds = payload.resultTicketUsed;
+            state.ticketAvailables = payload.data.ticketAvailables || [];
+            state.ticketCancels = payload.data.resultTicketCancel || [];
+            state.ticketUseds = payload.data.resultTicketUsed || [];
           } else {
             state.ticketAvailables = [];
             state.ticketUseds = [];
@@ -62,4 +61,4 @@ const userTicketSlice = createSlice({
   },
 });
 
-export default userTicketSlice;
+export default userTicketSlice.reducer;
