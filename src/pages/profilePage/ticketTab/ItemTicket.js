@@ -1,9 +1,20 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { userSelector } from "../../../redux/authSelector";
+import { fetchAllUserTicket } from "../../../slices/userTicketSlice";
 import ModalTicketDetail from "./ModalTicketDetail";
 
-const ItemTicket = ({ data, ind }) => {
+const ItemTicket = ({ data, ind, type = "available" }) => {
   const [open, setOpen] = useState(false);
 
+  const { user } = useSelector(userSelector);
+  const dispatch = useDispatch();
+
+  const [isChange, setIsChange] = useState(false);
+  const handleClose = () => {
+    if (isChange) dispatch(fetchAllUserTicket({ userID: user.user._id }));
+    setOpen(false);
+  };
   return (
     <div className="flex w-full px-6 py-4 pt-8 relative mx-4 my-2 border rounded-md items-center justify-between gap-2">
       <div className="flex items-center gap-4  ">
@@ -29,9 +40,11 @@ const ItemTicket = ({ data, ind }) => {
         </div>
       </div>
       <div className="flex flex-col gap-3">
-        <div className="px-6 text-center  py-2 rounded-md cursor-pointer bg-red-200 hover:bg-gray-300">
-          Thanh toan
-        </div>
+        {type !== "cancel" && !data.userBooking.isPay && (
+          <div className="px-6 text-center  py-2 rounded-md cursor-pointer bg-red-200 hover:bg-gray-300">
+            Thanh toan
+          </div>
+        )}
         <div
           onClick={() => setOpen(true)}
           className="px-6 text-center py-2 rounded-md cursor-pointer bg-gray-200 hover:bg-gray-300"
@@ -40,32 +53,47 @@ const ItemTicket = ({ data, ind }) => {
         </div>
       </div>
 
-      <div className="absolute top-0 left-0 flex items-center gap-1">
-        {new Date(data.route.date).getDate() - new Date().getDate() < 2 && (
-          <div className="px-6 py-1 rounded-sm text-center bg-red-50 text-[12px]">
-            Sắp đi
-          </div>
-        )}
+      {type !== "cancel" && (
+        <div className="absolute top-0 left-0 flex items-center gap-1">
+          {new Date(data.route.date).getDate() - new Date().getDate() < 2 && (
+            <div className="px-6 py-1 rounded-sm text-center bg-red-50 text-[12px]">
+              Sắp đi
+            </div>
+          )}
 
-        {ind === 0 && (
-          <div className="px-6 py-1 rounded-sm text-center bg-blue-50 text-[12px]">
-            Vừa đặt
-          </div>
-        )}
+          {ind === 0 && (
+            <div className="px-6 py-1 rounded-sm text-center bg-blue-50 text-[12px]">
+              Vừa đặt
+            </div>
+          )}
 
-        {data.userBooking.isPay ? (
-          <div className="px-6 py-1 rounded-sm text-center bg-green-50 text-green-500 text-[12px]">
-            đã thanh toán
+          {data.userBooking.isPay ? (
+            <div className="px-6 py-1 rounded-sm text-center bg-green-50 text-green-500 text-[12px]">
+              đã thanh toán
+            </div>
+          ) : (
+            <div className="px-6 py-1 rounded-sm text-center bg-red-50 text-red-500 text-[12px]">
+              Chưa thanh toán
+            </div>
+          )}
+        </div>
+      )}
+
+      {type === "cancel" && (
+        <div className="absolute top-0 left-0 flex items-center gap-1">
+          <div className="px-6 py-1 rounded-sm text-center bg-gray-100 text-[12px]">
+            Đã huỷ
           </div>
-        ) : (
-          <div className="px-6 py-1 rounded-sm text-center bg-red-50 text-red-500 text-[12px]">
-            Chưa thanh toán
-          </div>
-        )}
-      </div>
+        </div>
+      )}
 
       {open && (
-        <ModalTicketDetail data={data} closeModal={() => setOpen(false)} />
+        <ModalTicketDetail
+          type={type}
+          data={data}
+          setIsChange={setIsChange}
+          closeModal={handleClose}
+        />
       )}
     </div>
   );

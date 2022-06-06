@@ -44,8 +44,8 @@ const userTicketSlice = createSlice({
         if (payload.success) {
           if (payload.hadTrip) {
             state.ticketAvailables = payload.data.ticketAvailables || [];
-            state.ticketCancels = payload.data.resultTicketCancel || [];
-            state.ticketUseds = payload.data.resultTicketUsed || [];
+            state.ticketCancels = payload.data.ticketCancels || [];
+            state.ticketUseds = payload.data.ticketUseds || [];
           } else {
             state.ticketAvailables = [];
             state.ticketUseds = [];

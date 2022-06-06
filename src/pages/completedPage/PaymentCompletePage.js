@@ -1,10 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 const completedGif = require("../../asset/img/completed2.gif");
 const { seatSelector } = require("../../redux/seatBookingSelector");
 
 const PaymentCompletePage = () => {
   const { wagonBooking, status } = useSelector(seatSelector);
+
+  const navigate = useNavigate();
+  const handleCheckTicket = () => {
+    navigate("/profile/myticket");
+  };
   return (
     <div className="mx-4 my-2 rouned-lg  flex mt-4 relative justify-center w-full min-h-[580px] ">
       {status === "loading" && (
@@ -75,7 +81,10 @@ const PaymentCompletePage = () => {
             <div className="w-[180px] py-3 bg-gray-200 rounded-lg text-center uppercase hover:bg-opacity-80">
               Home
             </div>
-            <div className="w-[180px] py-3 bg-primary text-white rounded-lg text-center uppercase hover:bg-opacity-80">
+            <div
+              onClick={handleCheckTicket}
+              className="w-[180px] py-3 bg-primary text-white rounded-lg text-center uppercase hover:bg-opacity-80"
+            >
               Kiểm tra vé
             </div>
           </div>

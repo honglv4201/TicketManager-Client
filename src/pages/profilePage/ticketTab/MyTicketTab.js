@@ -5,7 +5,8 @@ import { ticketSelector } from "../../../redux/userTicketSelector";
 import { fetchAllUserTicket } from "../../../slices/userTicketSlice";
 import ItemTicket from "./ItemTicket";
 import TicketAvailableList from "./TicketAvailableList";
-const ticketImg = require("../../../asset/img/ticketvector.png");
+import TicketCancel from "./TicketCancel";
+import TicketUsed from "./TicketUsed";
 
 const MyTicketTab = () => {
   const [nav, setNav] = useState(0);
@@ -46,25 +47,13 @@ const NavRender = ({ nav }) => {
     return <TicketAvailableList />;
   }
   if (nav === 1) {
-    return <NoneTicket>Không có vé đã dùng</NoneTicket>;
+    return <TicketUsed />;
   }
   if (nav === 2) {
-    return <NoneTicket>Không có vé huỷ</NoneTicket>;
+    return <TicketCancel />;
   }
 };
 
-const NoneTicket = ({ children }) => {
-  return (
-    <Fragment>
-      <div className="w-full min-h-[300px] flex flex-col  mt-4 items-center ">
-        <div className="w-[140px] h-fit ">
-          <img className="opacity-10" src={ticketImg} alt="" />
-        </div>
-        <div className=" font-bold opacity-30 mt-2 text-lg">{children}</div>
-      </div>
-    </Fragment>
-  );
-};
 const NavItem = ({ children, active, setNavActive }) => {
   return (
     <div

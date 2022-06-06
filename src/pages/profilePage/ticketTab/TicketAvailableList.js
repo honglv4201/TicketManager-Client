@@ -5,16 +5,24 @@ import ItemTicket from "./ItemTicket";
 
 const ticketImg = require("../../../asset/img/ticketvector.png");
 const TicketAvailableList = () => {
-  const { ticketAvailables, isLoading } = useSelector(ticketSelector);
+  const { ticketAvailables, ticketCancels, ticketUseds, isLoading } =
+    useSelector(ticketSelector);
 
   return (
     <Fragment>
-      {ticketAvailables?.length > 0 &&
+      {isLoading && (
+        <div className="w-full h-[200px] flex items-center justify-center  text-center ">
+          <div className="w-8 h-8 rounded-full border-4 border-primary border-r-transparent animate-spin"></div>
+        </div>
+      )}
+
+      {!isLoading &&
+        ticketAvailables?.length > 0 &&
         ticketAvailables.map((item, ind) => {
           return <ItemTicket ind={ind} data={item} key={ind} />;
         })}
 
-      {ticketAvailables?.length <= 0 && <NoneTicketAvailable />}
+      {!isLoading && ticketAvailables?.length <= 0 && <NoneTicketAvailable />}
     </Fragment>
   );
 };

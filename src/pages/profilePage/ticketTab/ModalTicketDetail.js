@@ -1,12 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import useClickOutSide from "../../../hooks/useClickOutSide";
+import { cancelTicket } from "../../../slices/cusTicketSlice";
 import {
   handleMoney,
   handleTimeTicket,
   handleTimeTicketMinutes,
 } from "../../../utils/handleValue";
+import CancelModal from "./CancelModal";
 import "./ticket.scss";
 const ticketImg = require("../../../asset/img/ticketvector2.png");
-const ModalTicketDetail = ({ closeModal, data }) => {
+const ModalTicketDetail = ({ closeModal, setIsChange, data, type }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-20 z-50 grid place-content-center">
       <div className="modal-ticket    active min-w-[900px] overflow-hidden h-[600px] bg-white rounded-lg">
@@ -102,7 +106,14 @@ const ModalTicketDetail = ({ closeModal, data }) => {
           </div>
 
           {data &&
-            data.seat.map((item, ind) => <ItemTicket key={ind} data={item} />)}
+            data.seat.map((item, ind) => (
+              <ItemTicket
+                setIsChange={setIsChange}
+                type={type}
+                key={ind}
+                data={item}
+              />
+            ))}
 
           <div className="text-lg mt-4 mb-2 font-bold opacity-80">
             Thông tin thanh toán
@@ -118,7 +129,23 @@ const ModalTicketDetail = ({ closeModal, data }) => {
 
 export default ModalTicketDetail;
 
-const ItemTicket = ({ data }) => {
+const ItemTicket = ({ data, setIsChange, type }) => {
+  const { show, setShow, nodeRef } = useClickOutSide(".modal");
+  const dispatch = useDispatch();
+  const { isLoading, isErr } = useSelector((state) => state.cusTicket);
+  const [isCancel, setIsCancel] = useState(false);
+  const handleCancelTicket = () => {
+    setIsChange(true);
+    dispatch(cancelTicket(data.idCusTicket));
+    if (!isLoading) {
+      setIsCancel(true);
+    }
+  };
+  useEffect(() => {
+    if (isLoading) {
+      setShow(false);
+    }
+  }, [isCancel]);
   return (
     <div className="rounded-lg border-2 mb-2  border-gray-100 w-fit p-4">
       <div className="flex gap-6 items-center">
@@ -144,6 +171,34 @@ const ItemTicket = ({ data }) => {
               Toa {data.numOfWagon + 1} - Ghế {data.numOfSeat}
             </div>
           </div>
+        </div>
+
+        <div ref={nodeRef} className="ml-10 relative flex flex-col gap-4">
+          <div
+            onClick={() => {
+              if (isCancel) return;
+              if (type === "cancel") return;
+              setShow(true);
+            }}
+            className={`w-[140px] ${
+              type === "cancel" &&
+              "opacity-50 hover:!bg-gray-200 cursor-default"
+            } py-3 text-center px-2 bg-gray-200 rounded-lg cursor-pointer hover:bg-gray-300 ${
+              isCancel ? "opacity-40 hover:bg-gray-200 cursor-default" : ""
+            }`}
+          >
+            {type === "available" && !isCancel
+              ? "Huỷ vé"
+              : type === "cancel" || isCancel
+              ? "đã huỷ"
+              : ""}
+          </div>
+          {show && (
+            <CancelModal
+              handleCancelTicket={handleCancelTicket}
+              onClose={() => setShow(false)}
+            />
+          )}
         </div>
       </div>
     </div>
