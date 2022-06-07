@@ -1,6 +1,10 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { seatSelector } from "../../../redux/seatBookingSelector";
+import {
+  goPayment,
+  setMissingContinue,
+} from "../../../slices/seatBookingSlice";
 import ItemSeatDetail from "./ItemSeatDetail";
 
 const TickeChoosing = ({ type, handleContinue }) => {
@@ -14,10 +18,34 @@ const TickeChoosing = ({ type, handleContinue }) => {
     }
     return totalTicket;
   };
+  const dispatch = useDispatch();
   const handleContinueFix = () => {
     if (type === "edit") {
       handleContinue(1);
     } else {
+      let currentContinueStatus = "";
+
+      const userWagon = wagonBooking.user;
+      if (
+        !userWagon.name ||
+        !userWagon.email ||
+        !userWagon.sdt ||
+        !userWagon.identify
+      ) {
+        currentContinueStatus = "missingValue";
+      }
+      for (let i of wagonBooking.listUserTicket) {
+        if (!i.name || !i.identifyOrAge) {
+          currentContinueStatus = "missingValue";
+        }
+      }
+
+      // dispatch(goPayment());
+      if (currentContinueStatus === "missingValue") {
+        dispatch(setMissingContinue());
+        return;
+      }
+
       handleContinue(2);
     }
   };

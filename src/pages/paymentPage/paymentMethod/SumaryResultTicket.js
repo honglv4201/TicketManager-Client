@@ -51,14 +51,14 @@ const SumaryResultTicket = () => {
         Thông Tin Vé
       </div>
       <div className="px-4 py-2 rounded-md border-2 border-gray-100">
-        <div className="flex items-center gap-6">
-          <div className="border rounded-md w-12 h-12 overflow-hidden grid place-content-center">
+        <div className="flex items-center justify-center gap-6">
+          {/* <div className="border rounded-md w-12 h-12 overflow-hidden grid place-content-center">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/0/05/%C4%90svn.png"
               alt=""
             />
-          </div>
-          <div className="block border-r-2 border-r-gray-200  mt-2 pr-4">
+          </div> */}
+          <div className="block border-r-2 border-r-gray-200  mt-2 pr-4 -ml-6">
             <div className="text-sm opacity-50">Ngay Di</div>
             <div className="text-sm opacity-90">T5, 30/4/2022</div>
           </div>
@@ -71,7 +71,9 @@ const SumaryResultTicket = () => {
           <div className="flex items-center gap-1 w-fit ">
             <div className="flex flex-col gap-1 text-sm">
               <span className="time-start">12:00 AM</span>
-              <span className="font-bold opacity-90">Ga Da Nang</span>
+              <span className="font-bold opacity-90 text-orange-400">
+                Ga Da Nang
+              </span>
             </div>
             <div className="flex flex-col gap-1 items-center text-sm">
               <div className="w-[100px] border-dotted border-b-2"></div>
@@ -79,7 +81,9 @@ const SumaryResultTicket = () => {
             </div>
             <div className="flex flex-col gap-1 text-sm">
               <span className="time-start">04:30 PM</span>
-              <span className="font-bold opacity-90">Ga Sai Gon</span>
+              <span className="font-bold opacity-90 text-blue-400">
+                Ga Sai Gon
+              </span>
             </div>
           </div>
         </div>

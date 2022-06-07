@@ -25,7 +25,7 @@ const InputInfo = ({ isDark, process, SetProcess }) => {
         {/* left pannel general info */}
         <div className="flex flex-col min-w-[900px]">
           <div className={`${!true ? "mr-[150px]" : ""}`}>
-            <div className=" min-h-[60px] flex items-center   dark:!bg-dark_primary_pnl rounded-lg bg-white shadow-sm ">
+            {/* <div className=" min-h-[60px] flex items-center   dark:!bg-dark_primary_pnl rounded-lg bg-white shadow-sm ">
               <div className="flex justify-between h-full w-full items-center px-8 ">
                 <span className="text-lg opacity-80 font-bold dark:text-white">
                   Payment Options
@@ -37,9 +37,9 @@ const InputInfo = ({ isDark, process, SetProcess }) => {
                   <span className="text-blue-500 dark:!text-white ">{`${timeRemain}s`}</span>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div
-              className={`payment-process  dark:!text-white min-h-[60px] rounded-lg bg-white dark:!bg-dark_primary_pnl mt-2 shadow-sm grid ${
+              className={`payment-process  dark:!text-white min-h-[60px] rounded-lg bg-white dark:!bg-dark_primary_pnl mt-0 shadow-sm grid ${
                 isDark ? "dark" : ""
               }`}
             >

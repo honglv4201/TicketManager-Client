@@ -24,6 +24,7 @@ const initState = {
     listUserTicket: [],
     payment: "",
     isPay: "",
+    continueStatus: "",
   },
 };
 
@@ -192,7 +193,36 @@ const seatBookingSlice = createSlice({
       //   sum -= 1;
       // }
     },
+    goPayment: (state, action) => {
+      if (state.wagonBooking.continueStatus === "errorValue") {
+        return;
+      }
+      const userWagon = state.wagonBooking.user;
+      if (
+        !userWagon.name ||
+        !userWagon.email ||
+        !userWagon.sdt ||
+        !userWagon.identify
+      ) {
+        state.wagonBooking.continueStatus = "missingValue";
+        return;
+      }
+      for (let i of state.wagonBooking.listUserTicket) {
+        if (!i.name || !i.identifyOrAge) {
+          state.wagonBooking.continueStatus = "missingValue";
+          return;
+        }
+      }
+      state.wagonBooking.continueStatus = "ok";
+    },
+    setMissingContinue: (state, action) => {
+      state.wagonBooking.continueStatus = "missing";
+    },
+    resetContinueState: (state) => {
+      state.wagonBooking.continueStatus = "";
+    },
   },
+
   extraReducers: (builder) => {
     builder
       .addCase(fetchDataDetailTrip.pending, (state) => {
@@ -241,5 +271,8 @@ export const {
   updateInfo,
   updateInfoUserBooking,
   updateMethod: updateMethodPayment,
+  goPayment,
+  resetContinueState,
+  setMissingContinue,
 } = seatBookingSlice.actions;
 export default seatBookingSlice.reducer;
