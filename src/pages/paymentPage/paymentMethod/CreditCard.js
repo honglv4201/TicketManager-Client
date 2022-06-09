@@ -17,10 +17,19 @@ const CreditCard = () => {
     );
   };
   return (
-    <div className="creadit-card">
-      <div className="flex gap-2 justify-between">
-        <div className={`${method === "0" ? "opacity-100" : "opacity-100"}`}>
-          <h3 className="mb-3 dark:text-white">Tien Mat</h3>
+    <div className="creadit-card ">
+      <div className="w-full text-center py-4 text-lg">
+        Chọn phương thức thanh toán bên dưới
+      </div>
+      <div className="flex gap-10 justify-between flex-col">
+        <div
+          className={`w-fit ${method === "0" ? "opacity-100" : "opacity-100"}`}
+        >
+          <h3 className="mb-3 dark:text-white text-lg">Tiền Mặt </h3>
+          <div className="text-sm mb-4 opacity-80 ">
+            (Trả trực tiếp tại quầy hoặc đại lý)
+          </div>
+
           <label className="method-cash">
             <input
               type="radio"
@@ -47,7 +56,10 @@ const CreditCard = () => {
           </label>
         </div>
         <div className={`${method !== 0 ? "opacity-100" : "opacity-10"}`}>
-          <h3 className="mb-3 dark:text-white">Credit Cards</h3>
+          <h3 className="mb-3 dark:text-white ">Credit Cards</h3>
+          {/* <div className="text-sm mb-4 opacity-80 ">
+            (Chọn một trong các hình thức bên dưới)
+          </div> */}
           {/* method paying */}
           <div className="flex gap-4 ">
             <div className="item cursor-pointer bg-white dark:!bg-dark_secondary_pnl shadow-md  rounded-lg min-w-[140px] min-h-[50px]">
@@ -118,7 +130,7 @@ const CreditCard = () => {
               </label>
             </div>
 
-            <div className="item bg-white shadow-md dark:!bg-dark_secondary_pnl rounded-lg min-w-[130px] min-h-[54px]">
+            <div className="item  bg-white shadow-md dark:!bg-dark_secondary_pnl rounded-lg min-w-[130px] min-h-[54px]">
               <label className="method-item w-full h-full  cursor-pointer">
                 <input
                   type="radio"
@@ -192,7 +204,7 @@ const CreditCard = () => {
       <div
         className={`${
           method === "0" ? "opacity-40" : ""
-        } mt-10 w-full bg-white dark:!bg-dark_primary_pnl rounded-lg`}
+        } mt-10 hidden w-full bg-white dark:!bg-dark_primary_pnl rounded-lg`}
       >
         <div className="opacity-80 mb-2 dark:text-white">Name Card</div>
         <input

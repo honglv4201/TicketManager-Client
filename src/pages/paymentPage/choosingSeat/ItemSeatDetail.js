@@ -1,18 +1,21 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
 import { removeSeat } from "../../../slices/seatBookingSlice";
 import { convertNameWagon } from "../../../utils/constValue";
 import { handleMoney } from "../../../utils/handleValue";
 
 const ItemSeatDetail = ({
-  data: { numOfSeat, typeWagon, price },
+  data: { numOfSeat, typeWagon, price, name, identifyOrAge, typeTicket },
   wagon,
   type,
+  money,
 }) => {
   const dispatch = useDispatch();
 
   const handleRemoveItem = () => {
     dispatch(removeSeat({ numOfSeat, wagon }));
   };
+
   return (
     <div className="w-full px-3 py-3 flex justify-between items-center rounded-md border my-4">
       <div className="flex flex-col gap-1 items-start">
@@ -23,10 +26,14 @@ const ItemSeatDetail = ({
       </div>
 
       <div className="flex items-center gap-1 text-[12px] flex-col">
-        <div className={`opacity-60 ${type !== "edit" ? "" : "hidden "}`}>
-          Chưa nhập thông tin
+        <div
+          className={`opacity-60 ${name && "!opacity-100 !text-base"} ${
+            type !== "edit" ? "" : "hidden "
+          }`}
+        >
+          {name ? name : "Chưa nhập thông tin"}
         </div>
-        <span className="font-bold lowercase ">{handleMoney(price)}</span>
+        <span className="font-bold lowercase ">{handleMoney(money)}</span>
         <div
           onClick={handleRemoveItem}
           className={`${

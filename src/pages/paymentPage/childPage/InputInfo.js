@@ -4,6 +4,8 @@ import { Steps } from "antd";
 import SelectSeat from "../choosingSeat/SelectSeat";
 import CreditCard from "../paymentMethod/CreditCard";
 import InputInfoComponent from "../InputInfoComponent";
+import { useDispatch } from "react-redux";
+import { resetContinueState } from "../../../slices/seatBookingSlice";
 
 const InputInfo = ({ isDark, process, SetProcess }) => {
   const { Step } = Steps;
@@ -15,9 +17,21 @@ const InputInfo = ({ isDark, process, SetProcess }) => {
     }, 1000);
   });
 
+  const dispatch = useDispatch();
   const ChangeProcess = (value) => {
+    if (value === 2) {
+      if (enableContinue) {
+        SetProcess(value);
+        return;
+      } else return;
+    }
+    if (value === 0) {
+      dispatch(resetContinueState());
+    }
     SetProcess(value);
   };
+
+  const [enableContinue, setEnableContinue] = useState(false);
 
   return (
     <>
@@ -25,7 +39,7 @@ const InputInfo = ({ isDark, process, SetProcess }) => {
         {/* left pannel general info */}
         <div className="flex flex-col min-w-[900px]">
           <div className={`${!true ? "mr-[150px]" : ""}`}>
-            <div className=" min-h-[60px] flex items-center   dark:!bg-dark_primary_pnl rounded-lg bg-white shadow-sm ">
+            {/* <div className=" min-h-[60px] flex items-center   dark:!bg-dark_primary_pnl rounded-lg bg-white shadow-sm ">
               <div className="flex justify-between h-full w-full items-center px-8 ">
                 <span className="text-lg opacity-80 font-bold dark:text-white">
                   Payment Options
@@ -37,9 +51,9 @@ const InputInfo = ({ isDark, process, SetProcess }) => {
                   <span className="text-blue-500 dark:!text-white ">{`${timeRemain}s`}</span>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div
-              className={`payment-process  dark:!text-white min-h-[60px] rounded-lg bg-white dark:!bg-dark_primary_pnl mt-2 shadow-sm grid ${
+              className={`payment-process  dark:!text-white min-h-[60px] rounded-lg bg-white dark:!bg-dark_primary_pnl mt-0 shadow-sm grid ${
                 isDark ? "dark" : ""
               }`}
             >
@@ -58,7 +72,7 @@ const InputInfo = ({ isDark, process, SetProcess }) => {
             </div>
           </div>
           <div className="rounded-lg bg-white min-h-[400px] dark:!bg-dark_primary_pnl mt-4 px-10 pt-5">
-            <InputInfoComponent />
+            <InputInfoComponent setEnableContinue={setEnableContinue} />
           </div>
         </div>
 
@@ -67,6 +81,7 @@ const InputInfo = ({ isDark, process, SetProcess }) => {
           handleContinue={ChangeProcess}
           isOpenTab={true}
           type="nonedit"
+          enableContinue={enableContinue}
         />
         {/* <div className="w-[500px]"></div> */}
       </div>

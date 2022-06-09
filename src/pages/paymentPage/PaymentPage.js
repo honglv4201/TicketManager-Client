@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { checkDark } from "../../utils/darkMode";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   fetchDataDetailTrip,
@@ -11,6 +11,7 @@ import ChoosingTicket from "./childPage/ChoosingTicket";
 import Payment from "./childPage/Payment";
 import InputInfo from "./childPage/InputInfo";
 import { useParams } from "react-router-dom";
+import { filterTicketWithIndex } from "../../redux/filterTicketSelector";
 
 const PaymentPage = () => {
   const isDark = checkDark();

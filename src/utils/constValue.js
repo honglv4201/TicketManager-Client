@@ -14,3 +14,11 @@ export const convertNameWagon = (type) => {
       break;
   }
 };
+
+export const inputForTypeTicket = (type) => {
+  if (type === "Trẻ em") {
+    return "Nhập Tuổi ";
+  }
+  if (type === "Học Sinh / Sinh Viên") return "Nhập CMND/ Tuổi";
+  return "CMND/CCCD/GPLX";
+};

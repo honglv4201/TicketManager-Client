@@ -13,6 +13,14 @@ export const handleTimeTicket = (value) => {
   return result;
 };
 
+export const calculateDiscount = (type) => {
+  if (type === "Học Sinh / Sinh Viên") {
+    return 0.25;
+  }
+  if (type === "Trẻ em") return 0.5;
+  return 0;
+};
+
 export const handleTimeTicketMinutes = (value) => {
   let result = value?.toString();
   if (result?.length <= 2) result = result += ":00";
