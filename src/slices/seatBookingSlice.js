@@ -25,6 +25,7 @@ const initState = {
     payment: "",
     isPay: "",
     continueStatus: "",
+    enableContinue: false,
   },
 };
 
@@ -136,7 +137,7 @@ const seatBookingSlice = createSlice({
           name: "",
           typeWagon: state.wagonData[state.currentWagon].wagonType,
           identifyOrAge: "",
-          typeHuman: "",
+          typeTicket: "",
         });
       }
     },
@@ -145,6 +146,7 @@ const seatBookingSlice = createSlice({
         ...state.wagonBooking.listUserTicket[action.payload.index],
         name: action.payload.name,
         identifyOrAge: action.payload.info,
+        typeTicket: action.payload.typeTicket,
       };
     },
     updateInfoUserBooking: (state, action) => {
@@ -178,20 +180,10 @@ const seatBookingSlice = createSlice({
       state.currentWagon = action.payload;
     },
     setInitWagon: (state, action) => {
-      // state.wagon = [];
-      // let sum = action.payload - 1;
-      // while (sum > 0 && state.wagon.length < action.payload) {
-      //   state.wagon.push({
-      //     type:
-      //       sum % 3 === 0
-      //         ? "ngoi-mem-dieu-hoa"
-      //         : sum % 3 === 1
-      //         ? "nam-khoang-6"
-      //         : "nam-khoang-4",
-      //     seat: [],
-      //   });
-      //   sum -= 1;
-      // }
+      state.wagonBooking.listUserTicket = [];
+      state.wagonBooking.continueStatus = "";
+      state.wagonBooking.payment = "";
+      state.wagonBooking.isPay = "";
     },
     goPayment: (state, action) => {
       if (state.wagonBooking.continueStatus === "errorValue") {

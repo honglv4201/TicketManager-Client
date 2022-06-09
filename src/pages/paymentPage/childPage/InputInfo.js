@@ -4,6 +4,8 @@ import { Steps } from "antd";
 import SelectSeat from "../choosingSeat/SelectSeat";
 import CreditCard from "../paymentMethod/CreditCard";
 import InputInfoComponent from "../InputInfoComponent";
+import { useDispatch } from "react-redux";
+import { resetContinueState } from "../../../slices/seatBookingSlice";
 
 const InputInfo = ({ isDark, process, SetProcess }) => {
   const { Step } = Steps;
@@ -15,9 +17,21 @@ const InputInfo = ({ isDark, process, SetProcess }) => {
     }, 1000);
   });
 
+  const dispatch = useDispatch();
   const ChangeProcess = (value) => {
+    if (value === 2) {
+      if (enableContinue) {
+        SetProcess(value);
+        return;
+      } else return;
+    }
+    if (value === 0) {
+      dispatch(resetContinueState());
+    }
     SetProcess(value);
   };
+
+  const [enableContinue, setEnableContinue] = useState(false);
 
   return (
     <>
@@ -58,7 +72,7 @@ const InputInfo = ({ isDark, process, SetProcess }) => {
             </div>
           </div>
           <div className="rounded-lg bg-white min-h-[400px] dark:!bg-dark_primary_pnl mt-4 px-10 pt-5">
-            <InputInfoComponent />
+            <InputInfoComponent setEnableContinue={setEnableContinue} />
           </div>
         </div>
 
@@ -67,6 +81,7 @@ const InputInfo = ({ isDark, process, SetProcess }) => {
           handleContinue={ChangeProcess}
           isOpenTab={true}
           type="nonedit"
+          enableContinue={enableContinue}
         />
         {/* <div className="w-[500px]"></div> */}
       </div>

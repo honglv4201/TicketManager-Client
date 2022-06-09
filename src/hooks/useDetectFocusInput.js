@@ -1,25 +1,32 @@
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { seatSelector } from "../redux/seatBookingSelector";
+import { resetContinueState } from "../slices/seatBookingSlice";
 
-const useDetectFocusInput = (type = "name") => {
+const useDetectFocusInput = (typeInit = "name") => {
   const nodeRef = useRef();
   const focusRef = useRef(false);
   const [err, setErr] = useState("");
   const [focus, setFocus] = useState(false);
   const [value, setValue] = useState();
+  const [complete, setComplete] = useState(false);
+  const type = useRef(typeInit);
 
   const { wagonBooking } = useSelector(seatSelector);
   useEffect(() => {
     console.log("bookingchange", wagonBooking.continueStatus);
     if (wagonBooking.continueStatus === "missing") checkValue();
+    else {
+      setErr("");
+    }
   }, [wagonBooking.continueStatus]);
   const checkValue = () => {
     //checkname
     if (!value || value.length < 1) {
       setErr("* Vui Lòng nhập trường này");
     }
-    if (type === "name") {
+
+    if (type.current === "name") {
       console.log(value);
       const nameList = value?.split(" ");
       console.log(nameList);
@@ -33,13 +40,26 @@ const useDetectFocusInput = (type = "name") => {
         return false;
       }
       return true;
-    } else if (type === "identify") {
+    } else if (type.current === "age") {
+      if (value?.length > 2) {
+        setErr("Vui lòng nhập đúng tuổi");
+        return false;
+      }
+
+      return true;
+    } else if (type.current === "identify") {
       if (value?.length < 9 || value?.length > 11) {
         setErr("Vui lòng nhập đúng CMND/CCCD");
         return false;
       }
       return true;
-    } else if (type === "phoneNumber") {
+    } else if (type.current === "ageOrIdentify") {
+      if ((value?.length > 2 && value?.length < 9) || value?.length > 11) {
+        setErr("Vui lòng nhập đúng thông tin");
+        return false;
+      }
+      return true;
+    } else if (type.current === "phoneNumber") {
       if (
         value?.length > 12 ||
         value?.length < 8 ||
@@ -48,7 +68,7 @@ const useDetectFocusInput = (type = "name") => {
         setErr("Vui lòng nhập đúng Số điện thoại");
         return false;
       }
-    } else if (type === "email") {
+    } else if (type.current === "email") {
       if (
         !String(value)
           .toLowerCase()
@@ -63,17 +83,30 @@ const useDetectFocusInput = (type = "name") => {
     return true;
   };
 
+  const handleCheckValue = () => {
+    if (checkValue(value)) {
+      setErr("");
+      setComplete(true);
+    } else {
+      setComplete(false);
+    }
+  };
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const handleClickOutSite = (e) => {
       if (nodeRef.current && nodeRef.current.contains(e.target)) {
-        console.log("hong");
         setErr("");
+        dispatch(resetContinueState());
         focusRef.current = true;
       } else if (nodeRef.current && !nodeRef.current.contains(e.target)) {
         if (focusRef.current) {
           console.log("out", value);
           if (checkValue(value)) {
             setErr("");
+            setComplete(true);
+          } else {
+            setComplete(false);
           }
           focusRef.current = false;
         }
@@ -89,6 +122,9 @@ const useDetectFocusInput = (type = "name") => {
     err,
     value,
     setValue,
+    complete,
+    handleCheckValue,
+    type,
   };
 };
 

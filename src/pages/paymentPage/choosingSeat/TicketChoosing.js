@@ -1,13 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { filterTicketWithIndex } from "../../../redux/filterTicketSelector";
 import { seatSelector } from "../../../redux/seatBookingSelector";
 import {
   goPayment,
+  resetContinueState,
   setMissingContinue,
 } from "../../../slices/seatBookingSlice";
+import { calculateDiscount, handleMoney } from "../../../utils/handleValue";
 import ItemSeatDetail from "./ItemSeatDetail";
 
-const TickeChoosing = ({ type, handleContinue }) => {
+const TickeChoosing = ({ type, handleContinue, enableContinue }) => {
   const { wagon, currentWagon, wagonBooking } = useSelector(seatSelector);
 
   const checkTotalTicket = () => {
@@ -21,7 +24,7 @@ const TickeChoosing = ({ type, handleContinue }) => {
   const dispatch = useDispatch();
   const handleContinueFix = () => {
     if (type === "edit") {
-      handleContinue(1);
+      if (enableContinue) handleContinue(1);
     } else {
       let currentContinueStatus = "";
 
@@ -45,10 +48,15 @@ const TickeChoosing = ({ type, handleContinue }) => {
         dispatch(setMissingContinue());
         return;
       }
-
-      handleContinue(2);
+      if (enableContinue) {
+        handleContinue(2);
+        dispatch(resetContinueState());
+      }
     }
   };
+
+  const { start, end } = useSelector(filterTicketWithIndex);
+  let totalMoney = 0;
 
   useEffect(() => {}, []);
   return (
@@ -89,9 +97,16 @@ const TickeChoosing = ({ type, handleContinue }) => {
             );
           })} */}
           {wagonBooking.listUserTicket.map((item, ind) => {
+            if (ind === 0) totalMoney = 0;
+            let itemMoney =
+              item.price *
+              Math.abs(start - end) *
+              (1 - calculateDiscount(item.typeTicket));
+            totalMoney += itemMoney;
             return (
               <ItemSeatDetail
                 type={type}
+                money={itemMoney}
                 // data={{ seat: item.numOfSeat, wagon: index }}
                 data={item}
                 wagon={item.numOfWagon}
@@ -110,7 +125,7 @@ const TickeChoosing = ({ type, handleContinue }) => {
           </div>
           <div className="flex gap-2 items-center">
             <span className="opacity-80"> Số tiền:</span>
-            <span className="font-bold"> 1.523.000 vnd</span>
+            <span className="font-bold">{handleMoney(totalMoney)}</span>
           </div>
           <div
             className={`btn w-full px-4 py-2 rounded-lg duration-100 transition-all bg-primary mt-2 cursor-pointer hover:bg-opacity-80 text-center text-white ${

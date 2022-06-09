@@ -10,6 +10,7 @@ const CustomInput = ({
   handleOnChange,
   nodeRef,
   err,
+  value,
 }) => {
   return (
     <div className={`flex flex-col items-start gap-1 w-full relative`}>
@@ -18,6 +19,7 @@ const CustomInput = ({
         ref={nodeRef}
         onChange={handleOnChange}
         name={name}
+        value={value}
         type={type}
         className={`${className} text-base w-full px-4 py-2 rounded-md bg-gray-100 border-2 border-gray-200 outline-none focus:!border-blue-200`}
       ></input>

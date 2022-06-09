@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useDetectFocusInput from "../../hooks/useDetectFocusInput";
 import CustomInput from "../../minusComponents/CustomInput";
@@ -10,16 +10,17 @@ import {
   updateInfoUserBooking,
 } from "../../slices/seatBookingSlice";
 import useClickOutSide from "../../hooks/useClickOutSide";
+import { inputForTypeTicket } from "../../utils/constValue";
 
 const { Option } = Select;
-const InputInfoComponent = () => {
+const InputInfoComponent = ({ setEnableContinue }) => {
   const { wagonBooking } = useSelector(seatSelector);
 
   const [userBookingForm, setUserBookingForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    identify: "",
+    name: wagonBooking.user.name || "",
+    email: wagonBooking.user.email || "",
+    phone: wagonBooking.user.sdt || "",
+    identify: wagonBooking.user.identify || "",
   });
   const { nodeRef, err, setValue } = useDetectFocusInput("name");
   const {
@@ -40,6 +41,19 @@ const InputInfoComponent = () => {
     setValue: setValuePhoneNumber,
   } = useDetectFocusInput("phoneNumber");
 
+  useEffect(() => {
+    setValue(userBookingForm.name);
+  }, [userBookingForm.name]);
+  useEffect(() => {
+    setValueEmail(userBookingForm.email);
+  }, [userBookingForm.email]);
+  useEffect(() => {
+    setValueIdentify(userBookingForm.identify);
+  }, [userBookingForm.identify]);
+  useEffect(() => {
+    setValuePhoneNumber(userBookingForm.phone);
+  }, [userBookingForm.phone]);
+
   const handleOnchange = (e) => {
     setUserBookingForm({ ...userBookingForm, [e.target.name]: e.target.value });
     if (e.target.name === "name") {
@@ -55,6 +69,13 @@ const InputInfoComponent = () => {
       setValueIdentify(e.target.value);
     }
   };
+  useEffect(() => {
+    if (err || errPhoneNumber || errEmail || errIdentify) {
+      setEnableContinue(false);
+    } else {
+      setEnableContinue(true);
+    }
+  }, [err, errPhoneNumber, errEmail, errIdentify]);
 
   const dispatch = useDispatch();
 
@@ -80,11 +101,17 @@ const InputInfoComponent = () => {
   return (
     <div className="mb-10">
       <h1 className="text-lg">NHẬP THÔNG TIN HÀNH KHÁCH: </h1>
+
       <div className="list w-full">
         {wagonBooking &&
-          wagonBooking?.listUserTicket.map((item, ind) => (
-            <ItemCustomer key={ind} ind={ind} />
-          ))}
+          wagonBooking?.listUserTicket.map((item, ind) => {
+            const initState = {
+              name: item.name,
+              info: item.identifyOrAge,
+              typeTicket: "Người lớn",
+            };
+            return <ItemCustomer initState={initState} key={ind} ind={ind} />;
+          })}
       </div>
 
       <h1 className="text-lg uppercase mt-10">NHẬP THÔNG TIN người đặt: </h1>
@@ -145,21 +172,49 @@ const InputInfoComponent = () => {
   );
 };
 
-const ItemCustomer = ({ ind }) => {
+const ItemCustomer = ({ ind, initState }) => {
   const [form, setForm] = useState({
-    name: "",
-    info: "",
+    name: initState.name || "",
+    info: initState.info || "",
   });
   const { show, setShow, nodeRef } = useClickOutSide(".modal");
-  const [typeTicket, setTypeTicket] = useState("Người lớn");
+  const [typeTicket, setTypeTicket] = useState(initState.typeTicket);
+  const typeRef = useRef("identify");
 
-  const { nodeRef: nodeRef1, err, value, setValue } = useDetectFocusInput();
+  const {
+    nodeRef: nodeRef1,
+    err,
+    value,
+    setValue,
+
+    complete,
+  } = useDetectFocusInput();
+
+  useEffect(() => {
+    if (typeTicket === "Học Sinh / Sinh Viên") {
+      typeRef.current = "ageOrIdentify";
+    } else if (typeTicket === "Trẻ em") {
+      typeRef.current = "age";
+    } else typeRef.current = "identify";
+    type2.current = typeRef.current;
+    checkValue2();
+  }, [typeTicket]);
   const {
     nodeRef: nodeRef2,
     err: err2,
     value: value2,
     setValue: setValue2,
-  } = useDetectFocusInput("identify");
+    complete: complete2,
+    handleCheckValue: checkValue2,
+    type: type2,
+  } = useDetectFocusInput(typeRef.current);
+
+  useEffect(() => {
+    setValue(form.name);
+  }, [form.name]);
+  useEffect(() => {
+    setValue2(form.info);
+  }, [form.info]);
   const handleOnchange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setValue(e.target.value);
@@ -168,23 +223,19 @@ const ItemCustomer = ({ ind }) => {
       setValue2(e.target.value);
     }
   };
-  const handleOnChangeName = (e) => {
-    setForm({ ...form, name: e.target.value });
-  };
-  const handleOnChangeInfo = (e) => {
-    setForm({ ...form, info: e.target.value });
-  };
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(
       updateInfo({
-        name: form.name,
-        info: form.info,
+        name: complete ? form.name : "",
+        info: complete2 ? form.info : "",
         index: ind,
+        typeTicket: typeTicket,
       })
     );
-  }, [form.name, form.info, ind, dispatch]);
+  }, [complete, complete2, typeTicket]);
 
   // err
   const [isErr, setIsErr] = useState(false);
@@ -207,18 +258,6 @@ const ItemCustomer = ({ ind }) => {
         )}
       </h3>
 
-      {/* <Select
-        defaultValue="Người lớn"
-        style={{
-          width: 120,
-          border: 4,
-        }}
-      >
-        <Option value="Người lớn">Người lớn</Option>
-        <Option value="Học Sinh">Học Sinh</Option>
-
-        <Option value="Trẻ em">Trẻ em</Option>
-      </Select> */}
       <div className="w-[200px] h-10 bg-blue-50 rounded-md mt-4 flex items-center px-2 justify-between">
         <div className="flex items-center gap-2">
           <i class="fa-solid fa-chair"></i>Ghe 11 - Toa 1
@@ -236,7 +275,7 @@ const ItemCustomer = ({ ind }) => {
         <span className="absolute">{value}</span>
         <CustomInput
           nodeRef={nodeRef1}
-          value={value}
+          value={form.name}
           handleOnChange={handleOnchange}
           name="name"
           type="text"
@@ -250,7 +289,7 @@ const ItemCustomer = ({ ind }) => {
           name="info"
           type="number"
           err={err2}
-          placeholder="CMND/CCCD/GPLX"
+          placeholder={inputForTypeTicket(typeTicket)}
         />
       </div>
     </div>
