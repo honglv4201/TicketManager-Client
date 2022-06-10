@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterTicketWithIndex } from "../../../redux/filterTicketSelector";
 import { seatSelector } from "../../../redux/seatBookingSelector";
+import { filterSelector } from "../../../redux/tripSelector";
 import {
   goPayment,
   resetContinueState,
@@ -11,7 +12,14 @@ import { calculateDiscount, handleMoney } from "../../../utils/handleValue";
 import ItemSeatDetail from "./ItemSeatDetail";
 
 const TickeChoosing = ({ type, handleContinue, enableContinue }) => {
-  const { wagon, currentWagon, wagonBooking } = useSelector(seatSelector);
+  const { wagon, wagonData, currentWagon, wagonBooking } =
+    useSelector(seatSelector);
+
+  const {
+    start: startLocation,
+    end: endLocation,
+    date,
+  } = useSelector(filterSelector);
 
   const checkTotalTicket = () => {
     let totalTicket = 0;
@@ -74,12 +82,14 @@ const TickeChoosing = ({ type, handleContinue, enableContinue }) => {
               Chiều đi
             </div>
             <div className="font-bold">
-              <span>Ga Sài Gòn</span>
+              <span>Ga {startLocation}</span>
               <span> - </span>
-              <span>Ga Đà Nẵng</span>
+              <span>Ga {endLocation}</span>
             </div>
             <div className="opacity-80 text-[12px]">
-              Tàu SE2 - Thứ 5, 26/5/2022
+              Tàu {wagonData[0]?.currentVehical} - T
+              {new Date(date).getDay() + 1}, Ngày{" "}
+              {new Date(date).toLocaleDateString("vi-VN")}
             </div>
           </div>
         </div>

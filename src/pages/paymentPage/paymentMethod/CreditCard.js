@@ -9,10 +9,11 @@ const CreditCard = () => {
   const dispatch = useDispatch();
   const handleChangeMethod = (e) => {
     setMethod(e.target.value);
+
     dispatch(
       updateMethodPayment({
         payment: e.target.value === "0" ? "cash" : "creditcard",
-        isPay: e.target.value === "0" ? "true" : "false",
+        isPay: e.target.value === "0" ? "false" : "true",
       })
     );
   };

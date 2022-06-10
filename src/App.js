@@ -12,6 +12,9 @@ import ProfilePage from "./pages/profilePage/ProfilePage";
 import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import CheckTicketPage from "./pages/navPage/CheckTicketPage";
+import NewsPage from "./pages/navPage/NewsPage";
+import GetInTouchPage from "./pages/navPage/GetInTouchPage";
 
 function App() {
   return (
@@ -29,6 +32,9 @@ function App() {
             }
           ></Route>
           <Route path="/ticket" element={<TicketPage />}></Route>
+          <Route path="/checkticket" element={<CheckTicketPage />}></Route>
+          <Route path="/news" element={<NewsPage />}></Route>
+          <Route path="/getintouch" element={<GetInTouchPage />}></Route>
           <Route path="/booking/:id" element={<PaymentPage />}></Route>
           <Route
             path="/payment/completed"
