@@ -109,6 +109,14 @@
     }
   }
 }
+
+//TUDANGCSS
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .test {
   background-color: rgba(244, 244, 244, 0.663);
 }
