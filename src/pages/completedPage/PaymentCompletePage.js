@@ -5,7 +5,8 @@ const completedGif = require("../../asset/img/completed2.gif");
 const { seatSelector } = require("../../redux/seatBookingSelector");
 
 const PaymentCompletePage = () => {
-  const { wagonBooking, status } = useSelector(seatSelector);
+  const { wagonBooking, status, successUserbooking } =
+    useSelector(seatSelector);
 
   const navigate = useNavigate();
   const handleCheckTicket = () => {
@@ -36,12 +37,20 @@ const PaymentCompletePage = () => {
             <div className="text-lg mt-4">Thông tin thanh toán</div>
             <div className="grid grid-cols-1 text-base mt-4 px-8 py-3 rounded-lg border-2 border-gray-100 w-[480px] gap-x-4 gap-y-2">
               <div className="flex items-center gap-1 justify-between">
+                <div className="opacity-70">Mã đặt chỗ:</div>
+                <div className="opacity-100 font-bold text-right">
+                  {successUserbooking.code}
+                </div>
+              </div>
+              <div className="flex items-center gap-1 justify-between">
                 <div className="opacity-70">Payment Type</div>
                 <div className="opacity-100 font-bold text-right">
                   <span className="px-1 py-[2px] mr-1 rounded-md bg-blue-100 text-[12px] font-normal text-blue-500">
                     {wagonBooking.isPay ? "đã thanh toán" : "chưa thanh toán"}
                   </span>{" "}
-                  Tiền mặt
+                  {wagonBooking.payment === "cash"
+                    ? "trả tiền mặt"
+                    : "chuyển khoản"}
                 </div>
               </div>
               <div className="flex items-center gap-1 justify-between">

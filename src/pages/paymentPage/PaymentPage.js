@@ -12,7 +12,10 @@ import Payment from "./childPage/Payment";
 import InputInfo from "./childPage/InputInfo";
 import { useNavigate, useParams } from "react-router-dom";
 import { filterTicketWithIndex } from "../../redux/filterTicketSelector";
-import { filterSelector } from "../../redux/tripSelector";
+import {
+  filterSelector,
+  filterSelectorFixIndex,
+} from "../../redux/tripSelector";
 
 const PaymentPage = () => {
   const isDark = checkDark();
@@ -29,12 +32,18 @@ const PaymentPage = () => {
   const [process, SetProcess] = useState(0);
 
   const dispatch = useDispatch();
-
+  const { data: dataFilter, success } = useSelector(filterSelectorFixIndex);
   const { id } = useParams();
   useEffect(() => {
     dispatch(setInitWagon(9));
 
-    dispatch(fetchDataDetailTrip(id));
+    dispatch(
+      fetchDataDetailTrip({
+        idTrip: id,
+        startIndex: dataFilter.startIndex,
+        endIndex: dataFilter.endIndex,
+      })
+    );
   }, []);
 
   if (start)

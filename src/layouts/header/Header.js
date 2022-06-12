@@ -6,7 +6,7 @@ import { userSelector } from "../../redux/authSelector";
 import UserGuest from "./UserGuest";
 import { UserLogin } from "./UserLogined";
 
-const logo = require("../../asset/img/logo.png");
+const logo = require("../../asset/img/logoOfficial2.png");
 
 const Header = () => {
   const [showModal, setShowModal] = useState(false);
@@ -43,7 +43,7 @@ const Header = () => {
         <div className=" flex items-center w-screen justify-between">
           <div className="header__logo ssm:hidden  ">
             <div
-              className="img-logo w-fit h-12 cursor-pointer"
+              className="img-logo w-fit h-20 cursor-pointer"
               onClick={handleNavigate}
             >
               <img className="w-full h-full object-cover" src={logo} alt="" />

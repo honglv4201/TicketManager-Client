@@ -52,6 +52,7 @@ const SumaryResultTicket = () => {
     }
   };
 
+  const [totalMoney, setTotalMoney] = useState(0);
   const calculateTotal = () => {
     const currentListMoney = [];
     let sum = 0;
@@ -63,6 +64,10 @@ const SumaryResultTicket = () => {
     setListMoney(currentListMoney);
     return sum;
   };
+
+  useEffect(() => {
+    setTotalMoney(handleMoney(calculateTotal()));
+  }, []);
 
   return (
     <div className="flex-1 px-4 min-w-[300px] min-h-[400px] rounded-lg dark:!opacity-90 dark:!text-white  bg-white dark:!bg-dark_primary_pnl flex-col ">
@@ -120,7 +125,7 @@ const SumaryResultTicket = () => {
       <div className="mt-2 flex flex-col gap-3 text-sm dark:!text-white px-4 py-4 rounded-md border-2 border-gray-100">
         <div className="item flex justify-between px-3">
           <div className="opacity-60">3 Vé</div>
-          <div className="font-bold">{handleMoney(calculateTotal())}</div>
+          <div className="font-bold">{totalMoney}</div>
         </div>
         <div className="item hidden flex justify-between px-3">
           <div className="opacity-60">Thuế & phí</div>
@@ -132,7 +137,7 @@ const SumaryResultTicket = () => {
         </div>
         <div className="item flex justify-between bg-gray-100 dark:!bg-opacity-10 dark:!text-white rounded-lg py-2 px-3 ">
           <div className="opacity-60">Tổng Cộng</div>
-          <div className="font-bold">{handleMoney(calculateTotal())}</div>
+          <div className="font-bold">{totalMoney}</div>
         </div>
         <div className="text-lg opacity-80 font-bold">Hình thức thanh toán</div>
         <div className="mt-2 mb-2 flex items-center gap-2">
