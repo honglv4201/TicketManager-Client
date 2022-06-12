@@ -4,7 +4,7 @@ const initState = {
   start: "",
   end: "",
   input: "",
-  date: "everytime",
+  date: "",
   filter: {},
 };
 

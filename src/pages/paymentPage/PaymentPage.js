@@ -10,12 +10,21 @@ import {
 import ChoosingTicket from "./childPage/ChoosingTicket";
 import Payment from "./childPage/Payment";
 import InputInfo from "./childPage/InputInfo";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { filterTicketWithIndex } from "../../redux/filterTicketSelector";
+import { filterSelector } from "../../redux/tripSelector";
 
 const PaymentPage = () => {
   const isDark = checkDark();
-  useEffect(() => {}, []);
+
+  const navigate = useNavigate();
+
+  const { start, end } = useSelector(filterSelector);
+  useEffect(() => {
+    if (!start) {
+      navigate("/");
+    }
+  }, []);
 
   const [process, SetProcess] = useState(0);
 
@@ -27,11 +36,13 @@ const PaymentPage = () => {
 
     dispatch(fetchDataDetailTrip(id));
   }, []);
-  return (
-    <div className="dark:!bg-dark_primary_bg select-none">
-      <ComponentProcess process={process} SetProcess={SetProcess} />
-    </div>
-  );
+
+  if (start)
+    return (
+      <div className="dark:!bg-dark_primary_bg select-none">
+        <ComponentProcess process={process} SetProcess={SetProcess} />
+      </div>
+    );
 };
 const ComponentProcess = ({ process, SetProcess }) => {
   if (process === 0) {

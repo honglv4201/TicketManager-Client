@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { seatSelector } from "../../../redux/seatBookingSelector";
@@ -20,6 +20,7 @@ const SumaryResultTicket = () => {
   } = useSelector(filterSelectorFixIndex);
 
   const { start, end, date } = useSelector(filterSelector);
+  const [listMoney, setListMoney] = useState([]);
   const handlePay = () => {
     let typeHumanBooking = "guest";
     let data = {
@@ -42,6 +43,7 @@ const SumaryResultTicket = () => {
         userID: wagonBooking.user.idUser || "",
         tripLocation,
         typeHumanBooking,
+        listMoney,
       })
     );
 
@@ -51,10 +53,14 @@ const SumaryResultTicket = () => {
   };
 
   const calculateTotal = () => {
+    const currentListMoney = [];
     let sum = 0;
     for (let i of wagonBooking.listUserTicket) {
-      sum += i.price * Math.abs(startIndex - endIndex);
+      const moneyTicket = i.price * Math.abs(startIndex - endIndex);
+      sum += moneyTicket;
+      currentListMoney.push(moneyTicket);
     }
+    setListMoney(currentListMoney);
     return sum;
   };
 

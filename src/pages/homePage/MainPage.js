@@ -8,6 +8,8 @@ import locale from "antd/es/date-picker/locale/zh_CN";
 import { DatePicker } from "antd";
 import "antd/dist/antd.css";
 import "./mainPage.scss";
+import moment from "moment";
+import "moment/locale/zh-cn";
 
 import useClickOutSide from "../../hooks/useClickOutSide";
 import { useDispatch, useSelector } from "react-redux";
@@ -242,6 +244,7 @@ const MainPage = () => {
                 <span className="opacity-80">Thời gian</span>
                 <DatePicker
                   onChange={handleChangeDate}
+                  value={dateStart ? moment(dateStart) : moment("2022-06-13")}
                   placeholder="Chọn"
                   onClick={handleResetErr}
                   className="w-full"

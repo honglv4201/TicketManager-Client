@@ -49,6 +49,7 @@ const SearchHeader = () => {
     endLocation,
     dateStart,
     setStartLocation,
+    handleChangeDate,
     setEndLocation,
     setDateStart,
   } = useHandleTicketRequest(1);
@@ -113,13 +114,13 @@ const SearchHeader = () => {
             <DatePicker
               placeholder="Chọn"
               className="w-full"
-              value={moment(dateStart)}
-              defaultValue={moment(dateStart)}
+              onChange={handleChangeDate}
+              value={dateStart ? moment(dateStart) : moment("2022-06-13")}
             ></DatePicker>
           </div>
         </div>
 
-        <div className="flex flex-col gap-1">
+        {/* <div className="flex flex-col gap-1">
           <span className="font-sm opacity-80">Khoang</span>
           <div className="selected-option px-4 py-1 dark:!text-white dark:!bg-dark_input  bg-gray-50 rounded-lg">
             <Select defaultValue="lucy" style={{ width: 120 }}>
@@ -129,8 +130,8 @@ const SearchHeader = () => {
               <Option value="Yiminghe">4 seat</Option>
             </Select>
           </div>
-        </div>
-        <div className="flex-1 flex justify-end ">
+        </div> */}
+        <div className="flex-1 flex justify-end opacity-0 ">
           <div className=" btn px-10 py-2 rounded-lg bg-black mt-3 text-white inline-block h-fit">
             Search
           </div>

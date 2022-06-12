@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { apiUrl } from "../utils/utils";
 
+
+
 const initState = {
   status: "idle",
   currentWagon: 0,
@@ -54,7 +56,8 @@ export const createInvoice = createAsyncThunk(
           identifyNumber: reqdata.user.identify,
         };
         await axios.post(userBookingUrl, userBookingData);
-        for (let userTicket of reqdata.list) {
+        for (let i in reqdata.list) {
+          const userTicket =reqdata.list[i];
           const userTicketData = {
             idWagonTicket: userTicket.idWagon,
             numOfSeat: userTicket.numOfSeat,
@@ -71,8 +74,10 @@ export const createInvoice = createAsyncThunk(
             idSeat: seatDataReturn._id,
             idInvoice: data._id,
             cusName: userTicket.name,
-            cusID: userTicket.identifyOrAge,
+            cusID: userTicket.identifyOrAge ,
             cusAge: "0",
+            cusPriceTicket : reqdata.listMoney[i],
+            cusTypeTicket: userTicket.typeTicket
           };
 
           await axios.post(cusTicketUrl, userInfoTicket);
@@ -131,7 +136,7 @@ const seatBookingSlice = createSlice({
 
         state.wagonBooking.listUserTicket.push({
           idWagon: state.wagonData[state.currentWagon]._id,
-          price: state.wagonData[state.currentWagon].price,
+          price: state.wagonData[state.currentWagon].price * ,
           numOfSeat: action.payload,
           numOfWagon: state.currentWagon,
           name: "",
