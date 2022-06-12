@@ -186,7 +186,6 @@ const ItemCustomer = ({ ind, initState }) => {
     err,
     value,
     setValue,
-
     complete,
   } = useDetectFocusInput();
 
@@ -235,7 +234,7 @@ const ItemCustomer = ({ ind, initState }) => {
         typeTicket: typeTicket,
       })
     );
-  }, [complete, complete2, typeTicket]);
+  }, [complete, complete2, typeTicket, form.name, form.info]);
 
   // err
   const [isErr, setIsErr] = useState(false);

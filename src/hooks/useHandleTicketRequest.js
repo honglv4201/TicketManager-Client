@@ -16,7 +16,7 @@ const useHandleTicketRequest = (type = 0) => {
   };
   const [fixbug, setFixBug] = useState(0);
 
-  const handleChangeDate = (e) => {
+  const handleChangeDate = (date, dateString) => {
     // if (type === 1) {
     //   alert("hong");
     //   if (fixbug === 0) {
@@ -24,7 +24,8 @@ const useHandleTicketRequest = (type = 0) => {
     //     return;
     //   }
     // }
-    setDateStart(e._d.toISOString().substring(0, 10));
+    // setDateStart(e._d.toISOString().substring(0, 10));
+    setDateStart(dateString);
   };
 
   const dispatch = useDispatch();
