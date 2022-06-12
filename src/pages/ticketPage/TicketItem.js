@@ -7,6 +7,7 @@ import {
 } from "../../redux/tripSelector";
 import { setInitWagon } from "../../slices/seatBookingSlice";
 import {
+  handleMoney,
   handleTimeTicket,
   handleTimeTicketMinutes,
 } from "../../utils/handleValue";
@@ -28,7 +29,7 @@ const TicketItem = ({ data }) => {
     localStorage.setItem("e", dataFilter.endIndex);
     navigate(`/booking/${data.idTrip}`);
   };
-
+  const { date } = useSelector(filterSelector);
   const [tabDetail, setTabDetail] = useState(1);
   if (!data) {
     return <div>Khong co du lieu</div>;
@@ -63,7 +64,10 @@ const TicketItem = ({ data }) => {
               {/* <span className="p-2 font-bold text-lg ">
                 {data.route.startLocation}
               </span> */}
-              <div className="flex items-center flex-col gap-1 text-sm ml-10">
+              <span className=" ml-10 mr-6">
+                {new Date(date).toLocaleDateString("vi-VN")}
+              </span>
+              <div className="flex items-center flex-col gap-1 text-sm">
                 <span className="time-start font-bold">
                   {handleTimeTicket(data.s)}
                 </span>
@@ -71,14 +75,27 @@ const TicketItem = ({ data }) => {
               </div>
               <div className="flex flex-col gap-1 items-center text-sm">
                 <div className="w-[100px] border-dotted border-b-2"></div>
-                <span>{handleTimeTicketMinutes(data.e - data.s)}h</span>
+                <span>
+                  {handleTimeTicketMinutes(Math.abs(data.e - data.s))}h
+                </span>
               </div>
-              <div className="flex  items-center flex-col gap-1 text-sm mr-10">
+              <div className="flex  items-center flex-col gap-1 text-sm mr-6">
                 <span className="time-start font-bold">
                   {handleTimeTicket(data.e)}
                 </span>
                 <span> {end}</span>
               </div>
+              <span className=" ml-0 mr-10">
+                {data.e >= 24
+                  ? data.e >= 48
+                    ? new Date(
+                        new Date(date).getTime() + 2 * 86400000
+                      ).toLocaleDateString("vi-VN")
+                    : new Date(
+                        new Date(date).getTime() + 86400000
+                      ).toLocaleDateString("vi-VN")
+                  : new Date(date).toLocaleDateString("vi-VN")}
+              </span>
 
               {/* <span className="p-2 font-bold text-lg ">
                 {" "}
@@ -125,9 +142,9 @@ const TicketItem = ({ data }) => {
           </div>
           <Link
             to="/payment"
-            className="btn-pay px-4 py-2 text-center rounded-lg bg-gray-200 text-black hover:text-black hover:bg-gray-300 "
+            className="btn-pay px-4 py-2 text-center rounded-lg bg-gray-50 text-black hover:text-black hover:bg-gray-300 "
           >
-            Luu lai
+            {handleMoney(data.fixed_price)}
           </Link>
 
           <div
@@ -159,7 +176,7 @@ const TicketItem = ({ data }) => {
           </span>
         </div>
         <div className="custom-animate-dropdown bg-white overflow-hidden  rounded-tl-none rounded-tr-none rounded-br-lg rounded-bl-lg w-full min-h-[200px]">
-          <ComponentInDetail tab={tabDetail} />
+          <ComponentInDetail data={data} tab={tabDetail} />
         </div>
       </div>
       ``
@@ -167,10 +184,10 @@ const TicketItem = ({ data }) => {
   );
 };
 
-const ComponentInDetail = ({ tab }) => {
+const ComponentInDetail = ({ tab, data }) => {
   switch (tab) {
     case 1: {
-      return <Details />;
+      return <Details data={data} />;
     }
     case 2: {
       return <Policy />;

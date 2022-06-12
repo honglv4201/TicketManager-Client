@@ -27,6 +27,7 @@ const initState = {
     continueStatus: "",
     enableContinue: false,
   },
+  successUserbooking: {},
 };
 
 export const createInvoice = createAsyncThunk(
@@ -36,6 +37,7 @@ export const createInvoice = createAsyncThunk(
       const urlInvoice = `${apiUrl}/invoice/create`;
 
       const { data } = await axios.post(urlInvoice, reqdata.data);
+      let userBooking = {};
 
       if (data) {
         const seatUrl = `${apiUrl}/seat/create`;
@@ -53,7 +55,11 @@ export const createInvoice = createAsyncThunk(
           email: reqdata.user.email,
           identifyNumber: reqdata.user.identify,
         };
-        await axios.post(userBookingUrl, userBookingData);
+        const { data: dataUserBooking } = await axios.post(
+          userBookingUrl,
+          userBookingData
+        );
+        userBooking = dataUserBooking;
         for (let i in reqdata.list) {
           const userTicket = reqdata.list[i];
           const userTicketData = {
@@ -81,7 +87,7 @@ export const createInvoice = createAsyncThunk(
           await axios.post(cusTicketUrl, userInfoTicket);
         }
       }
-      return data;
+      return userBooking.userBooking;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
     }
@@ -90,11 +96,11 @@ export const createInvoice = createAsyncThunk(
 
 export const fetchDataDetailTrip = createAsyncThunk(
   "seatBooking/fetchData",
-  async (idTrip, thunkAPI) => {
+  async (payload, thunkAPI) => {
     try {
       const url = `${apiUrl}/wagonTicket/getAllByidTrip`;
 
-      const { data } = await axios.post(url, { idTrip });
+      const { data } = await axios.post(url, payload);
       return data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -247,8 +253,9 @@ const seatBookingSlice = createSlice({
       .addCase(createInvoice.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(createInvoice.fulfilled, (state) => {
+      .addCase(createInvoice.fulfilled, (state, action) => {
         state.status = "idle";
+        state.successUserbooking = action.payload;
       })
       .addCase(createInvoice.rejected, (state, action) => {
         state.status = "idle";

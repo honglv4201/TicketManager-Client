@@ -18,11 +18,11 @@ const TicketPage = () => {
   }, [data, dispatch]);
 
   return (
-    <div className="lg:px-6 xl:px-2">
+    <div className="lg:px-6 xl:px-10 px-[100px]">
       <SearchHeader />
       <div className="page-container mt-4">
         <div className="flex lg:flex-col  gap-10">
-          <FilterSearch />
+          {/* <FilterSearch /> */}
           <ListItemTicket />
         </div>
       </div>

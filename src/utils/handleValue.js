@@ -1,4 +1,7 @@
 export const handleTimeTicket = (value) => {
+  if (value >= 24) value = value - 24;
+  if (value >= 24) value = value - 24;
+  if (value >= 24) value = value - 24;
   let result = value?.toString();
   if (result?.length <= 2) result = result += ":00";
   else {

@@ -171,7 +171,7 @@ const MainPage = () => {
                 <i class="fa-solid fa-cart-flatbed text-base"></i>
                 <span className="">Transport</span>
               </div>
-              <div className="flex 2xl:gap-3 lg:gap-2 text-lg leading-7 pr-1 mr-2 opacity-40 cursor-pointer">
+              <div className="hidden  2xl:gap-3 lg:gap-2 text-lg leading-7 pr-1 mr-2 opacity-40 cursor-pointer">
                 <i class="fa-solid fa-hotel text-base"></i>
                 <span className="">Hotel</span>
               </div>
@@ -179,7 +179,7 @@ const MainPage = () => {
             <div
               ref={nodeRefQuantity}
               onClick={handleOpenModalQuantity}
-              className="flex gap-3 text-base items-center mb-4 2xl:mt-0 lg:mt-4 relative cursor-pointer"
+              className="flex hidden gap-3 text-base items-center mb-4 2xl:mt-0 lg:mt-4 relative cursor-pointer"
             >
               <span className="w-fit block">1 Passenger</span>
               <i class="fa-solid fa-angle-down opacity-60"></i>

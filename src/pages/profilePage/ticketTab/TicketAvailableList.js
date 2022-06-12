@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { ticketSelector } from "../../../redux/userTicketSelector";
 import ItemTicket from "./ItemTicket";
@@ -18,7 +18,7 @@ const TicketAvailableList = () => {
 
       {!isLoading &&
         ticketAvailables?.length > 0 &&
-        ticketAvailables.map((item, ind) => {
+        [...ticketAvailables].reverse().map((item, ind) => {
           return <ItemTicket ind={ind} data={item} key={ind} />;
         })}
 

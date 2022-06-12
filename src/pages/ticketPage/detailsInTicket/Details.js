@@ -1,6 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { filterSelector } from "../../../redux/tripSelector";
+import {
+  handleTimeTicket,
+  handleTimeTicketMinutes,
+} from "../../../utils/handleValue";
 
-const Details = () => {
+const Details = ({ data }) => {
+  const { date } = useSelector(filterSelector);
+  console.log("🚀 ~ file: Details.js ~ line 11 ~ Details ~ date", date);
   return (
     <div className="px-8 py-6  custom-anim-left">
       <div className="flex gap gap-8">
@@ -11,15 +19,20 @@ const Details = () => {
           </p>
           <div className="flex items-center gap-2">
             <span className="opacity-60">Ngày khởi hành: </span>
-            <span className="">22/10/2022</span>
+            <span className="">
+              {date && new Date(date).toLocaleDateString("vi-VN")}
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <span className="opacity-60">Khởi hành: </span>
-            <span className="">12h30</span>
+            <span className="">{handleTimeTicket(data.s)}</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="opacity-60">Thời gian dự kiến: </span>
-            <span className="">8 giờ</span>
+            <span className="">
+              {" "}
+              {handleTimeTicketMinutes(Math.abs(data.e - data.s))} giờ
+            </span>
           </div>
         </div>
         <div className="tab py-4 px-6 rounded-md bg-gray-50 bg-opacity-60  flex flex-col gap-2">
