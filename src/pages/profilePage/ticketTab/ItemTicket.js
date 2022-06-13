@@ -41,7 +41,7 @@ const ItemTicket = ({ data, ind, type = "available" }) => {
       </div>
       <div className="flex flex-col gap-3">
         {type !== "cancel" && !data.userBooking.isPay && (
-          <div className="px-6 text-center  py-2 rounded-md cursor-pointer bg-red-200 hover:bg-gray-300">
+          <div className="px-6 hidden text-center  py-2 rounded-md cursor-pointer bg-red-200 hover:bg-gray-300">
             Thanh toan
           </div>
         )}

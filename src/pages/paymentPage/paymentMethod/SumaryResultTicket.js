@@ -18,10 +18,18 @@ const SumaryResultTicket = () => {
   const {
     data: { startIndex, endIndex },
   } = useSelector(filterSelectorFixIndex);
+  const {
+    start: startLocation,
+    end: endLocation,
+    date: timeStart,
+  } = useSelector(filterSelector);
 
   const { start, end, date } = useSelector(filterSelector);
   const [listMoney, setListMoney] = useState([]);
   const handlePay = () => {
+    if (!wagonBooking.payment) {
+      alert("Vui lòng chọn hình thức thanh toán");
+    }
     let typeHumanBooking = "guest";
     let data = {
       idTicket: wagonData[0]?.idTicket,
@@ -44,6 +52,9 @@ const SumaryResultTicket = () => {
         tripLocation,
         typeHumanBooking,
         listMoney,
+        startLocation,
+        endLocation,
+        date: timeStart,
       })
     );
 

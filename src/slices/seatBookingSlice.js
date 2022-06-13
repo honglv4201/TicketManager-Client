@@ -54,6 +54,9 @@ export const createInvoice = createAsyncThunk(
           phoneNumber: Math.floor(reqdata.user.sdt),
           email: reqdata.user.email,
           identifyNumber: reqdata.user.identify,
+          startLocation: reqdata.startLocation,
+          endLocation: reqdata.endLocation,
+          date: reqdata.date,
         };
         const { data: dataUserBooking } = await axios.post(
           userBookingUrl,

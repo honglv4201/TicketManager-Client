@@ -5,7 +5,7 @@ const trainImg = require("../../asset/img/train1.jpeg");
 const CheckTicketPage = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [bookingCode, setBookingCode] = useState("");
-  const [detailView, setDetailView] = useState(true);
+  const [detailView, setDetailView] = useState(false);
   const [data, setData] = useState({});
 
   const onBack = async () => {
@@ -36,101 +36,189 @@ const CheckTicketPage = () => {
             </div>
             <div class="flex flex-col justify-start items-start bg-gray-50 dark:bg-gray-800 w-full p-6 md:p-14">
               <div>
-                <h1 class="text-2xl  dark:text-white font-semibold leading-6 text-gray-800">Thông tin người đặt vé</h1>
+                <h1 class="text-2xl  dark:text-white font-semibold leading-6 text-gray-800">
+                  Thông tin người đặt vé
+                </h1>
               </div>
               <div class="flex mt-7 flex-col items-end w-full space-y-6">
                 <div class="flex w-full items-center">
-                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">Mã đặt vé</p>
-                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">{data?.userBooking?.bookingCode}</p>
+                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">
+                    Mã đặt vé
+                  </p>
+                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">
+                    {data?.userBooking?.bookingCode}
+                  </p>
                 </div>
                 <div class="flex w-full items-center">
-                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">Tên</p>
-                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">{data?.userBooking?.fullname}</p>
+                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">
+                    Tên
+                  </p>
+                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">
+                    {data?.userBooking?.fullname}
+                  </p>
                 </div>
                 <div class="flex w-full items-center">
-                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">Email</p>
-                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">{data?.userBooking?.email}</p>
+                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">
+                    Email
+                  </p>
+                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">
+                    {data?.userBooking?.email}
+                  </p>
                 </div>
                 <div class="flex w-full items-center">
-                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">CMND/CCCD</p>
-                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">{data?.userBooking?.identifyNumber}</p>
+                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">
+                    CMND/CCCD
+                  </p>
+                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">
+                    {data?.userBooking?.identifyNumber}
+                  </p>
                 </div>
                 <div class="flex w-full items-center">
-                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">Số điện thoại</p>
-                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">{data?.userBooking?.phoneNumber}</p>
+                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">
+                    Số điện thoại
+                  </p>
+                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">
+                    {data?.userBooking?.phoneNumber}
+                  </p>
                 </div>
                 <div class="flex w-full items-center">
-                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">Phương thức thanh toán</p>
-                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">{data?.userBooking?.payment}</p>
+                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">
+                    Phương thức thanh toán
+                  </p>
+                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">
+                    {data?.userBooking?.payment}
+                  </p>
                 </div>
                 <div class="flex w-full items-center">
-                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">Trạng thái</p>
-                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">{data?.userBooking?.isPay ? "Đã thanh toán" : "Chưa thanh toán"}</p>
+                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">
+                    Trạng thái
+                  </p>
+                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">
+                    {data?.userBooking?.isPay
+                      ? "Đã thanh toán"
+                      : "Chưa thanh toán"}
+                  </p>
                 </div>
               </div>
             </div>
             <div class="flex flex-col justify-start items-start bg-gray-50 dark:bg-gray-800 w-full p-6 md:p-14">
               <div>
-                <h1 class="text-2xl  dark:text-white font-semibold leading-6 text-gray-800">Tuyến đường</h1>
+                <h1 class="text-2xl  dark:text-white font-semibold leading-6 text-gray-800">
+                  Tuyến đường
+                </h1>
               </div>
               <div class="flex mt-7 flex-col items-end w-full space-y-6">
                 <div class="flex w-full items-center">
-                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">Mã tàu</p>
-                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">{data?.route?.idTrain}</p>
+                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">
+                    Mã tàu
+                  </p>
+                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">
+                    {data?.route?.idTrain}
+                  </p>
                 </div>
                 <div class="flex w-full items-center">
-                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">Công ty</p>
-                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">{data?.route?.enterpriseName}</p>
+                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">
+                    Công ty
+                  </p>
+                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">
+                    {data?.route?.enterpriseName}
+                  </p>
                 </div>
                 <div class="flex w-full items-center">
-                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">Điểm đi</p>
-                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">{data?.route?.cityNameStart}</p>
+                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">
+                    Điểm đi
+                  </p>
+                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">
+                    {data?.route?.cityNameStart}
+                  </p>
                 </div>
                 <div class="flex w-full items-center">
-                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">Điểm đến</p>
-                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">{data?.route?.cityNameEnd}</p>
+                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">
+                    Điểm đến
+                  </p>
+                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">
+                    {data?.route?.cityNameEnd}
+                  </p>
                 </div>
                 <div class="flex w-full items-center">
-                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">Ngày khởi hành</p>
-                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">{new Date(data?.route?.startDate).toLocaleDateString("vi-VN")}</p>
+                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">
+                    Ngày khởi hành
+                  </p>
+                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">
+                    {new Date(data?.route?.startDate).toLocaleDateString(
+                      "vi-VN"
+                    )}
+                  </p>
                 </div>
               </div>
             </div>
-            {data?.seats?.map(seat => (
-              <div role="listitem" class="bg-white dark:bg-gray-800 cursor-pointer shadow rounded-lg mt-3 flex relative z-30">
+            {data?.seats?.map((seat) => (
+              <div
+                role="listitem"
+                class="bg-white  dark:bg-gray-800 cursor-pointer shadow rounded-lg mt-3 flex relative z-30"
+              >
                 <div class="w-2.5 h-auto bg-indigo-700 rounded-tl-md rounded-bl-md"></div>
                 <div class="w-full p-8">
                   <div class="md:flex items-center justify-between">
-                    <h2 class="text-2xl font-semibold leading-6 text-gray-800 dark:text-white">{seat.cusName}</h2>
+                    <h2 class="text-2xl font-semibold leading-6 text-gray-800 dark:text-white">
+                      {seat.cusName}
+                    </h2>
                   </div>
                   <div class="flex flex-col justify-start items-start bg-gray-50 dark:bg-gray-800 w-full p-6 md:p-14">
-              <div>
+                    <div></div>
+                    <div class="flex mt-7 flex-col items-end w-full space-y-6">
+                      {!!seat.cusId && (
+                        <div class="flex w-full items-center">
+                          <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">
+                            ID
+                          </p>
+                          <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">
+                            {seat?.cusId}
+                          </p>
+                        </div>
+                      )}
+                      {!!seat.cusAge && (
+                        <div class="flex w-full items-center">
+                          <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">
+                            Tuổi
+                          </p>
+                          <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">
+                            {seat?.cusAge}
+                          </p>
+                        </div>
+                      )}
+                      <div class="flex w-full items-center">
+                        <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">
+                          Số ghế
+                        </p>
+                        <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">
+                          {seat?.numOfSeat}
+                        </p>
+                      </div>
+                      <div class="flex w-full items-center">
+                        <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">
+                          Số toa
+                        </p>
+                        <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">
+                          {seat?.numOfWagon}
+                        </p>
+                      </div>
+                      <div class="flex w-full items-center">
+                        <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">
+                          Giá
+                        </p>
+                        <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">
+                          {seat?.price
+                            .toString()
+                            .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.") +
+                            " VND"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="flex mt-7 flex-col items-end w-full space-y-6">
-                <div class="flex w-full items-center">
-                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">ID</p>
-                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">{seat?.cusId}</p>
-                </div>
-                <div class="flex w-full items-center">
-                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">Tuổi</p>
-                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">{seat?.cusAge}</p>
-                </div>
-                <div class="flex w-full items-center">
-                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">Số ghế</p>
-                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">{seat?.numOfSeat}</p>
-                </div>
-                <div class="flex w-full items-center">
-                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">Số toa</p>
-                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">{seat?.numOfWagon}</p>
-                </div>
-                <div class="flex w-full items-center">
-                  <p class="text-lg dark:text-gray-300 leading-4 text-gray-600 w-[300px]">Giá</p>
-                  <p class="text-lg dark:text-gray-300 font-semibold leading-4 text-gray-600">{seat?.price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.") + " VND"}</p>
-                </div>
-              </div>
-            </div>
-                </div>
-              </div>))}
+            ))}
           </div>
         ) : (
           <div className="absolute top-1/2 left-1/2 w-[500px] min-h-[300px] rounded-lg bg-white -translate-x-1/2 -translate-y-3/4 p-10 flex flex-col gap-4">
