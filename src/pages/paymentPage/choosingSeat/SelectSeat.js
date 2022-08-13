@@ -38,18 +38,18 @@ const SelectSeat = () => {
         <div className="h-10 grid content-center bg-gray-100 text-center shrink-0">
           Toa {currentWagon + 1}: Ngồi mềm điều hòa
         </div>
-        <div className="mt-6 w-full flex items-center gap-6 justify-center">
-          <div className="item flex items-center gap-2">
+        <div className="mt-6 w-full flex sm:flex-col items-center gap-6 justify-center">
+          <div className="item flex sm:w-[160px] items-center gap-2">
             <div className="w-6 h-6 rounded-md border-2"></div>
             Ghe Trong
           </div>
 
-          <div className="item flex items-center gap-2">
+          <div className="item flex sm:w-[160px] items-center gap-2">
             <div className="w-6 h-6 rounded-md border-2 bg-blue-50 border-blue-400"></div>
             Ghe Dang Chon
           </div>
 
-          <div className="item flex items-center gap-2">
+          <div className="item flex sm:w-[160px] items-center gap-2">
             <div className="w-6 h-6 rounded-md border-2 bg-gray-200"></div>
             Ghe Da Chon
           </div>

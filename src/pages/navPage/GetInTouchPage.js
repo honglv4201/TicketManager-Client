@@ -5,8 +5,8 @@ const GetInTouchPage = () => {
   return (
     <div>
       <div className="w-full h-screen relative">
-        <img src={trainImg} className="w-full h-full object-cover" alt="" />
-        <div className="absolute shadow-lg top-10 right-20 w-[500px] min-h-[300px] rounded-lg bg-white  p-10 flex flex-col gap-4">
+        <img src={trainImg} className="w-full h-screen object-cover" alt="" />
+        <div className="absolute shadow-lg top-10 right-20 sm:right-2 sm:px-2 sm:w-fit w-[500px] min-h-[300px] rounded-lg bg-white  p-10 flex flex-col gap-4">
           <div className="-mt-8 text-center font-bold opacity-80 w-full py-0 text-lg">
             Liên hệ với chúng tôi thông qua
           </div>

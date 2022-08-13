@@ -62,8 +62,8 @@ const CreditCard = () => {
             (Chọn một trong các hình thức bên dưới)
           </div> */}
           {/* method paying */}
-          <div className="flex gap-4 ">
-            <div className="item cursor-pointer bg-white dark:!bg-dark_secondary_pnl shadow-md  rounded-lg min-w-[140px] min-h-[50px]">
+          <div className="flex sm:flex-col sm:gap-8 gap-4 sm:mb-8">
+            <div className="item cursor-pointer bg-white dark:!bg-dark_secondary_pnl  border-2 border-gray-100 sm:w-[280px] rounded-lg min-w-[140px] min-h-[50px]">
               <label className="method-item w-full h-full cursor-pointer ">
                 <input
                   type="radio"
@@ -97,7 +97,7 @@ const CreditCard = () => {
               </label>
             </div>
 
-            <div className="item bg-white dark:!bg-dark_secondary_pnl shadow-md  rounded-lg min-w-[130px] min-h-[54px]">
+            <div className="item bg-white dark:!bg-dark_secondary_pnl border-2 border-gray-100 sm:w-[280px] rounded-lg min-w-[130px] min-h-[54px]">
               <label className="method-item w-full h-full cursor-pointer ">
                 <input
                   type="radio"
@@ -131,7 +131,7 @@ const CreditCard = () => {
               </label>
             </div>
 
-            <div className="item  bg-white shadow-md dark:!bg-dark_secondary_pnl rounded-lg min-w-[130px] min-h-[54px]">
+            <div className="item  bg-white border-2 border-gray-100 sm:w-[280px]  dark:!bg-dark_secondary_pnl rounded-lg min-w-[130px] min-h-[54px]">
               <label className="method-item w-full h-full  cursor-pointer">
                 <input
                   type="radio"
@@ -165,7 +165,7 @@ const CreditCard = () => {
               </label>
             </div>
 
-            <div className="item bg-white shadow-md  dark:!bg-dark_secondary_pnl rounded-lg min-w-[130px] min-h-[54px]">
+            <div className="item bg-white border-2 border-gray-100 sm:w-[280px]   dark:!bg-dark_secondary_pnl rounded-lg min-w-[130px] min-h-[54px]">
               <label className="method-item w-full h-full  cursor-pointer">
                 <input
                   type="radio"

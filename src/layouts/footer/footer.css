@@ -83,12 +83,22 @@ footer .footer-col {
 /*responsive*/
 @media (max-width: 767px) {
   .footer-col {
-    width: 50%;
     margin-bottom: 30px;
+    width: 100% !important;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (max-width: 574px) {
   .footer-col {
     width: 100%;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    margin-left: auto;
+    margin-right: auto;
   }
 }

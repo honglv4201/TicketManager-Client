@@ -121,7 +121,7 @@ const InputInfoComponent = ({ setEnableContinue }) => {
       <div className="list w-full">
         <div className="mt-8 px-4 py-3 flex flex-col gap-4 rounded-md border-2 pb-8 border-gray-100">
           <div
-            className={`flex items-center gap-10 mt-2 justify-items-stretch ${
+            className={`flex md:flex-col items-center gap-10 mt-2 justify-items-stretch ${
               (err || errIdentify) && "pb-8"
             }`}
           >
@@ -144,7 +144,7 @@ const InputInfoComponent = ({ setEnableContinue }) => {
             />
           </div>
           <div
-            className={`flex items-center gap-10 ${
+            className={`flex md:flex-col items-center gap-10 ${
               (errPhoneNumber || errEmail) && "pb-8"
             }`}
           >
@@ -267,11 +267,10 @@ const ItemCustomer = ({ ind, initState }) => {
         </div>
       </div>
       <div
-        className={`flex items-center gap-10 mt-2 justify-items-stretch ${
+        className={`flex md:flex-col items-center gap-10 lg:gap-6 mt-2 lg:mt-4 justify-items-stretch ${
           (err || err2) && "pb-6"
         }`}
       >
-        <span className="absolute">{value}</span>
         <CustomInput
           nodeRef={nodeRef1}
           value={form.name}

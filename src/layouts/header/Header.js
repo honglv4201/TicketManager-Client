@@ -41,7 +41,7 @@ const Header = () => {
     <Fragment>
       <div className="min-h-[80px] bg-white shadow-md dark:!bg-black !transition-colors !duration-500 2xl:px-16 md:px-1 w-200 flex items-center">
         <div className=" flex items-center w-screen justify-between">
-          <div className="header__logo ssm:hidden  ">
+          <div className="header__logo flex-1 ssm:w-[180px] ml-2 ">
             <div
               className="img-logo w-fit h-20 cursor-pointer"
               onClick={handleNavigate}
@@ -68,7 +68,11 @@ const Header = () => {
       </div>
       {/* {showModal ? <ModalLogin close={openModal} /> : null} */}
       {showModal && !user ? (
-        <AuthModal authType={authType} handleClose={closeModal} />
+        <AuthModal
+          setAuthType={setAuthType}
+          authType={authType}
+          handleClose={closeModal}
+        />
       ) : null}
       <Outlet />
     </Fragment>

@@ -44,7 +44,7 @@ const PopularRoute = () => {
         The beatiful destination for foreign people in the world
       </div>
 
-      <div className="slider inset-0 left-0  w-full px-20">
+      <div className="slider inset-0  w-full flex justify-center">
         <SimpleImageSlider
           width={"90%"}
           height={404}

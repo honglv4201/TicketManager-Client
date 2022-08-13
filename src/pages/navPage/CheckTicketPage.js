@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getDetailTicket } from "../../slices/userSlice";
+import { toast } from "react-toastify";
 const trainImg = require("../../asset/img/train1.jpeg");
 
 const CheckTicketPage = () => {
@@ -18,15 +19,21 @@ const CheckTicketPage = () => {
     const filter = { phoneNumber, bookingCode };
 
     setData(await getDetailTicket(filter));
-
+    console.log(
+      "🚀 ~ file: CheckTicketPage.js ~ line 24 ~ onSubmit ~ data",
+      data.userBooking
+    );
+    if (!data.userBooking) {
+      toast.error("Thông tin không chính xác");
+    }
     setDetailView(true);
   };
 
   return (
     <div>
       <div className="w-full relative">
-        <img src={trainImg} className="w-full h-full object-cover" alt="" />
-        {detailView ? (
+        <img src={trainImg} className="w-full h-screen object-cover" alt="" />
+        {detailView && data?.userBooking ? (
           <div className="absolute top-[465px] left-1/2 w-[1200px] h-[900px] min-h-[700px] rounded-lg bg-white -translate-x-1/2 -translate-y-1/2 p-10 flex flex-col gap-4 overflow-y-scroll">
             <div
               className="w-[100px] text-white cursor-pointer py-3 text-center mt-4 bg-primary hover:bg-opacity-80 rounded-lg"
@@ -221,7 +228,7 @@ const CheckTicketPage = () => {
             ))}
           </div>
         ) : (
-          <div className="absolute top-1/2 left-1/2 w-[500px] min-h-[300px] rounded-lg bg-white -translate-x-1/2 -translate-y-3/4 p-10 flex flex-col gap-4">
+          <div className="absolute top-1/2  left-1/2 sm:w-fit w-[500px] min-h-[300px] rounded-lg bg-white -translate-x-1/2 -translate-y-3/4 p-10 flex flex-col gap-4">
             <CustomInput
               required={true}
               title="Nhập Số Điện Thoại"

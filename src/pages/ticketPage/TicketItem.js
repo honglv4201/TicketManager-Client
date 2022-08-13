@@ -36,23 +36,28 @@ const TicketItem = ({ data }) => {
   }
   return (
     <div>
-      <div className="flex gap-0 py-10 px-8 bg-white dark:!bg-dark_primary_pnl rounded-lg">
+      <div className="flex gap-0 sm:flex-col py-10 px-8 bg-white dark:!bg-dark_primary_pnl rounded-lg">
         <div className="flex-1">
           <div className="block ">
             <div className="flex gap-3 mb-2 pb-1 border-b border-b-slate-100">
-              <span className="pr-2 border-r-2 border-r-slate-100">Cheap</span>
-              <span className="">Rating: </span>
-              <span className="text-yellow-500 pr-2 border-r-2 border-r-slate-100">
+              <span className="hidden ssm:block bg-blue-50 text-blue-400  leading-2 text-center rounded-md px-2 py-[2px] pr-2 border-r-2 border-r-slate-100">
+                {data.idTrain}
+              </span>
+              <span className="ssm:hidden pr-2 border-r-2 border-r-slate-100">
+                Cheap
+              </span>
+              <span className="ssm:hidden">Rating: </span>
+              <span className="ssm:hidden text-yellow-500 pr-2 border-r-2 border-r-slate-100">
                 4.5
               </span>
               <span className="">Available: </span>
               <span className="text-yellow-500 ">{data.totalSeat} seat</span>
             </div>
 
-            <div className="flex items-center gap-2">
-              <div className="transport-image relative max-w-[160px] max-h-[220px] overflow-hidden -ml-4">
+            <div className="flex items-center gap-2 ssm:mt-8">
+              <div className="transport-image ssm:hidden relative  lg:max-w-[100px] lg:-mr-6 max-w-[160px] max-h-[220px] overflow-hidden -ml-4">
                 <img
-                  className="w-full h-full rounded-lg md:hidden"
+                  className="w-full h-full rounded-lg "
                   src="https://images.moneycontrol.com/static-mcnews/2021/08/Indian-Railways.jpg?impolicy=website&width=770&height=431"
                   alt="tau_image"
                 />
@@ -64,10 +69,10 @@ const TicketItem = ({ data }) => {
               {/* <span className="p-2 font-bold text-lg ">
                 {data.route.startLocation}
               </span> */}
-              <span className=" ml-10 mr-6">
+              <span className=" ml-10 ssm:!ml-0 mr-6  lg:hidden">
                 {new Date(date).toLocaleDateString("vi-VN")}
               </span>
-              <div className="flex items-center flex-col gap-1 text-sm">
+              <div className="flex items-center flex-col gap-1 text-sm lg:ml-14 ssm:ml-4 ">
                 <span className="time-start font-bold">
                   {handleTimeTicket(data.s)}
                 </span>
@@ -85,7 +90,7 @@ const TicketItem = ({ data }) => {
                 </span>
                 <span> {end}</span>
               </div>
-              <span className=" ml-0 mr-10">
+              <span className=" ml-0 mr-10 lg:hidden">
                 {data.e >= 24
                   ? data.e >= 48
                     ? new Date(
@@ -102,7 +107,7 @@ const TicketItem = ({ data }) => {
                 {data.route.endLocation}
               </span> */}
 
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1 md:hidden">
                 <div className="opacity-40 text-[13px] max-w-[160px]">
                   * Xem tong quan
                 </div>
@@ -133,23 +138,17 @@ const TicketItem = ({ data }) => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 pt-2 pl-10">
-          <div className="money px-2 font-bold">
-            {/* {data.ticket?.price.toLocaleString("it-IT", {
-              style: "currency",
-              currency: "VND",
-            })}{" "} */}
-          </div>
+        <div className="flex flex-col md:flex-row md:mt-8 md:w-full  md:!pl-0 gap-4 pt-2 pl-10">
           <Link
             to="/payment"
-            className="btn-pay px-4 py-2 text-center rounded-lg bg-gray-50 text-black hover:text-black hover:bg-gray-300 "
+            className="btn-pay md:py-3 md:w-full px-4 py-2 text-center rounded-lg bg-gray-50 text-black hover:text-black hover:bg-gray-300 "
           >
             {handleMoney(data.fixed_price)}
           </Link>
 
           <div
             onClick={handleToBooking}
-            className="btn-pay px-4 py-2 rounded-lg bg-primary text-white hover:text-white hover:bg-opacity-80 cursor-pointer "
+            className="btn-pay md:py-3 md:w-full text-center px-4 py-2 rounded-lg bg-primary text-white hover:text-white hover:bg-opacity-80 cursor-pointer "
           >
             Dat Ngay
           </div>

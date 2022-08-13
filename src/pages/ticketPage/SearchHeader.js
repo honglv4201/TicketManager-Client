@@ -62,8 +62,8 @@ const SearchHeader = () => {
 
   return (
     <div className="page-container w-full min-h-[90px] pt-2 bg-white rounded-lg pr-10 shadow-sm  pl-10 mt-4 dark:!bg-dark_primary_pnl dark:!text-white ">
-      <div className="flex gap-4 justify-end">
-        <div className="flex flex-col gap-1">
+      <div className="flex gap-4 flex-wrap pb-6 pt-2">
+        <div className="flex flex-col  gap-1">
           <span className="font-sm opacity-80">From</span>
           <div className="relative px-4 py-2 bg-gray-50   dark:!bg-dark_input  rounded-lg">
             <input
@@ -85,15 +85,6 @@ const SearchHeader = () => {
           </div>
         </div>
 
-        {show1 && (
-          <PickModal
-            type="end"
-            setLocation={setEndLocation}
-            handleClose={() => setShow1(false)}
-            coords={coords}
-          ></PickModal>
-        )}
-
         <div className="flex flex-col gap-1">
           <span className="font-sm opacity-80">To</span>
           <div className="px-4 py-2 bg-gray-50 dark:!bg-dark_input rounded-lg">
@@ -108,9 +99,9 @@ const SearchHeader = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 w-[200px]">
           <span className="font-sm opacity-80">Time</span>
-          <div className="px-4 py-[2px] bg-gray-50  dark:!bg-dark_input  rounded-lg">
+          <div className="px-4 w-full py-[2px] bg-gray-50  dark:!bg-dark_input  rounded-lg">
             <DatePicker
               placeholder="Chọn"
               className="w-full"
@@ -131,11 +122,20 @@ const SearchHeader = () => {
             </Select>
           </div>
         </div> */}
-        <div className="flex-1 flex justify-end opacity-0 ">
+        <div className="flex-1 flex justify-end hidden ">
           <div className=" btn px-10 py-2 rounded-lg bg-black mt-3 text-white inline-block h-fit">
             Search
           </div>
         </div>
+
+        {show1 && (
+          <PickModal
+            type="end"
+            setLocation={setEndLocation}
+            handleClose={() => setShow1(false)}
+            coords={coords}
+          ></PickModal>
+        )}
       </div>
     </div>
   );

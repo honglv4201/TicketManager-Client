@@ -11,7 +11,7 @@ const TicketAvailableList = () => {
   return (
     <Fragment>
       {isLoading && (
-        <div className="w-full h-[200px] flex items-center justify-center  text-center ">
+        <div className="w-full  h-[200px] flex items-center justify-center  text-center ">
           <div className="w-8 h-8 rounded-full border-4 border-primary border-r-transparent animate-spin"></div>
         </div>
       )}
@@ -36,7 +36,7 @@ const NoneTicketAvailable = () => {
       <div className=" font-bold opacity-90 mt-2 text-lg">
         Hiện tại bạn chưa có vé nào cả
       </div>
-      <div className="mt-4 text-md w-[420px] opacity-60 text-center">
+      <div className="mt-4 text-md w-[420px] sm:w-[300px] sm:text-base opacity-60 text-center">
         Nếu có ý định di chuyển bằng tàu lửa, hãy mau chóng đặt vé trên 5Ting
         ticket, vừa đơn giản vừa tiết kiệm
       </div>

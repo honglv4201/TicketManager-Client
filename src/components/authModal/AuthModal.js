@@ -8,7 +8,7 @@ import { reset } from "../../slices/authSlice";
 import Login from "./Login";
 import SignUp from "./SignUp";
 
-const AuthModal = ({ handleClose, authType }) => {
+const AuthModal = ({ handleClose, authType, setAuthType }) => {
   const { isLoading } = useSelector(userSelector);
 
   const dispatch = useDispatch();
@@ -19,11 +19,11 @@ const AuthModal = ({ handleClose, authType }) => {
     <div className="fixed inset-0 modal-login ">
       <div className="overlay absolute inset-0 bg-[#0000009a]"></div>
       <div className="relative w-screen inset-0 h-screen flex items-center justify-center">
-        <div className="w-[450px] min-h-[400px] rounded-2xl px-10 py-6 bg-white relative">
-          <div className="heading text-2xl font-bold">
+        <div className="w-[450px] sm:w-[340px] sm:px-6 min-h-[400px] rounded-2xl px-10 py-6 bg-white relative">
+          <div className="heading text-2xl font-bold mb-10">
             Welcome to Ticket Booking
           </div>
-          <div className="method-login flex items-center gap-3 text-base cursor-pointer my-6">
+          {/* <div className="method-login flex items-center gap-3 text-base cursor-pointer my-6">
             <div className="login-gg flex-1 px-6 py-3 rounded-xl bg-blue-500 text-white flex h-[46px] items-center justify-center gap-4">
               <i class="fa-brands fa-google"></i>
               {authType === "login" ? "Sign in" : "Sign up"} with Google
@@ -35,14 +35,13 @@ const AuthModal = ({ handleClose, authType }) => {
 
           <div className="mb-6 txt-orlogin mt-4 text-center relative before:absolute before:content-[''] before:w-[30%] before:border-2 before:border-gray-100 before:left-2 before:top-2/4 after:absolute after:content-[''] after:w-[30%] after:right-2 after:border-2 after:border-gray-100 after:top-2/4">
             or continue with
-          </div>
+          </div> */}
 
-          {authType === "login" ? <Login /> : <SignUp />}
-
-          <div className="mt-3 text-center">
-            Dont have account ?{" "}
-            <span className="text-blue-400 cursor-pointer">Sign Up</span>
-          </div>
+          {authType === "login" ? (
+            <Login setAuthType={setAuthType} />
+          ) : (
+            <SignUp setAuthType={setAuthType} />
+          )}
 
           {/* exit  */}
           <div
