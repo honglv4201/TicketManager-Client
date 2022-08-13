@@ -138,7 +138,7 @@ const TickeChoosing = ({ type, handleContinue, enableContinue }) => {
             <span className="font-bold">{handleMoney(totalMoney)}</span>
           </div>
           <div
-            className={`btn w-full px-4 py-2 rounded-lg duration-100 transition-all bg-primary mt-2 cursor-pointer hover:bg-opacity-80 text-center text-white ${
+            className={`btn w-full lg:py-3 lg:my-4 px-4 py-2 rounded-lg duration-100 transition-all bg-primary mt-2 cursor-pointer hover:bg-opacity-80 text-center text-white ${
               checkTotalTicket() === 0
                 ? "!opacity-20 hover:bg-opacity-100 bg-gray-500"
                 : ""

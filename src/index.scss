@@ -108,6 +108,21 @@
       color: white !important;
     }
   }
+
+  .menubar-anim {
+    animation: slide 0.3s ease;
+  }
+  @keyframes slide {
+    from {
+      transform: translateX(200px);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+}
+.menubar-anim {
+  animation: slide 0.3s ease;
 }
 
 //TUDANGCSS

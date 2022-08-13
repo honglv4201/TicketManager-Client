@@ -68,10 +68,10 @@ const ProfilePage = ({ index: tabIndex }) => {
     return <div></div>;
   } else
     return (
-      <div className="w-full">
-        <div className="page-container mt-6 flex items-stretch min-h-[600px] gap-2">
-          <div className="p-4 pr-0 h-[500px] rounded-lg bg-white  border-gray-200">
-            <div className="flex text-base flex-col gap-4 items-center">
+      <div className="w-full sm:w-fit">
+        <div className="page-container sm:w-fit mt-6 flex items-stretch min-h-[600px] gap-2">
+          <div className="p-4 pr-0 h-[500px] rounded-lg bg-white sm:hidden border-gray-200">
+            <div className="flex text-base flex-col gap-4 items-center sm:hidden">
               {listTabJson.map((item, index) => {
                 return (
                   <ItemTab
@@ -88,7 +88,7 @@ const ProfilePage = ({ index: tabIndex }) => {
             </div>
           </div>
 
-          <div className="flex-1 px-20 bg-white min-h-[400px] rounded-md">
+          <div className="flex-1 px-20 sm:px-4 sm:mx-4 sm:mb-8 sm:pb-8 bg-white min-h-[400px] rounded-md">
             <RenderTabItem tab={tabIndex} />
           </div>
         </div>

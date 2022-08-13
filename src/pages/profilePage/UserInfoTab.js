@@ -41,7 +41,7 @@ const UserInfoTab = () => {
   };
   return (
     <div className="mt-8">
-      <div className="w-full mb-10 text-center text-lg font-bold">
+      <div className="w-fit mb-10 text-center text-lg font-bold">
         Cài đặt tài khoản
       </div>
       <div className="mt-10 mb-5 font-bold text-base">Thông tin người dùng</div>

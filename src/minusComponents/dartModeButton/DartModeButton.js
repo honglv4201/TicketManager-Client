@@ -17,8 +17,12 @@ const DartModeButton = ({ onClick }) => {
     setThemeState(localStorage.theme === "dark" ? "dark" : "light");
   }, []);
   return (
-    <div className="custom-toggle" ref={toggleRef} onClick={handleToggle}>
-      <div className="inner-cicle flex items-center justify-center transition-all duration-500">
+    <div
+      className="custom-toggle lg:hidden"
+      ref={toggleRef}
+      onClick={handleToggle}
+    >
+      <div className="inner-cicle flex items-center justify-center transition-all duration-500 ">
         {themeState === "dark" ? (
           <i class="bx bx-moon"></i>
         ) : (

@@ -8,7 +8,7 @@ import CustomButton from "./CustomButton";
 import { register } from "../../slices/authSlice";
 import { userSelector } from "../../redux/authSelector";
 
-const SignUp = () => {
+const SignUp = ({ setAuthType }) => {
   const [signUpForm, setSignUpForm] = useState({
     firstName: "",
     lastName: "",
@@ -90,6 +90,16 @@ const SignUp = () => {
       </div>
 
       <CustomButton onClick={handleSignUp}> Sign up</CustomButton>
+
+      <div className="mt-3 text-center">
+        Had an account ?{" "}
+        <span
+          onClick={() => setAuthType("login")}
+          className="text-blue-400 cursor-pointer"
+        >
+          Sign in
+        </span>
+      </div>
     </Fragment>
   );
 };

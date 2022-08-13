@@ -25,7 +25,7 @@ const CustomInput = ({
       ></input>
 
       {err && (
-        <div className="absolute -bottom-8 left-0 right-0 text-red-400 flex items-center gap-2 text-sm ml-2">
+        <div className="absolute md:relative md:bottom-0 md:mb-0 md:mt-4 -bottom-8 left-0 right-0 text-red-400 flex items-center gap-2 text-sm ml-2">
           <i class="fa-solid fa-triangle-exclamation "></i>
           {err}
         </div>

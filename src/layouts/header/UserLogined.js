@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import useClickOutSide from "../../hooks/useClickOutSide";
 import { userSelector } from "../../redux/authSelector";
+import NavLink from "./NavLink";
 import UserOptionModal from "./UserOptionModal";
 const avatar = require("../../asset/img/avatar.jpg");
 /**
@@ -26,16 +27,9 @@ export const UserLogin = (props) => {
   };
   return (
     <div className="flex items-center gap-10 text-base">
-      <div className="flex items-center gap-10 list-none">
-        <Link to="/" className="text-blue-600 font-bold">
-          Trang chủ
-        </Link>
-        <Link to="/checkticket">Kiểm tra vé</Link>
-        {/* <Link to="/news">Tin tức</Link> */}
-        <Link to="/getintouch">Liên hệ</Link>
-      </div>
-      <div className="logined-bar">
-        <div className="notify p-1 text-primary bg-gray-200 rounded-full w-[35px] h-[35px] flex items-center justify-center">
+      <NavLink />
+      <div className="logined-bar ">
+        <div className="notify p-1 sm:hidden text-primary bg-gray-200 rounded-full w-[35px] h-[35px] flex items-center justify-center">
           <i class="fas fa-bell"></i>
         </div>
 

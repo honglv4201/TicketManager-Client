@@ -29,6 +29,7 @@ const SumaryResultTicket = () => {
   const handlePay = () => {
     if (!wagonBooking.payment) {
       alert("Vui lòng chọn hình thức thanh toán");
+      return;
     }
     let typeHumanBooking = "guest";
     let data = {

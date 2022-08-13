@@ -13,10 +13,10 @@ const ListItemTicket = () => {
     <div className="bg-transparent dark:!text-white dark:!bg-dark_primary_bg w-full h-full min-h-[800px] flex flex-col gap-4 ">
       <div className=" min-h-[60px] rounded-lg bg-white dark:!bg-dark_primary_pnl  flex justify-between items-center pl-6 mb-1">
         <div className="flex gap-2 items-center ">
-          <div className="name text-lg font-bold pr-2 border-r-2 border-r-gray-100">
+          <div className="name text-lg font-bold pr-2 border-r-2 border-r-gray-100 sm:hidden">
             Tàu hoả
           </div>
-          <div className="">Total: </div>
+          <div className="ssm:hidden">Total: </div>
           <div className="span text-primary">{trip.trip?.length} kết quả</div>
         </div>
         <div className="flex items-center gap-1 cursor-pointer mr-4">

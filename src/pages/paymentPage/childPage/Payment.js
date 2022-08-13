@@ -20,12 +20,12 @@ const Payment = ({ isDark, process, SetProcess }) => {
 
   return (
     <>
-      <div className="flex relative gap-4 mt-4 mx-8 px-0 lg:flex-col">
+      <div className="flex relative gap-4 mt-4 mx-8 sm:mx-3 px-0 lg:flex-col">
         {/* left pannel general info */}
-        <div className="flex flex-col min-w-[900px]">
+        <div className="flex flex-col min-w-[900px] xl:min-w-[300px]">
           <div className="">
             <div
-              className={`payment-process  dark:!text-white min-h-[60px] rounded-lg bg-white dark:!bg-dark_primary_pnl mt-0 shadow-sm grid ${
+              className={`payment-process xl:hidden dark:!text-white min-h-[60px] rounded-lg bg-white dark:!bg-dark_primary_pnl mt-0 shadow-sm grid ${
                 isDark ? "dark" : ""
               }`}
             >
@@ -48,7 +48,7 @@ const Payment = ({ isDark, process, SetProcess }) => {
                 <span className="text-lg opacity-80 font-bold dark:text-white">
                   Thanh Toán
                 </span>
-                <div className="flex gap-1 dark:text-white">
+                <div className="flex gap-1 dark:text-white sm:hidden">
                   <span className="opacity-50">
                     Phiên giao dịch sẽ bị huỷ sau:
                   </span>

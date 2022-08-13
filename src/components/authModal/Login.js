@@ -6,7 +6,7 @@ import { login } from "../../slices/authSlice";
 import CustomButton from "./CustomButton";
 import CustomInput, { ErrorNotify } from "./CustomInput";
 
-const Login = () => {
+const Login = ({ setAuthType }) => {
   const initState = {
     email: "",
     password: "",
@@ -50,6 +50,15 @@ const Login = () => {
       </div>
 
       <CustomButton onClick={handleLogin}>Login</CustomButton>
+      <div className="mt-3 text-center">
+        Dont have account ?{" "}
+        <span
+          onClick={() => setAuthType("signup")}
+          className="text-blue-400 cursor-pointer"
+        >
+          Sign Up
+        </span>
+      </div>
     </Fragment>
   );
 };

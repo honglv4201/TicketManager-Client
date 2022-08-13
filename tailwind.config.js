@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        body: ["DM Sans", "sans-serif"],
+        bodyx: ["DM Sans", "sans-serif"],
+        body: ["Roboto", "sans-serif"],
       },
       colors: {
         primary: "#0d6efd",
@@ -37,7 +38,7 @@ module.exports = {
 
       sm: { max: "639px" },
       // => @media (max-width: 639px) { ... }
-      ssm: { max: "350px" },
+      ssm: { max: "450px" },
     },
     // fontSize: {
     //   base: "1.6rem",
