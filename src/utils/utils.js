@@ -1,1 +1,1 @@
-export const apiUrl = "http://localhost:2002/api";
+export const apiUrl = "https://hl-ticketmanager-backend.herokuapp.com/api";
